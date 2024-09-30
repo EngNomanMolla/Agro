@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:smart_biniyog/App/constant/base_url.dart';
+import 'package:smart_biniyog/App/data/model/product_model.dart';
 import 'package:smart_biniyog/App/data/model/project_model.dart';
 import 'package:smart_biniyog/App/modules/Screens/home/controller/home_controller.dart';
+import 'package:smart_biniyog/App/modules/screens/cart/controller/cart_controller.dart';
 
 class ProfitSimuScreen extends StatefulWidget {
   Projects project;
@@ -13,6 +16,7 @@ class ProfitSimuScreen extends StatefulWidget {
 
 class _ProfitSimuScreenState extends State<ProfitSimuScreen> {
   HomeController homeController=Get.find<HomeController>();
+  CartController cartController=Get.put(CartController());
 
   int totalNumberOfProjects=1;
   num totalPrice=0;
@@ -102,18 +106,23 @@ class _ProfitSimuScreenState extends State<ProfitSimuScreen> {
 
                     Expanded(
                         flex: 5,
-                        child: Container(
-                          padding: EdgeInsets.all(8.0),
-                          decoration: BoxDecoration(
-                            color: Color(0xff38b579),
-                            borderRadius: BorderRadius.circular(8.0),
-                          ),
-                          child: Center(
-                            child: Text('Add to Cart',style: TextStyle(
-                              fontSize: 18.0,
-                              fontWeight: FontWeight.normal,
-                              color: Colors.white,
-                            )),
+                        child: InkWell(
+                          onTap: (){
+                            cartController.addProduct(ProductModel(id: widget.project.id!, quantity: totalNumberOfProjects, price: double.parse( (totalPrice*totalNumberOfProjects).toString()), name: widget.project.name!, image: api_base_url+widget.project.image!));
+                          },
+                          child: Container(
+                            padding: EdgeInsets.all(8.0),
+                            decoration: BoxDecoration(
+                              color: Color(0xff38b579),
+                              borderRadius: BorderRadius.circular(8.0),
+                            ),
+                            child: Center(
+                              child: Text('Add to Cart',style: TextStyle(
+                                fontSize: 18.0,
+                                fontWeight: FontWeight.normal,
+                                color: Colors.white,
+                              )),
+                            ),
                           ),
                         ))
                   ]

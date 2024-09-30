@@ -15,6 +15,7 @@ import 'package:smart_biniyog/App/modules/Screens/project_details/views/project_
 import 'package:smart_biniyog/App/modules/Widgets/RemarkBestProjectWidget.dart';
 import 'package:smart_biniyog/App/modules/Widgets/RemarkCategoryWidget.dart';
 import 'package:smart_biniyog/App/modules/screens/blog_details/views/blog_details.dart';
+import 'package:smart_biniyog/App/modules/screens/cart/views/cart_screen.dart';
 import 'package:smart_biniyog/App/modules/utils/TextStyles.dart';
 import 'package:smart_biniyog/App/routes/route_names.dart';
 
@@ -53,7 +54,7 @@ class _MyHomePageScreenState extends State<MyHomePageScreen> {
         actions: [
           IconButton(
               onPressed: () {
-                Get.toNamed(RouteNames.myCardScreen);
+                Get.to(CartScreen());
               },
               icon: const Icon(
                 Icons.shopping_cart,

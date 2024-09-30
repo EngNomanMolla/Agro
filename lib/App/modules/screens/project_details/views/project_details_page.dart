@@ -111,7 +111,7 @@ class _ProjectDetailScreenState extends State<ProjectDetailScreen> with SingleTi
                       Center(child: SummaryScreen(widget.project)),
                       Center(child: ProfitSimuScreen(widget.project)),
                       Center(child: AboutSreen(widget.project.about!)),
-                      Center(child: ProjectReviews()),
+                      Center(child: ProjectReviews(widget.project.reviews!)),
                     ],
                   ),
                 ),

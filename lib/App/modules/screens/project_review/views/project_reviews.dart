@@ -1,12 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:smart_biniyog/App/constant/base_url.dart';
 import 'package:smart_biniyog/App/modules/Screens/home/controller/home_controller.dart';
+import 'package:intl/intl.dart';
+import '../../../../data/model/project_model.dart';
 
 
 
 class ProjectReviews extends StatelessWidget {
-  ProjectReviews();
+
+  List<Reviews> reviews=[];
+
+  ProjectReviews(this.reviews);
   HomeController homeController = Get.put(HomeController());
+
+  String formatDate(String date) {
+    final DateTime parsedDate = DateTime.parse(date);
+    return DateFormat('dd MMM yyyy').format(parsedDate); // Formatting to 01 Jun 2024
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +27,7 @@ class ProjectReviews extends StatelessWidget {
         padding: const EdgeInsets.all(10.0),
         child: GetBuilder<HomeController>(builder: (_) {
           return ListView.builder(
-            itemCount: 5,
+            itemCount: reviews.length,
             itemBuilder: (context, index) {
               return Container(
                 margin: EdgeInsets.only(bottom: 15.0),
@@ -33,8 +44,8 @@ class ProjectReviews extends StatelessWidget {
                       children: [
                         ClipRRect(
                           borderRadius: BorderRadius.circular(50),
-                          child: Image.asset(
-                            'assets/images/Agriculture.jpg',
+                          child: reviews[index].clientImage==" "? Icon(Icons.person,size: 30.0,color:Colors.black.withOpacity(0.7)): Image.network(
+                            api_base_url+reviews[index].clientImage!,
                             height: 60,
                             width: 60,
                             fit: BoxFit.cover,
@@ -45,11 +56,21 @@ class ProjectReviews extends StatelessWidget {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              buildStarRating(4),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text(reviews[index].clientName!,style: TextStyle(
+                                    fontSize: 18,
+                                    overflow: TextOverflow.ellipsis,
+                                    color: Colors.black.withOpacity(0.7),
+                                    fontWeight: FontWeight.normal,
+                                  )),
+                                  buildStarRating(int.parse(reviews[index].rating!)),
+                                ],
+                              ),
                               SizedBox(height: 5),
                               Text(
-                                "Lorem Ipsum is simply dummy text of the printing and typesetting industry. "
-                                    "Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.",
+                                reviews[index].reviewText!,
                                 style: TextStyle(
                                   fontSize: 14,
                                   color: Colors.black.withOpacity(0.7),
@@ -66,7 +87,7 @@ class ProjectReviews extends StatelessWidget {
                     Align(
                       alignment: Alignment.bottomRight,
                       child: Text(
-                        'Commented on: 6 June 2024',
+                        'Commented on: ${formatDate(reviews[index].createdAt!)}',
                         style: TextStyle(
                           fontSize: 12,
                           color: Colors.grey,
