@@ -22,7 +22,7 @@ class _MainBottomNavBarState extends State<MainBottomNavBar> {
  // int _selectedScreen = 0;
   final List<Widget> _screens =  [
     MyHomePageScreen(),
-    ProjectPageScreen(),
+    ProjectPageScreen(false),
     MyFarmsScreen(),
     MorePageScreen(),
 
@@ -59,15 +59,10 @@ class _MainBottomNavBarState extends State<MainBottomNavBar> {
             elevation: 4,
             currentIndex:controller.selectedIndex,
             items: const [
-              BottomNavigationBarItem(
-                  icon: Icon(Icons.home), label: 'Home'),
-              BottomNavigationBarItem(
-                  icon: Icon(Icons.account_tree_outlined), label: 'Projects'),
-              BottomNavigationBarItem(
-                  icon: Icon(Icons.support_agent_outlined), label: 'My Farm'),
-              BottomNavigationBarItem(
-                  icon: Icon(Icons.dataset), label: 'More'),
-
+              BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
+              BottomNavigationBarItem(icon: Icon(Icons.account_tree_outlined), label: 'Projects'),
+              BottomNavigationBarItem(icon: Icon(Icons.account_balance_sharp), label: 'My Farm'),
+              BottomNavigationBarItem(icon: Icon(Icons.dashboard), label: 'More'),
             ],
           );
         }

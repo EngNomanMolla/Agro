@@ -54,7 +54,7 @@ class RouteDestinations{
     GetPage(name: RouteNames.mainNavigationScreen, page:()=>  MainBottomNavBar(),binding: NavigaionBinding()),
     GetPage(name: RouteNames.myCardScreen, page:()=> MyCardScreen(),binding: MyCardBinding()),
     GetPage(name: RouteNames.personInfoScreen, page:()=> const PersonInfoScreen(),binding: PersonInfoBinding()),
-    GetPage(name: RouteNames.projectScreen, page:()=>  ProjectPageScreen(),binding: ProjectBinding()),
+    GetPage(name: RouteNames.projectScreen, page:()=>  ProjectPageScreen(true),binding: ProjectBinding()),
     GetPage(name: RouteNames.moreScreen, page:()=> const MorePageScreen(),binding: MoreBinding()),
     GetPage(name: RouteNames.bestProject, page:()=> const BestProjectScreen(),binding: BestProjectBinding()),
     GetPage(name: RouteNames.projectReviewList, page:()=> const ProjectReviewList(),binding: ProjectReviewListBinding()),
@@ -66,8 +66,6 @@ class RouteDestinations{
     GetPage(name: RouteNames.allProject, page:()=>   AllProjectScreen(),binding: AllProjectBinding()),
     GetPage(name: RouteNames.shortTermProject, page:()=>   ShortTermScreen(),binding: ShortTermBinding()),
     GetPage(name: RouteNames.changeMobileBankingInfo, page:()=>   MobileBankingChange(),binding: ChangeBankingBinding()),
-
-
 
   ];
 }

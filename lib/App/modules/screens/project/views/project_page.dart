@@ -11,7 +11,8 @@ import 'package:smart_biniyog/App/modules/screens/variable_term/views/variable_p
 import 'package:smart_biniyog/App/routes/route_names.dart';
 
 class ProjectPageScreen extends StatelessWidget {
-   ProjectPageScreen({Key? key}) : super(key: key);
+  bool leading;
+   ProjectPageScreen(this.leading);
   HomeController homeController=Get.put(HomeController());
 
 
@@ -19,9 +20,7 @@ class ProjectPageScreen extends StatelessWidget {
    Widget build(BuildContext context) {
      return Scaffold(
        appBar: AppBar(
-         automaticallyImplyLeading: false,
-         //centerTitle: true,
-         leading: InkWell(onTap:()=>Get.back(),child: Icon(Icons.arrow_back_ios,color: Colors.white)),
+         leading: leading? InkWell(onTap:()=>Get.back(),child: Icon(Icons.arrow_back_ios,color: Colors.white)):SizedBox(),
          title: Text('Projects',style: TextStyle(color: Colors.white)),
          backgroundColor: Color(0xff38b579), // Base color
          bottom: TabBar(

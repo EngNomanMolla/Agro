@@ -5,6 +5,7 @@ import 'package:smart_biniyog/App/data/model/product_model.dart';
 import 'package:smart_biniyog/App/data/model/project_model.dart';
 import 'package:smart_biniyog/App/modules/Screens/home/controller/home_controller.dart';
 import 'package:smart_biniyog/App/modules/screens/cart/controller/cart_controller.dart';
+import 'package:smart_biniyog/App/modules/screens/cart/views/cart_screen.dart';
 
 class ProfitSimuScreen extends StatefulWidget {
   Projects project;
@@ -109,6 +110,7 @@ class _ProfitSimuScreenState extends State<ProfitSimuScreen> {
                         child: InkWell(
                           onTap: (){
                             cartController.addProduct(ProductModel(id: widget.project.id!, quantity: totalNumberOfProjects, price: double.parse( (totalPrice*totalNumberOfProjects).toString()), name: widget.project.name!, image: api_base_url+widget.project.image!));
+                            Get.off(CartScreen());
                           },
                           child: Container(
                             padding: EdgeInsets.all(8.0),

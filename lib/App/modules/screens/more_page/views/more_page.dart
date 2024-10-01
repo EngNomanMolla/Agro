@@ -19,220 +19,119 @@ class MorePageScreen extends GetView<MoreController> {
   @override
   Widget build(BuildContext context) {
     return  Scaffold(
-
-      appBar: AppBar(
-
-        title: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text('Welcome to '),
-          Row(
+       appBar: AppBar(
+         automaticallyImplyLeading: false,
+         backgroundColor: Color(0xff38b579),
+         title: Text('More',style: TextStyle(color: Colors.white)),
+       ),
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Column(
             children: [
-              Text(
-                'SMART ',
-                style: TitleTextStyle.copyWith(
-                    color: greyColor,
-                    fontWeight: FontWeight.bold,
-                fontSize: 20),
+              Card(
+                color: Color(0xff38b579), //     Get.toNamed(RouteNames.profile);
+                child: InkWell(
+                  onTap: (){
+                    Get.toNamed(RouteNames.profile);
+                  },
+                  child: ListTile(
+                    trailing: Icon(Icons.arrow_forward_ios,size: 17,color: Colors.white.withOpacity(0.7)),
+                    title: Text('Profile',style: TextStyle(color: Colors.white,fontSize: 17.0)),
+                    leading: Icon(Icons.perm_identity_outlined,color: Colors.white)
+
+
+                  ),
+                ),
               ),
-              Text(
-                'BINIYOG ',
-                style: TitleTextStyle.copyWith(
-                    color: primaryColor, fontWeight: FontWeight.bold,
-                    fontSize: 20),
+              SizedBox(height: 5.0),
+
+              Card(
+                color: Color(0xff38b579), //     Get.toNamed(RouteNames.profile);
+                child: InkWell(
+                  onTap: (){
+
+                  },
+                  child: ListTile(
+                      trailing: Icon(Icons.arrow_forward_ios,size: 17,color: Colors.white.withOpacity(0.7)),
+                      title: Text('Support',style: TextStyle(color: Colors.white,fontSize: 17.0)),
+                      leading: Icon(Icons.chat,color: Colors.white)
+
+
+                  ),
+                ),
               ),
+              SizedBox(height: 5.0),
+              Card(
+                color: Color(0xff38b579), //     Get.toNamed(RouteNames.profile);
+                child: InkWell(
+                  onTap: (){
+
+                  },
+                  child: ListTile(
+                      trailing: Icon(Icons.arrow_forward_ios,size: 17,color: Colors.white.withOpacity(0.7)),
+                      title: Text('Contact',style: TextStyle(color: Colors.white,fontSize: 17.0)),
+                      leading: Icon(Icons.contact_phone,color: Colors.white)
+
+
+                  ),
+                ),
+              ),
+              SizedBox(height: 5.0),
+              Card(
+                color: Color(0xff38b579), //     Get.toNamed(RouteNames.profile);
+                child: InkWell(
+                  onTap: (){
+
+                  },
+                  child: ListTile(
+                      trailing: Icon(Icons.arrow_forward_ios,size: 17,color: Colors.white.withOpacity(0.7)),
+                      title: Text('About Us',style: TextStyle(color: Colors.white,fontSize: 17.0)),
+                      leading: Icon(Icons.info_outline,color: Colors.white)
+
+
+                  ),
+                ),
+              ),
+              SizedBox(height: 5.0),
+              Card(
+                color: Color(0xff38b579), //     Get.toNamed(RouteNames.profile);
+                child: InkWell(
+                  onTap: (){
+
+                  },
+                  child: ListTile(
+                      trailing: Icon(Icons.arrow_forward_ios,size: 17,color: Colors.white.withOpacity(0.7)),
+                      title: Text('Privacy Policy',style: TextStyle(color: Colors.white,fontSize: 17.0)),
+                      leading: Icon(Icons.policy,color: Colors.white)
+
+
+                  ),
+                ),
+              ),
+              SizedBox(height: 5.0),
+              Card(
+                color: Color(0xff38b579), //     Get.toNamed(RouteNames.profile);
+                child: InkWell(
+                  onTap: (){
+
+                  },
+                  child: ListTile(
+                      trailing: Icon(Icons.arrow_forward_ios,size: 17,color: Colors.white.withOpacity(0.7)),
+                      title: Text('Login',style: TextStyle(color: Colors.white,fontSize: 17.0)),
+                      leading: Icon(Icons.login_outlined,color: Colors.white)
+
+
+                  ),
+                ),
+              ),
+
+
+
+
             ],
           ),
-
-        ],
-
-      ),
-      leading:  CircleAvatar(
-        radius: 700,
-        child:  Center(
-          child: Image.asset(
-            'assets/images/smart_biniyog.png',
-            fit: BoxFit.fill,
-          ),
         ),
-
-      ),
-
-      ),
-
-
-
-      body: Column(
-        children: [
-          SizedBox(height: 10,),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Card(
-              elevation: 2,  //     Get.toNamed(RouteNames.profile);
-              child: InkWell(
-                onTap: (){
-                  Get.toNamed(RouteNames.profile);
-                },
-                child: Container(
-                    width: double.infinity,
-                    color: Colors.green[50],
-                    height: 60,
-                    child: ListTile(
-                      trailing: Icon(Icons.arrow_forward_ios,size: 15,),
-                      title: Text('profile'),
-                      leading: Icon(Icons.perm_identity_outlined)
-
-
-                    )),
-              ),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Card(
-              elevation: 2,
-              child: Container(
-                width: double.infinity,
-                color: Colors.green[50],
-                  height: 60,
-
-                  child: ListTile(
-                      trailing: Icon(Icons.arrow_forward_ios),
-                      title: Text('Support'),
-                    leading: IconButton(onPressed: (){}, icon: Icon(Icons.chat)),
-
-
-                  )),
-            ),
-          ),
-
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Card(
-              elevation: 2,
-              child: InkWell(
-                onTap: (){
-                  Navigator.push(context, MaterialPageRoute(builder: (context) => ContactScreen()));
-                },
-                child: Container(
-                    width: double.infinity,
-                    color: Colors.green[50],
-                    height: 60,
-
-                    child: ListTile(
-                      trailing: Icon(Icons.arrow_forward_ios),
-                      title: Text('Contact'),
-                      leading: Icon(Icons.people),
-
-
-                    )),
-              ),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Card(
-              elevation: 2,
-              child: InkWell(
-                onTap: (){
-                  Navigator.push(context, MaterialPageRoute(builder: (context) => AboutScreen()));
-
-                },
-                child: Container(
-                    width: double.infinity,
-                    color: Colors.green[50],
-                    height: 60,
-
-                    child: ListTile(
-                      trailing: Icon(Icons.arrow_forward_ios),
-                      title: Text('About Us'),
-                      leading: Icon(Icons.badge_rounded),
-
-
-                    )),
-              ),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Card(
-              elevation: 2,
-              child: InkWell(
-                onTap: (){
-
-                  Navigator.push(context, MaterialPageRoute(builder: (context) => FaqQuestion()));
-                },
-                child: Container(
-                    width: double.infinity,
-                    color: Colors.green[50],
-                    height: 60,
-
-                    child: ListTile(
-                      trailing: Icon(Icons.arrow_forward_ios),
-                      title: Text('FAQ'),
-                      leading: Icon(Icons.quiz)
-
-
-
-                    )),
-              ),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Card(
-              elevation: 2,
-              child: InkWell(
-                onTap: (){
-
-                  Navigator.push(context, MaterialPageRoute(builder: (context) => PrivacyScreen()));
-                },
-                child: Container(
-                    width: double.infinity,
-                    color: Colors.green[50],
-                    height: 60,
-
-                    child: ListTile(
-                      trailing: Icon(Icons.arrow_forward_ios),
-                      title: Text('Privacy policy'),
-                      leading:Icon(Icons.calendar_month_sharp),
-
-
-                    )),
-              ),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Card(
-              elevation: 2,
-              child: Container(
-                  width: double.infinity,
-                  color: Colors.green[50],
-                  height: 60,
-
-                  child: ListTile(
-                    trailing: Icon(Icons.arrow_forward_ios),
-                    title: Text('Login'),
-                    leading: IconButton(onPressed: (){
-
-                      Navigator.pushReplacement(
-                          context,
-                          MaterialPageRoute(builder: (context) => LogInSreen()),);
-
-                    }, icon: Icon(Icons.login)),
-
-
-                  )),
-            ),
-          ),
-
-
-
-
-
-        ],
       ),
     );
   }
