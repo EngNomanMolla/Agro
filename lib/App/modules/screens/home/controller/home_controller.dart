@@ -6,6 +6,7 @@ import 'package:get/get_state_manager/src/simple/get_controllers.dart';
 import 'package:smart_biniyog/App/data/model/blog_model.dart';
 import 'package:smart_biniyog/App/data/model/catagory_model.dart';
 import 'package:smart_biniyog/App/data/model/allproject_nodel.dart';
+import 'package:smart_biniyog/App/data/model/dashboard_model.dart';
 import 'package:smart_biniyog/App/data/model/project_model.dart';
 import 'package:smart_biniyog/App/data/model/project_type_model.dart';
 import 'package:smart_biniyog/App/data/service/network_caller.dart';
@@ -16,6 +17,7 @@ class HomeController extends GetxController
     with GetSingleTickerProviderStateMixin {
   late TabController tabController;
   bool getCategoryProgress = false;
+  RxBool isDashboardLoading = RxBool(false);
   List<CategoryModel> categories = [];
 
   RxInt currentIndex = 0.obs;
@@ -23,6 +25,8 @@ class HomeController extends GetxController
   List<ProjectModel> projects = [];
 
   List<String> sliderImages = [];
+
+  var dashboardModel = DashboardModel().obs;
 
   BlogModel? blogModel;
 

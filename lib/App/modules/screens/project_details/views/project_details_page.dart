@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:smart_biniyog/App/constant/base_url.dart';
 import 'package:smart_biniyog/App/data/model/project_model.dart';
 import 'package:smart_biniyog/App/modules/Screens/about_page.dart';
 import 'package:smart_biniyog/App/modules/Screens/summary_page.dart';
@@ -74,8 +75,7 @@ class _ProjectDetailScreenState extends State<ProjectDetailScreen> with SingleTi
                 Container(
                   color: Colors.green,
                   child: Center(
-                    child: Image.asset(
-                      'assets/images/Agriculture.jpg',
+                    child: Image.network('$api_base_url${widget.project.image ?? ''}',
                       width: MediaQuery.of(context).size.width,
                       fit: BoxFit.fill,
                     ),

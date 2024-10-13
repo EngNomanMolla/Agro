@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:device_preview/device_preview.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
@@ -16,6 +18,7 @@ import 'package:smart_biniyog/App/modules/Widgets/RemarkBestProjectWidget.dart';
 import 'package:smart_biniyog/App/modules/Widgets/RemarkCategoryWidget.dart';
 import 'package:smart_biniyog/App/modules/screens/blog_details/views/blog_details.dart';
 import 'package:smart_biniyog/App/modules/screens/cart/views/cart_screen.dart';
+import 'package:smart_biniyog/App/modules/screens/home/views/components/dashboard_section.dart';
 import 'package:smart_biniyog/App/modules/utils/TextStyles.dart';
 import 'package:smart_biniyog/App/routes/route_names.dart';
 
@@ -29,7 +32,7 @@ class MyHomePageScreen extends StatefulWidget {
 class _MyHomePageScreenState extends State<MyHomePageScreen> {
   final ValueNotifier<int> _currentCarouselIndex = ValueNotifier(0);
 
-  HomeController homeController = Get.put(HomeController());
+  final homeController = Get.put(HomeController());
 
   @override
   Widget build(BuildContext context) {
@@ -123,8 +126,8 @@ class _MyHomePageScreenState extends State<MyHomePageScreen> {
                                                 } else {
                                                   return Container(
                                                     width: double.infinity,
-                                                    height:
-                                                        178.0, // Match the carousel height
+                                                    height: 178.0,
+                                                    // Match the carousel height
                                                     color: Colors.black.withOpacity(
                                                         0.3), // Placeholder background color
                                                   );
@@ -167,171 +170,8 @@ class _MyHomePageScreenState extends State<MyHomePageScreen> {
                                         ],
                                       );
                                     }),
-                                Padding(
-                                  padding: EdgeInsets.fromLTRB(8, 10, 8, 0),
-                                  child: Card(
-                                    elevation: 5,
-                                    child: Container(
-                                        padding: EdgeInsets.all(20.0),
-                                        height: 230,
-                                        width: double.infinity,
-                                        decoration: BoxDecoration(
-                                          color: Colors.white,
-                                          borderRadius: BorderRadius.all(
-                                              Radius.circular(10)),
-                                        ),
-                                        child: Row(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            Expanded(
-                                                child: Column(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.start,
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              children: [
-                                                Icon(
-                                                  Icons.home_work,
-                                                  color: Color(0xff38b579),
-                                                ),
-                                                SizedBox(height: 8.0),
-                                                Row(
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment
-                                                            .start,
-                                                    children: [
-                                                      Text(
-                                                        '৳',
-                                                        style: TextStyle(
-                                                            fontSize: 20,
-                                                            fontWeight:
-                                                                FontWeight.bold,
-                                                            color: Color(
-                                                                0xff38b579)),
-                                                      ),
-                                                      SizedBox(width: 8.0),
-                                                      Text(
-                                                        '617M +',
-                                                        style: TextStyle(
-                                                          fontSize: 16,
-                                                          fontWeight:
-                                                              FontWeight.bold,
-                                                        ),
-                                                      ),
-                                                    ]),
-                                                Text(
-                                                  'Funds Disbursed',
-                                                  style: TextStyle(
-                                                    color: Colors.black54,
-                                                  ),
-                                                ),
-                                                SizedBox(
-                                                  height: 22,
-                                                ),
-                                                Icon(
-                                                  Icons.people,
-                                                  color: Color(0xff38b579),
-                                                ),
-                                                SizedBox(height: 8.0),
-                                                Row(
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment
-                                                            .start,
-                                                    children: [
-                                                      Text(
-                                                        '617M +',
-                                                        style: TextStyle(
-                                                          fontSize: 16,
-                                                          fontWeight:
-                                                              FontWeight.bold,
-                                                        ),
-                                                      ),
-                                                    ]),
-                                                Text(
-                                                  'Farmers Engaged',
-                                                  style: TextStyle(
-                                                    color: Colors.black54,
-                                                  ),
-                                                ),
-                                              ],
-                                            )),
-                                            Expanded(
-                                                child: Column(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.start,
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              children: [
-                                                Icon(
-                                                  Icons.hail_outlined,
-                                                  color: Color(0xff38b579),
-                                                ),
-                                                SizedBox(height: 8.0),
-                                                Row(
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment
-                                                            .start,
-                                                    children: [
-                                                      Text(
-                                                        '৳',
-                                                        style: TextStyle(
-                                                            fontSize: 20,
-                                                            fontWeight:
-                                                                FontWeight.bold,
-                                                            color: Color(
-                                                                0xff38b579)),
-                                                      ),
-                                                      SizedBox(width: 8.0),
-                                                      Text(
-                                                        '617M +',
-                                                        style: TextStyle(
-                                                          fontSize: 16,
-                                                          fontWeight:
-                                                              FontWeight.bold,
-                                                        ),
-                                                      ),
-                                                    ]),
-                                                Text(
-                                                  'Agricultural Yield',
-                                                  style: TextStyle(
-                                                    color: Colors.black54,
-                                                  ),
-                                                ),
-                                                SizedBox(
-                                                  height: 22,
-                                                ),
-                                                Icon(
-                                                  Icons.money,
-                                                  color: Color(0xff38b579),
-                                                ),
-                                                SizedBox(height: 8.0),
-                                                Row(
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment
-                                                            .start,
-                                                    children: [
-                                                      Text(
-                                                        '617M +',
-                                                        style: TextStyle(
-                                                          fontSize: 16,
-                                                          fontWeight:
-                                                              FontWeight.bold,
-                                                        ),
-                                                      ),
-                                                    ]),
-                                                Text(
-                                                  'Return Reimbursed',
-                                                  style: TextStyle(
-                                                    color: Colors.black54,
-                                                  ),
-                                                ),
-                                              ],
-                                            )),
-                                          ],
-                                        )),
-                                  ),
-                                ),
+
+                                const DashboardSection()
                               ],
                             )),
                         SizedBox(
@@ -379,10 +219,10 @@ class _MyHomePageScreenState extends State<MyHomePageScreen> {
                             padding: const EdgeInsets.all(10.0),
                             child: ListView.builder(
                               padding: EdgeInsets.zero,
-                              shrinkWrap:
-                                  true, // Ensures the ListView doesn't take infinite height
-                              physics:
-                                  NeverScrollableScrollPhysics(), // Prevents independent scrolling
+                              shrinkWrap: true,
+                              // Ensures the ListView doesn't take infinite height
+                              physics: NeverScrollableScrollPhysics(),
+                              // Prevents independent scrolling
                               itemCount: homeController.projects.length,
                               itemBuilder: (context, outerIndex) {
                                 ProjectModel project =
@@ -413,10 +253,10 @@ class _MyHomePageScreenState extends State<MyHomePageScreen> {
                                     ),
                                     ListView.builder(
                                       padding: EdgeInsets.zero,
-                                      shrinkWrap:
-                                          true, // Ensures the inner ListView has proper height
-                                      physics:
-                                          NeverScrollableScrollPhysics(), // Prevents inner scrolling
+                                      shrinkWrap: true,
+                                      // Ensures the inner ListView has proper height
+                                      physics: NeverScrollableScrollPhysics(),
+                                      // Prevents inner scrolling
                                       itemCount: project.projects!.length == 3
                                           ? 3
                                           : project.projects!.length == 2
@@ -441,7 +281,8 @@ class _MyHomePageScreenState extends State<MyHomePageScreen> {
                                                         MainAxisAlignment.start,
                                                     crossAxisAlignment:
                                                         CrossAxisAlignment
-                                                            .start, // Aligns text to the left
+                                                            .start,
+                                                    // Aligns text to the left
                                                     children: [
                                                       Text(_project.name!,
                                                           style: TextStyle(
@@ -574,12 +415,13 @@ class _MyHomePageScreenState extends State<MyHomePageScreen> {
                             itemCount: homeController.blogModel!.data!.length,
                             physics: NeverScrollableScrollPhysics(),
                             itemBuilder: (context, index) {
-                              Data blog=homeController.blogModel!.data![index];
+                              Data blog =
+                                  homeController.blogModel!.data![index];
                               return Padding(
                                 padding: const EdgeInsets.only(
                                     left: 10.0, right: 10.0, bottom: 6.0),
                                 child: GestureDetector(
-                                  onTap: ()=>Get.to(BlogDetailsScreen(blog)),
+                                  onTap: () => Get.to(BlogDetailsScreen(blog)),
                                   child: Card(
                                     child: Column(
                                         mainAxisAlignment:
@@ -589,13 +431,14 @@ class _MyHomePageScreenState extends State<MyHomePageScreen> {
                                         children: [
                                           ClipRRect(
                                             child: Image.network(
-                                                api_base_url+blog.image!,
+                                                api_base_url + blog.image!,
                                                 height: 140.0,
                                                 width: Get.width,
                                                 fit: BoxFit.cover),
                                             borderRadius: BorderRadius.only(
                                                 topLeft: Radius.circular(10.0),
-                                                topRight: Radius.circular(10.0)),
+                                                topRight:
+                                                    Radius.circular(10.0)),
                                           ),
                                           Padding(
                                             padding: const EdgeInsets.only(
@@ -605,7 +448,8 @@ class _MyHomePageScreenState extends State<MyHomePageScreen> {
                                                 bottom: 4),
                                             child: Text(blog.title!,
                                                 style: TextStyle(
-                                                  overflow: TextOverflow.ellipsis,
+                                                  overflow:
+                                                      TextOverflow.ellipsis,
                                                   fontSize: 16,
                                                   fontWeight: FontWeight.bold,
                                                   color: Colors.black
@@ -622,8 +466,8 @@ class _MyHomePageScreenState extends State<MyHomePageScreen> {
                                               style: TextStyle(
                                                 fontSize: 12,
                                                 fontWeight: FontWeight.normal,
-                                                color:
-                                                    Colors.black.withOpacity(0.6),
+                                                color: Colors.black
+                                                    .withOpacity(0.6),
                                               ),
                                               maxLines: 4, // Limit to two lines
                                               overflow: TextOverflow
