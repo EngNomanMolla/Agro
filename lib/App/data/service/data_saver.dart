@@ -29,9 +29,11 @@ class AuthUtils {
   //   }
   // }
 
-  static Future<void> getAuthData() async {
+  static Future<String> getAuthData() async {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
     token = sharedPreferences.getString('token');
+    print(token);
+    return token ?? '';
     // firstName = sharedPreferences.getString('firstName');
     // lastName = sharedPreferences.getString('lastName');
     // profilePic = sharedPreferences.getString('photo');

@@ -59,7 +59,6 @@ class NetworkUtils {
     http.Response response =
         await http.get(Uri.parse(Urls.dashboard), headers: headers);
 
-    print('Dashboard is: ${response.body}');
     return dashboardModelFromJson(response.body);
   }
 
@@ -134,10 +133,13 @@ class NetworkUtils {
       //     moveToLogin();
       //   }
       else {
+
         log("Something went wrong ${response.statusCode}");
+        return false;
       }
     } catch (e) {
       log('Error $e');
+      return false;
     }
   }
 
