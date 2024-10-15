@@ -3,8 +3,18 @@ import 'package:get/get.dart';
 import 'package:smart_biniyog/App/data/model/product_model.dart';
 import 'package:smart_biniyog/App/modules/screens/cart/controller/cart_controller.dart';
 
-class CartScreen extends StatelessWidget {
+class CartScreen extends StatefulWidget {
+  @override
+  State<CartScreen> createState() => _CartScreenState();
+}
+
+class _CartScreenState extends State<CartScreen> {
   final CartController cartController = Get.put(CartController());
+
+  @override
+  void initState() {
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -16,9 +26,7 @@ class CartScreen extends StatelessWidget {
               Get.back();
             },
             child: Icon(Icons.arrow_back_ios, color: Colors.white)),
-        title: Text('Cart List', style: TextStyle(
-            color: Colors.white
-        )),
+        title: Text('Cart List', style: TextStyle(color: Colors.white)),
       ),
       body: GetBuilder<CartController>(
         builder: (_) {
@@ -47,47 +55,90 @@ class CartScreen extends StatelessWidget {
                 ),
               ),
               // Fixed Button at the bottom
-                  cartController.productList.isEmpty? SizedBox(): Padding(
-                  padding: const EdgeInsets.all(10.0),
-                  child: Container(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10.0),
-                      color: Color(0xff38b579),
-                    ),
-                    child: Padding(
-                      padding: const EdgeInsets.all(10.0),
-                      child: Row(
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          children: [
-                            Expanded(
-                                flex: 4,
-                                child: Text('Order Now',
-                                    textAlign: TextAlign.right,
+              if (cartController.productList.isEmpty)
+                SizedBox()
+              else
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    GetBuilder<CartController>(
+                      builder: (_) {
+                        return Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                          child: Card(
+                            child: Padding(
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 8.0,
+                                vertical: 10,
+                              ),
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text(
+                                    'Total Quantity: ${cartController.productList.map((e) => e.quantity).fold(0, (sum, quantity) => sum + quantity)}',
+                                    textAlign: TextAlign.left,
                                     style: TextStyle(
-                                      color: Colors.white,
+                                      color: Colors.black,
                                       fontWeight: FontWeight.normal,
-                                      fontSize: 17.0,
-
-                                    ))),
-                            GetBuilder<CartController>(
-                              builder: (_) {
-                                return Expanded(
-                                    flex: 3,
-                                    child: Text(
-                                        ' Total: ${cartController.totalPrice}',
-                                        textAlign: TextAlign.right,
-                                        style: TextStyle(
-                                            color: Colors.white,
-                                            fontWeight: FontWeight.normal,
-                                            fontSize: 14.0
-                                        )));
-                              },
-                            )
-                          ]
-                      ),
+                                      fontSize: 14.0,
+                                    ),
+                                  ),
+                                  Text(
+                                      'Total Price: ৳${cartController.totalPrice}',
+                                      textAlign: TextAlign.left,
+                                      style: TextStyle(
+                                          color: Colors.black,
+                                          fontWeight: FontWeight.normal,
+                                          fontSize: 14.0)),
+                                ],
+                              ),
+                            ),
+                          ),
+                        );
+                      },
                     ),
-                  )
-              ),
+                    Obx(() => Padding(
+                        padding: const EdgeInsets.all(10.0),
+                        child: InkWell(
+                          onTap: () => cartController.placeOrder(),
+                          child: Container(
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10.0),
+                              color: Color(0xff38b579),
+                            ),
+                            child: Padding(
+                              padding: const EdgeInsets.all(10.0),
+                              child: Row(
+                                mainAxisAlignment:
+                                MainAxisAlignment.center,
+                                children: [
+
+                                  if(cartController.isLoading.value)
+                                  Center(
+                                    child: SizedBox(
+                                      height: 25,
+                                      width: 25,
+                                      child: CircularProgressIndicator(
+                                        color: Colors.white,
+                                      ),
+                                    ),
+                                  )
+                                  else
+                                  Text('Order Now',
+                                      textAlign: TextAlign.center,
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.normal,
+                                        fontSize: 17.0,
+                                      )),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ))),
+                  ],
+                ),
             ],
           );
         },
@@ -107,9 +158,8 @@ class ProductTile extends StatelessWidget {
     return ListTile(
       leading: ImageLoader(imageUrl: product.image),
       // Loading indicator added here
-      title: Text(product.name, style: TextStyle(
-          color: Colors.black.withOpacity(0.7)
-      )),
+      title: Text(product.name,
+          style: TextStyle(color: Colors.black.withOpacity(0.7))),
       subtitle: Text('Quantity: ${product.quantity}  Price: ৳${product.price}'),
       trailing: IconButton(
         icon: Icon(Icons.delete, color: Colors.red.withOpacity(0.6)),
@@ -140,7 +190,7 @@ class ImageLoader extends StatelessWidget {
               color: Color(0xff38b579),
               value: loadingProgress.expectedTotalBytes != null
                   ? loadingProgress.cumulativeBytesLoaded /
-                  loadingProgress.expectedTotalBytes!
+                      loadingProgress.expectedTotalBytes!
                   : null,
             );
           }

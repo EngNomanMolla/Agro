@@ -23,19 +23,19 @@ class Client {
   String? email;
   String? verifiedAt;
   String? phone;
-  Null? address;
+  String? address;
   String? nid;
-  Null? nidF;
-  Null? nidB;
+  dynamic nidF;
+  dynamic nidB;
   String? tin;
   String? balance;
-  Null? image;
-  Null? otp;
+  dynamic image;
+  dynamic otp;
   String? gender;
   String? status;
   String? clientType;
   String? referralCode;
-  Null? referralId;
+  dynamic referralId;
   String? referralStatus;
   String? createdAt;
   String? updatedAt;
@@ -222,16 +222,16 @@ class Nominee {
 }
 
 class AllBalance {
-  int? sumOfPaymentAmount;
-  String? sumOfReferralAmount;
-  int? sumOfProfitAmount;
-  int? sumOfWithdrawalAmount;
-  int? currentBalance;
-  int? sumOfWithdrawalConfirmAmount;
-  int? currentMainConfirmBalance;
-  int? clientActiveBalance;
-  int? restBalance;
-  int? currentTotalBalance;
+  dynamic sumOfPaymentAmount;
+  dynamic sumOfReferralAmount;
+  dynamic sumOfProfitAmount;
+  dynamic sumOfWithdrawalAmount;
+  dynamic currentBalance;
+  dynamic sumOfWithdrawalConfirmAmount;
+  dynamic currentMainConfirmBalance;
+  dynamic clientActiveBalance;
+  dynamic restBalance;
+  dynamic currentTotalBalance;
 
   AllBalance(
       {this.sumOfPaymentAmount,

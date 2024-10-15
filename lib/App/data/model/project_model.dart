@@ -45,7 +45,7 @@ class Projects {
   String? createdAt;
   String? updatedAt;
   String? statusName;
-  String? duration;
+  dynamic duration;
   int? inWaiting;
   String? categoryName;
   List<Reviews>? reviews;
@@ -97,9 +97,9 @@ class Projects {
     createdAt = json['created_at'];
     updatedAt = json['updated_at'];
     statusName = json['status_name'];
-    duration = json['duration'];
+    duration = json['duration'].toString();
     inWaiting = json['in_waiting'];
-    categoryName = json['category_name'];
+    categoryName = json['category_name'] ?? json['category']['name'];
     if (json['reviews'] != null) {
       reviews = <Reviews>[];
       json['reviews'].forEach((v) {

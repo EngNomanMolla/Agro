@@ -3,6 +3,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 class AuthUtils {
   static String? firstName, lastName, token, profilePic, mobile, email;
 
+  static bool isLoggedIn = false;
+
   static Future<void> saveUserData(String uToken) async {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
     await sharedPreferences.setString('token', uToken);
@@ -19,19 +21,23 @@ class AuthUtils {
    // email = uEmail;
   }
 
-  // static Future<bool> checkLoginState() async {
-  //   SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-  //   String? token = sharedPreferences.getString('token');
-  //   if (token == null) {
-  //     return false;
-  //   } else {
-  //     return true;
-  //   }
-  // }
+  static Future<bool> checkLoginState() async {
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    String? token = sharedPreferences.getString('token');
+    if (token == null) {
+      isLoggedIn = false;
+      return false;
+    } else {
+      isLoggedIn = true;
+      return true;
+    }
+  }
 
-  static Future<void> getAuthData() async {
+  static Future<String> getAuthData() async {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
     token = sharedPreferences.getString('token');
+    print(token);
+    return token ?? '';
     // firstName = sharedPreferences.getString('firstName');
     // lastName = sharedPreferences.getString('lastName');
     // profilePic = sharedPreferences.getString('photo');
@@ -40,9 +46,9 @@ class AuthUtils {
 
   }
 
-  static Future<void> clearData() async {
+  static Future<void> clearData(String key) async {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-    await sharedPreferences.clear();
+    await sharedPreferences.remove(key);
   }
 
 }

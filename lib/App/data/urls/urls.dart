@@ -15,6 +15,10 @@ class Urls {
  static String bankingInfoChangeurl = '$baseUrl/client-banking';
  static String mbankingInfoChangeurl = '$baseUrl/client-mfs';
  static String nomineeInfoChangeurl = '$baseUrl/update-nominee';
+ static String dashboard = '$baseUrl/dashboard';
+ static String myFarm = '$baseUrl/order/my-farm';
+ static String checkUpToDate = '$baseUrl/check_up_to_date';
+ static String orderStore = '$baseUrl/order/store';
 
 
 
