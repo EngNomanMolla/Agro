@@ -41,8 +41,8 @@ class _ProfitSimuScreenState extends State<ProfitSimuScreen> {
             child: Table(
               border: TableBorder.all(color: Colors.grey),
               children: [
-                _buildTableRow('Project Duration',
-                    widget.project.duration.toString()),
+                _buildTableRow(
+                    'Project Duration', widget.project.duration.toString()),
                 _buildTableRow(
                     'ROI',
                     widget.project.returnMin.toString() +
@@ -50,10 +50,8 @@ class _ProfitSimuScreenState extends State<ProfitSimuScreen> {
                         ' - ' +
                         widget.project.returnMax.toString() +
                         '%'),
-                _buildTableRow('Net Profit', '৳ ${calculateROI(widget.project.returnMin,
-                    widget.project.projectPrice)} - ৳ ${calculateROI(widget.project.returnMax,
-                    widget.project.projectPrice)}'),
-
+                _buildTableRow('Net Profit',
+                    '৳ ${calculateROI(widget.project.returnMin, widget.project.projectPrice)} - ৳ ${calculateROI(widget.project.returnMax, widget.project.projectPrice)}'),
                 _buildTableRow('Total Investment',
                     '৳ ${(totalPrice * totalNumberOfProjects).toString()}')
               ],
@@ -71,6 +69,11 @@ class _ProfitSimuScreenState extends State<ProfitSimuScreen> {
                           setState(() {
                             totalNumberOfProjects--;
                           });
+
+
+                          final price = totalPrice * totalNumberOfProjects;
+                          cartController.tempTotalPrice.value = price.toString();
+                          cartController.tempTotalQuantity.value = totalNumberOfProjects.toString();
                         }
                       },
                       child: Container(
@@ -96,6 +99,11 @@ class _ProfitSimuScreenState extends State<ProfitSimuScreen> {
                         setState(() {
                           totalNumberOfProjects++;
                         });
+
+                        final price = totalPrice * totalNumberOfProjects;
+                        cartController.tempTotalPrice.value = price.toString();
+                        cartController.tempTotalQuantity.value = totalNumberOfProjects.toString();
+
                       },
                       child: Container(
                         decoration: BoxDecoration(

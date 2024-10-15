@@ -1,12 +1,14 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:smart_biniyog/App/constant/base_url.dart';
 import 'package:smart_biniyog/App/modules/screens/change_person_Info/views/change_info.dart';
 import 'package:smart_biniyog/App/modules/screens/personal_info/controlar/personal_controller.dart';
 import 'package:smart_biniyog/App/routes/route_names.dart';
 
 class PersonalInfoScreen extends GetView<PersonalInfoGetController> {
   PersonalInfoScreen({Key? key}) : super(key: key);
+
   PersonalInfoGetController personalInfoGetController =
       Get.put(PersonalInfoGetController());
 
@@ -15,6 +17,8 @@ class PersonalInfoScreen extends GetView<PersonalInfoGetController> {
     return Scaffold(
       body: GetBuilder<PersonalInfoGetController>(
           builder: (PersonalInfoGetController) {
+            print(api_base_url + personalInfoGetController
+                .personInfoDataModel.client!.image);
         return PersonalInfoGetController.personInfoProgress
             ? const Center(
                 child: CircularProgressIndicator(color: Color(0xff38b579)),
@@ -23,14 +27,39 @@ class PersonalInfoScreen extends GetView<PersonalInfoGetController> {
                 child: Column(
                   children: [
                     SizedBox(height: 15.0),
-                    Container(
+                    InkWell(
+                      onTap: personalInfoGetController.selectPhoto,
+                      child: Container(
+                        height: 100,
+                        width: 100,
                         decoration: BoxDecoration(
                             color: Color(0xff38b579).withOpacity(0.2),
-                            borderRadius: BorderRadius.circular(100)),
+                            borderRadius: BorderRadius.circular(100),
+                            image: personalInfoGetController
+                                        .personInfoDataModel.client!.image !=
+                                    null
+                                ? DecorationImage(
+                                    image: NetworkImage(
+                                      api_base_url + personalInfoGetController
+                                          .personInfoDataModel.client!.image,
+                                    ),
+                                    fit: BoxFit.cover,
+                                  )
+                                : personalInfoGetController
+                                        .selected.value.path.isEmpty
+                                    ? null
+                                    : DecorationImage(
+                                        image: FileImage(
+                                            personalInfoGetController
+                                                .selected.value),
+                                        fit: BoxFit.cover,
+                                      )),
                         child: Padding(
                           padding: const EdgeInsets.all(8.0),
-                          child: Icon(Icons.person, size: 100.0),
-                        )),
+                          child: Icon(Icons.camera_alt_outlined),
+                        ),
+                      ),
+                    ),
                     SizedBox(height: 15.0),
                     Container(
                       decoration: BoxDecoration(
@@ -38,14 +67,16 @@ class PersonalInfoScreen extends GetView<PersonalInfoGetController> {
                       ),
                       child: ListTile(
                         title: Text(
-                          'Personal Informaion',
+                          'Personal Information',
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
                           ),
                         ),
                         trailing: TextButton(
                           onPressed: () {
-                            Get.toNamed(RouteNames.changePersonalInfo, arguments: PersonalInfoGetController.personInfoDataModel);
+                            Get.toNamed(RouteNames.changePersonalInfo,
+                                arguments: PersonalInfoGetController
+                                    .personInfoDataModel);
                           },
                           child: Container(
                               decoration: BoxDecoration(
@@ -124,7 +155,7 @@ class PersonalInfoScreen extends GetView<PersonalInfoGetController> {
                     ListTile(
                       iconColor: Colors.black,
                       trailing: Text(
-                        ' 05-05-1999',
+                        ' ${PersonalInfoGetController.personInfoDataModel.client!.address}',
                         style: TextStyle(
                           color: Colors.black,
                           fontWeight: FontWeight.w600,
@@ -132,7 +163,7 @@ class PersonalInfoScreen extends GetView<PersonalInfoGetController> {
                         ),
                       ),
                       title: Text(
-                        'Date of Birth: ',
+                        'Address: ',
                         style: TextStyle(
                           color: Colors.black,
                           fontWeight: FontWeight.w600,
@@ -140,6 +171,25 @@ class PersonalInfoScreen extends GetView<PersonalInfoGetController> {
                         ),
                       ),
                     ),
+                    // ListTile(
+                    //   iconColor: Colors.black,
+                    //   trailing: Text(
+                    //     ' 05-05-1999',
+                    //     style: TextStyle(
+                    //       color: Colors.black,
+                    //       fontWeight: FontWeight.w600,
+                    //       fontSize: 15,
+                    //     ),
+                    //   ),
+                    //   title: Text(
+                    //     'Date of Birth: ',
+                    //     style: TextStyle(
+                    //       color: Colors.black,
+                    //       fontWeight: FontWeight.w600,
+                    //       fontSize: 15,
+                    //     ),
+                    //   ),
+                    // ),
                     ListTile(
                       iconColor: Colors.black,
                       trailing: Text(

@@ -42,14 +42,14 @@ class _MyFarmsScreenState extends State<MyFarmsScreen> {
         scrolledUnderElevation: 0,
         title: Center(child: const Text('My Farms')),
         actions: [
-          IconButton(
-              onPressed: () {
-                Get.toNamed(RouteNames.myCardScreen);
-              },
-              icon: Icon(
-                Icons.shopping_cart,
-                color: Colors.grey,
-              )),
+          // IconButton(
+          //     onPressed: () {
+          //       Get.toNamed(RouteNames.myCardScreen);
+          //     },
+          //     icon: Icon(
+          //       Icons.shopping_cart,
+          //       color: Colors.grey,
+          //     )),
         ],
       ),
       body: token == null
@@ -123,7 +123,69 @@ class _MyFarmsScreenState extends State<MyFarmsScreen> {
                 )
               : controller.myFarm.value.data!.isEmpty
                   ? Center(
-                      child: Text('No Data Found'),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Divider(
+                            color: Colors.grey,
+                            // height: 10,
+                            thickness: 2,
+                            // indent: 20,
+                            // endIndent: 20,
+                          ),
+                          Expanded(
+                              flex: 50,
+                              child: Container(
+                                  width: double.infinity,
+                                  child: Icon(
+                                    Icons.production_quantity_limits,
+                                    size: 100,
+                                    color: Colors.deepOrange,
+                                  ))),
+                          Expanded(
+                            flex: 50,
+                            child: Container(
+                              width: double.infinity,
+                              child: Column(
+                                children: [
+                                  Text(
+                                    'No Project Found',
+                                    style: TextStyle(
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                  SizedBox(
+                                    height: 10,
+                                  ),
+                                  Text(
+                                    "you need to purchase project\nview the content of this page",
+                                    style: TextStyle(
+                                        fontSize: 15,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                  SizedBox(
+                                    height: 10,
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: AppElevatedButton(
+                                      Color: Colors.green,
+                                      onTap: () {
+                                        Get.offAllNamed(RouteNames.logInScreen);
+                                      },
+                                      child: Text(
+                                        'Go to project page ',
+                                        style: TextStyle(color: Colors.white),
+                                      ),
+                                    ),
+                                  )
+                                ],
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
                     )
                   : ListView(
                       children: [
@@ -135,7 +197,9 @@ class _MyFarmsScreenState extends State<MyFarmsScreen> {
                           itemBuilder: (_, index) {
                             final data = controller.myFarm.value.data![index];
 
-                            return CustomProjectWidget(farm: data,);
+                            return CustomProjectWidget(
+                              farm: data,
+                            );
                           },
                         )
                       ],

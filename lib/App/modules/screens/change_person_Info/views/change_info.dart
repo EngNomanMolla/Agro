@@ -34,6 +34,10 @@ class _ChangePerInfoState extends State<ChangePerInfo> {
       TextEditingController(text: info.client!.email);
   final TextEditingController _PhnNumController =
       TextEditingController(text: info.client!.phone);
+
+  final TextEditingController _address =
+  TextEditingController(text: info.client!.address);
+
   final TextEditingController _DateBirthlController = TextEditingController();
   final TextEditingController _nid_backlController = TextEditingController();
   final TextEditingController _nid_frontPartlController =
@@ -60,11 +64,19 @@ class _ChangePerInfoState extends State<ChangePerInfo> {
     }
   }
 
+  bool isLoading = false;
+
   updateProfileData() async {
+
+    setState(() {
+      isLoading = true;
+    });
+
     final response = await NetworkUtils().updatePersonalInfo(
       personalInfo: {
         'name' : _nameController.text,
         'phone' : _PhnNumController.text,
+        'address' : _address.text,
         'email' : _EmailController.text,
         'date_of_birth' : _DateBirthlController.text,
         'nid' : _nidNumController.text,
@@ -73,7 +85,9 @@ class _ChangePerInfoState extends State<ChangePerInfo> {
       },
     );
 
-    print(response.body);
+    setState(() {
+      isLoading = false;
+    });
 
     if (response.statusCode == 200) {
       Get.offAllNamed(RouteNames.mainNavigationScreen);
@@ -163,6 +177,17 @@ class _ChangePerInfoState extends State<ChangePerInfo> {
                   ),
                   const SizedBox(height: 12),
                   AppTextFieldWidget(
+                    controller: _address,
+                    hintText: 'Address',
+                    validator: (value) {
+                      if (value?.isEmpty ?? true) {
+                        return 'Please enter your address';
+                      }
+                      return null;
+                    },
+                  ),
+                  const SizedBox(height: 12),
+                  AppTextFieldWidget(
                     controller: _EmailController,
                     hintText: 'Email',
                     validator: (value) {
@@ -172,23 +197,23 @@ class _ChangePerInfoState extends State<ChangePerInfo> {
                       return null;
                     },
                   ),
-                  const SizedBox(height: 12),
-                  AppTextFieldWidget(
-                    controller: _DateBirthlController,
-                    hintText: 'Date Of Birth',
-                    suffixIcon: IconButton(
-                      onPressed: () {
-                        _selectDate(context);
-                      },
-                      icon: const Icon(Icons.calendar_month_sharp),
-                    ),
-                    validator: (value) {
-                      if (value?.isEmpty ?? true) {
-                        return 'Please enter your WhatsApp number';
-                      }
-                      return null;
-                    },
-                  ),
+                  // const SizedBox(height: 12),
+                  // AppTextFieldWidget(
+                  //   controller: _DateBirthlController,
+                  //   hintText: 'Date Of Birth',
+                  //   suffixIcon: IconButton(
+                  //     onPressed: () {
+                  //       _selectDate(context);
+                  //     },
+                  //     icon: const Icon(Icons.calendar_month_sharp),
+                  //   ),
+                  //   validator: (value) {
+                  //     if (value?.isEmpty ?? true) {
+                  //       return 'Please enter your WhatsApp number';
+                  //     }
+                  //     return null;
+                  //   },
+                  // ),
                   const SizedBox(height: 12),
                   AppTextFieldWidget(
                     controller: _nidNumController,

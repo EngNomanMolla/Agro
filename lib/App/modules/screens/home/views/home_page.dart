@@ -1,5 +1,6 @@
 import 'dart:ffi';
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:device_preview/device_preview.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
@@ -57,7 +58,7 @@ class _MyHomePageScreenState extends State<MyHomePageScreen> {
         actions: [
           IconButton(
               onPressed: () {
-                Get.to(CartScreen());
+                Get.to(() => CartScreen());
               },
               icon: const Icon(
                 Icons.shopping_cart,
@@ -112,26 +113,17 @@ class _MyHomePageScreenState extends State<MyHomePageScreen> {
                                           child: ClipRRect(
                                             borderRadius:
                                                 BorderRadius.circular(12),
-                                            child: Image.network(
-                                              api_base_url + i,
-                                              fit: BoxFit.cover,
-                                              // Show a container while the image is loading
-                                              loadingBuilder:
-                                                  (BuildContext context,
-                                                      Widget child,
-                                                      ImageChunkEvent?
-                                                          loadingProgress) {
-                                                if (loadingProgress == null) {
-                                                  return child; // Image has finished loading, return the actual image
-                                                } else {
-                                                  return Container(
-                                                    width: double.infinity,
-                                                    height: 178.0,
-                                                    // Match the carousel height
-                                                    color: Colors.black.withOpacity(
-                                                        0.3), // Placeholder background color
-                                                  );
-                                                }
+                                            child: CachedNetworkImage(
+                                              imageUrl: api_base_url + i,
+                                              progressIndicatorBuilder:
+                                                  (_, value, progress) {
+                                                return Container(
+                                                  width: double.infinity,
+                                                  height: 178.0,
+                                                  // Match the carousel height
+                                                  color: Colors.black.withOpacity(
+                                                      0.3), // Placeholder background color
+                                                );
                                               },
                                             ),
                                           ),
@@ -170,7 +162,6 @@ class _MyHomePageScreenState extends State<MyHomePageScreen> {
                                         ],
                                       );
                                     }),
-
                                 const DashboardSection()
                               ],
                             )),
@@ -266,7 +257,7 @@ class _MyHomePageScreenState extends State<MyHomePageScreen> {
                                         Projects _project =
                                             project.projects![innerIndex];
                                         return GestureDetector(
-                                          onTap: () => Get.to(
+                                          onTap: () => Get.to(() =>
                                               ProjectDetailScreen(_project)),
                                           child: Container(
                                             margin: const EdgeInsets.symmetric(

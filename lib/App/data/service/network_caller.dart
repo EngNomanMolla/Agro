@@ -88,6 +88,20 @@ class NetworkUtils {
     return response;
   }
 
+  Future<bool> checkUpToDate() async {
+    Map<String, String> headers = {
+      "Content-Type": "application/json",
+      'Authorization': 'Bearer ${await AuthUtils.getAuthData()}',
+    };
+
+    http.Response response =
+    await http.get(Uri.parse(Urls.checkUpToDate), headers: headers);
+
+    final data = jsonDecode(response.body);
+
+    return data['up_to_date_status'] as bool;
+  }
+
   Future<http.Response> updatePersonalInfo({Map? personalInfo}) async {
     Map<String, String> headers = {
       "Content-Type": "application/json",
@@ -98,6 +112,50 @@ class NetworkUtils {
       Uri.parse(Urls.updateprofileurl),
       headers: headers,
       body: jsonEncode(personalInfo)
+    );
+
+    return response;
+  }
+
+  Future<http.StreamedResponse> updateProfilePicture (String image) async {
+    var headers = {
+      "Content-Type": "application/json",
+      'Authorization': 'Bearer ${await AuthUtils.getAuthData()}',
+    };
+    var request = http.MultipartRequest('POST', Uri.parse(Urls.updateprofileurl));
+    request.files.add(await http.MultipartFile.fromPath('image', image));
+    request.headers.addAll(headers);
+
+    http.StreamedResponse response = await request.send();
+
+    return response;
+  }
+
+  Future<http.Response> updateNominee ({Map? info}) async {
+    Map<String, String> headers = {
+      "Content-Type": "application/json",
+      'Authorization': 'Bearer ${await AuthUtils.getAuthData()}',
+    };
+
+    http.Response response = await http.post(
+        Uri.parse(Urls.nomineeInfoChangeurl),
+        headers: headers,
+        body: jsonEncode(info)
+    );
+
+    return response;
+  }
+
+  Future<http.Response> order ({required Map orderData}) async {
+    Map<String, String> headers = {
+      "Content-Type": "application/json",
+      'Authorization': 'Bearer ${await AuthUtils.getAuthData()}',
+    };
+
+    http.Response response = await http.post(
+        Uri.parse(Urls.orderStore),
+        headers: headers,
+        body: jsonEncode(orderData)
     );
 
     return response;
