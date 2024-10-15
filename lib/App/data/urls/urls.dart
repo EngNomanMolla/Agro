@@ -16,6 +16,7 @@ class Urls {
  static String mbankingInfoChangeurl = '$baseUrl/client-mfs';
  static String nomineeInfoChangeurl = '$baseUrl/update-nominee';
  static String dashboard = '$baseUrl/dashboard';
+ static String myFarm = '$baseUrl/order/my-farm';
 
 
 

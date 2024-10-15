@@ -222,16 +222,16 @@ class Nominee {
 }
 
 class AllBalance {
-  int? sumOfPaymentAmount;
-  String? sumOfReferralAmount;
-  int? sumOfProfitAmount;
-  int? sumOfWithdrawalAmount;
-  int? currentBalance;
-  int? sumOfWithdrawalConfirmAmount;
-  int? currentMainConfirmBalance;
-  int? clientActiveBalance;
-  int? restBalance;
-  int? currentTotalBalance;
+  dynamic sumOfPaymentAmount;
+  dynamic sumOfReferralAmount;
+  dynamic sumOfProfitAmount;
+  dynamic sumOfWithdrawalAmount;
+  dynamic currentBalance;
+  dynamic sumOfWithdrawalConfirmAmount;
+  dynamic currentMainConfirmBalance;
+  dynamic clientActiveBalance;
+  dynamic restBalance;
+  dynamic currentTotalBalance;
 
   AllBalance(
       {this.sumOfPaymentAmount,

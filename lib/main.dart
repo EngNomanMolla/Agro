@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:device_preview/device_preview.dart';
 import 'package:get/get.dart';
 import 'package:smart_biniyog/App/data/model/product_model.dart';
+import 'package:smart_biniyog/App/data/service/data_saver.dart';
 import 'package:smart_biniyog/App/routes/route_destinations.dart';
 import 'package:smart_biniyog/App/routes/route_names.dart';
 import 'package:hive_flutter/hive_flutter.dart';
@@ -14,6 +15,8 @@ void main()async {
   await Hive.initFlutter();
   Hive.registerAdapter(ProductModelAdapter()); // Register adapter
   await Hive.openBox<ProductModel>('products');
+
+  await AuthUtils.checkLoginState();
 
   runApp(
 

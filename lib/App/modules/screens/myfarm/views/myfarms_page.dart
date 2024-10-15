@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -29,11 +31,7 @@ class _MyFarmsScreenState extends State<MyFarmsScreen> {
     getToken();
   }
 
-  bool _isLoading = false;
-
-  bool _isSubmitted = false;
-
-  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  final controller = Get.put(MyFarmController());
 
   @override
   Widget build(BuildContext context) {
@@ -119,19 +117,29 @@ class _MyFarmsScreenState extends State<MyFarmsScreen> {
                 ],
               ),
             )
-          : ListView(
-            children: [
-              ListView.builder(
-                padding: EdgeInsets.all(15),
-                shrinkWrap: true,
-                primary: false,
-                itemCount: 5,
-                itemBuilder: (_, index) {
-                  return CustomProjectWidget(index: index);
-                },
-              )
-            ],
-          ),
+          : Obx(() => controller.isLoading.value
+              ? Center(
+                  child: CircularProgressIndicator(),
+                )
+              : controller.myFarm.value.data!.isEmpty
+                  ? Center(
+                      child: Text('No Data Found'),
+                    )
+                  : ListView(
+                      children: [
+                        ListView.builder(
+                          padding: EdgeInsets.all(15),
+                          shrinkWrap: true,
+                          primary: false,
+                          itemCount: controller.myFarm.value.data!.length,
+                          itemBuilder: (_, index) {
+                            final data = controller.myFarm.value.data![index];
+
+                            return CustomProjectWidget(farm: data,);
+                          },
+                        )
+                      ],
+                    )),
       // body: Column(
       //   mainAxisAlignment: MainAxisAlignment.center,
       //   children: [

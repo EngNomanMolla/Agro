@@ -1,7 +1,6 @@
 import 'package:get/get_state_manager/src/simple/get_controllers.dart';
 
-class ChangePerInfoController extends GetxController{
-
+class ChangePerInfoController extends GetxController {
 
 
   @override
@@ -9,8 +8,6 @@ class ChangePerInfoController extends GetxController{
     // TODO: implement onInit
     super.onInit();
   }
-
-
 
 
 }

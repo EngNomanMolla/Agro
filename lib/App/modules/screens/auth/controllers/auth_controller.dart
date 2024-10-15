@@ -106,6 +106,8 @@ class PhnEmailOtpController extends GetxController {
 
     Get.offAllNamed(RouteNames.mainNavigationScreen);
 
+    AuthUtils.checkLoginState();
+
     // if (result != null && result['status'] == 'success') {
     //   await AuthUtils.saveUserData(
     //     result['token'],

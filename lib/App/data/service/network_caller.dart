@@ -9,7 +9,7 @@ import 'package:smart_biniyog/App/data/urls/urls.dart';
 
 class NetworkUtils {
   Future<http.Response> getProjectsByBusinessType() async {
-    String token = "53|pRq1MiXNh0Ja8pHjWhYfj37CJ4b7MZSXr08NWTwCead8a176";
+    String token = 'Bearer ' + await AuthUtils.getAuthData();
 
     String url = api_base_url + "api/client-v1/project_list";
 
@@ -23,7 +23,7 @@ class NetworkUtils {
   }
 
   Future<http.Response> getAllSliderImages() async {
-    String token = "53|pRq1MiXNh0Ja8pHjWhYfj37CJ4b7MZSXr08NWTwCead8a176";
+    String token = 'Bearer ' + await AuthUtils.getAuthData();
 
     String url = api_base_url + "api/client-v1/slider/";
 
@@ -37,7 +37,7 @@ class NetworkUtils {
   }
 
   Future<http.Response> getAllBlog() async {
-    String token = "53|pRq1MiXNh0Ja8pHjWhYfj37CJ4b7MZSXr08NWTwCead8a176";
+    String token = 'Bearer ' + await AuthUtils.getAuthData();
 
     String url = api_base_url + "api/client-v1/blog/";
 
@@ -76,9 +76,36 @@ class NetworkUtils {
     return response;
   }
 
+  Future<http.Response> getMyFarm() async {
+    Map<String, String> headers = {
+      "Content-Type": "application/json",
+      'Authorization': 'Bearer ${await AuthUtils.getAuthData()}',
+    };
+
+    http.Response response =
+        await http.get(Uri.parse(Urls.myFarm), headers: headers);
+
+    return response;
+  }
+
+  Future<http.Response> updatePersonalInfo({Map? personalInfo}) async {
+    Map<String, String> headers = {
+      "Content-Type": "application/json",
+      'Authorization': 'Bearer ${await AuthUtils.getAuthData()}',
+    };
+
+    http.Response response = await http.post(
+      Uri.parse(Urls.updateprofileurl),
+      headers: headers,
+      body: jsonEncode(personalInfo)
+    );
+
+    return response;
+  }
+
   /// Get request
   Future<dynamic> getMethod(String url) async {
-    String token = "53|pRq1MiXNh0Ja8pHjWhYfj37CJ4b7MZSXr08NWTwCead8a176";
+    String token = 'Bearer ' + await AuthUtils.getAuthData();
     try {
       final http.Response response = await http.get(
         Uri.parse(url),
@@ -100,7 +127,7 @@ class NetworkUtils {
   /// Post request
   Future<http.Response> profilepostMethod({Map<String, String>? body1}) async {
     String url = "https://agro.smartbiniyog.com/api/client-v1/update-profile";
-    String token = "49|l1Wi5Z2ah7KZS1mCsyI9tuZbslHGDtVAoSUXEmG4c99f4b04";
+    String token = 'Bearer ' + await AuthUtils.getAuthData();
     Map<String, String> headers = {
       "Content-Type": "application/json",
       'Authorization': 'Bearer $token',
@@ -113,7 +140,7 @@ class NetworkUtils {
 
   Future<dynamic> authPostMethod(String url,
       {Map<String, String>? body}) async {
-    String token = "53|pRq1MiXNh0Ja8pHjWhYfj37CJ4b7MZSXr08NWTwCead8a176";
+    String token = 'Bearer ' + await AuthUtils.getAuthData();
     try {
       final http.Response response = await http.post(Uri.parse(url),
           headers: {
@@ -133,7 +160,6 @@ class NetworkUtils {
       //     moveToLogin();
       //   }
       else {
-
         log("Something went wrong ${response.statusCode}");
         return false;
       }
@@ -144,7 +170,7 @@ class NetworkUtils {
   }
 
   Future<dynamic> PostMethod(String url, {Map<String, String>? body}) async {
-    String token = "53|pRq1MiXNh0Ja8pHjWhYfj37CJ4b7MZSXr08NWTwCead8a176";
+    String token = 'Bearer ' + await AuthUtils.getAuthData();
     try {
       final http.Response response = await http.post(Uri.parse(url),
           headers: {

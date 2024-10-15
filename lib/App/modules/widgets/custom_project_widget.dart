@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:smart_biniyog/App/constant/base_url.dart';
+import 'package:smart_biniyog/App/data/model/my_farm_model.dart';
 
 class CustomProjectWidget extends StatelessWidget {
-  final int index;
-  const CustomProjectWidget({super.key, required this.index});
+  final Datum farm;
+
+  const CustomProjectWidget({super.key, required this.farm});
 
   @override
   Widget build(BuildContext context) {
@@ -10,7 +13,7 @@ class CustomProjectWidget extends StatelessWidget {
       children: [
         Container(
           decoration: BoxDecoration(
-            color: index == 1 ? Colors.red : Colors.green,
+            color: farm.projectStatus == 'Active' ? Colors.green : Colors.red,
             borderRadius: BorderRadius.only(
               topRight: Radius.circular(20),
               topLeft: Radius.circular(20),
@@ -22,7 +25,7 @@ class CustomProjectWidget extends StatelessWidget {
           ),
           child: Center(
             child: Text(
-              index == 1 ? 'Terminated' : 'Active',
+              farm.projectStatus ?? '',
               style: TextStyle(
                 color: Colors.white,
                 fontWeight: FontWeight.bold,
@@ -52,15 +55,16 @@ class CustomProjectWidget extends StatelessWidget {
                 contentPadding: EdgeInsets.zero,
                 leading: CircleAvatar(
                   radius: 25,
+                  backgroundImage: NetworkImage(api_base_url + farm.image!),
                 ),
                 title: Text(
-                  'Burton Cook',
+                  farm.projectName ?? '',
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
                   ),
                 ),
                 subtitle: Text(
-                  'Short Term',
+                  farm.name ?? '',
                   style: TextStyle(
                     color: Colors.black.withOpacity(.5),
                     fontWeight: FontWeight.w500,
@@ -72,29 +76,24 @@ class CustomProjectWidget extends StatelessWidget {
                 indent: 40,
                 endIndent: 40,
               ),
-              buildRow(Icons.monetization_on_outlined, '1000 BDT/Unit'),
-              buildRow(Icons.access_time_filled_outlined, '5 Months'),
-              buildRow(Icons.percent, '10% - 15%'),
+              buildRow(Icons.monetization_on_outlined,
+                  '${farm.minInvestment} BDT/Unit'),
+              buildRow(Icons.access_time_filled_outlined,
+                  farm.projectDuration ?? ''),
+              buildRow(
+                  Icons.percent, '${farm.returnMin}% - ${farm.returnMax}%'),
               const SizedBox(
                 height: 5,
               ),
-              Row(
-                children: [
-                  Expanded(
-                      child: LinearProgressIndicator(
-                    value: 0.95,
-                  )),
-                  const SizedBox(
-                    width: 10,
-                  ),
-                  Text('95%')
-                ],
+              DateProgress(
+                startDate: farm.startDate!, // Your data from the API
+                expirationDate: farm.expirationDate!,
               ),
               const SizedBox(
                 height: 5,
               ),
               Text(
-                'Expiration Date: 10/20/2024',
+                'Expiration Date: ${farm.expirationDate!.day}/${farm.expirationDate!.month}/${farm.expirationDate!.year}',
               )
             ],
           ),
@@ -128,4 +127,42 @@ class CustomProjectWidget extends StatelessWidget {
       ],
     );
   }
+
+
 }
+
+class DateProgress extends StatelessWidget {
+  final DateTime startDate;
+  final DateTime expirationDate;
+
+  DateProgress({required this.startDate, required this.expirationDate});
+
+  @override
+  Widget build(BuildContext context) {
+    // Current date
+    DateTime today = DateTime.now();
+
+    // Calculating total days and days passed
+    int totalDays = expirationDate.difference(startDate).inDays;
+    int daysPassed = today.difference(startDate).inDays;
+
+    // Ensuring the percentage value stays between 0 and 1
+    double progress = (daysPassed / totalDays).clamp(0.0, 1.0);
+    int percentage = (progress * 100).round();
+
+    return Row(
+      children: [
+        Expanded(
+          child: LinearProgressIndicator(
+            value: progress,
+            minHeight: 8,
+          ),
+        ),
+        const SizedBox(width: 10),
+        Text('$percentage%')
+      ],
+    );
+  }
+}
+
+
