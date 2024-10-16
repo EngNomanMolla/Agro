@@ -9,6 +9,7 @@ class CustomProjectWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
     return Column(
       children: [
         Container(
@@ -55,7 +56,7 @@ class CustomProjectWidget extends StatelessWidget {
                 contentPadding: EdgeInsets.zero,
                 leading: CircleAvatar(
                   radius: 25,
-                  backgroundImage: NetworkImage(api_base_url + farm.image!),
+                  backgroundImage: NetworkImage('$api_base_url${farm.projectImage ?? ''}'),
                 ),
                 title: Text(
                   farm.projectName ?? '',
@@ -64,7 +65,7 @@ class CustomProjectWidget extends StatelessWidget {
                   ),
                 ),
                 subtitle: Text(
-                  farm.name ?? '',
+                  farm.projectCategory ?? '',
                   style: TextStyle(
                     color: Colors.black.withOpacity(.5),
                     fontWeight: FontWeight.w500,
@@ -77,7 +78,7 @@ class CustomProjectWidget extends StatelessWidget {
                 endIndent: 40,
               ),
               buildRow(Icons.monetization_on_outlined,
-                  '${farm.minInvestment} BDT/Unit'),
+                  '${farm.totalDeposit} BDT Total Deposit'),
               buildRow(Icons.access_time_filled_outlined,
                   farm.projectDuration ?? ''),
               buildRow(
@@ -86,14 +87,14 @@ class CustomProjectWidget extends StatelessWidget {
                 height: 5,
               ),
               DateProgress(
-                startDate: farm.startDate!, // Your data from the API
-                expirationDate: farm.expirationDate!,
+                startDate: farm.projectStartDate!, // Your data from the API
+                expirationDate: farm.projectExpirationDate!,
               ),
               const SizedBox(
                 height: 5,
               ),
               Text(
-                'Expiration Date: ${farm.expirationDate!.day}/${farm.expirationDate!.month}/${farm.expirationDate!.year}',
+                'Expiration Date: ${farm.projectExpirationDate!.day}/${farm.projectExpirationDate!.month}/${farm.projectExpirationDate!.year}',
               )
             ],
           ),

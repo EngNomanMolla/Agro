@@ -34,6 +34,8 @@ class _ProjectDetailScreenState extends State<ProjectDetailScreen>
   @override
   void initState() {
     super.initState();
+    controller.tempTotalPrice.value = widget.project.projectPrice!;
+    controller.tempTotalQuantity.value = '1';
     _tabController = TabController(length: 4, vsync: this);
     _tabController.addListener(() {
       if (!_tabController.indexIsChanging) {
@@ -59,8 +61,19 @@ class _ProjectDetailScreenState extends State<ProjectDetailScreen>
         isLoading = true;
       });
 
+      final isUpToDate = await NetworkUtils().checkUpToDate();
+
+      if (!isUpToDate) {
+        showSnackBarMessage(Get.context!, 'Please setup your profile before you want to place an order!');
+        Get.toNamed(RouteNames.profile);
+        setState(() {
+          isLoading = false;
+        });
+        return;
+      }
+
       final response = await NetworkUtils().order(orderData: {
-        "total_amount": controller.tempTotalPrice.toString(),
+        "total_amount": controller.tempTotalPrice.value,
         "projects": [
           {
             "id": widget.project.id.toString(),

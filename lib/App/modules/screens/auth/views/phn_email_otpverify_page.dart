@@ -169,18 +169,18 @@ class _PhnEmailOtpVerifyScreenState extends State<PhnEmailOtpVerifyScreen> {
                     SizedBox(
                       height: 10,
                     ),
-                    Row(
-                      children: [
-                        Text('Do not receive code ? Resend Code in'),
-                        SizedBox(
-                          width: 5,
-                        ),
-                        Text(
-                          '2.3 sec',
-                          style: TextStyle(color: Colors.deepOrange),
-                        ),
-                      ],
-                    )
+                    // Row(
+                    //   children: [
+                    //     Text('Do not receive code ? Resend Code in'),
+                    //     SizedBox(
+                    //       width: 5,
+                    //     ),
+                    //     Text(
+                    //       '2.3 sec',
+                    //       style: TextStyle(color: Colors.deepOrange),
+                    //     ),
+                    //   ],
+                    // )
                   ],
                 ),
               );

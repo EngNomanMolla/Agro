@@ -42,7 +42,7 @@ class PersonalInfoGetController extends GetxController{
       selected.value = File(picked.path);
       update();
 
-      // updateProfilePicture();
+      updateProfilePicture();
     }
   }
 

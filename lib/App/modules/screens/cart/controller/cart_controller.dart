@@ -3,6 +3,7 @@ import 'package:get/get_rx/get_rx.dart';
 import 'package:get/get_rx/src/rx_types/rx_types.dart';
 import 'package:hive/hive.dart';
 import 'package:smart_biniyog/App/data/model/product_model.dart';
+import 'package:smart_biniyog/App/data/service/data_saver.dart';
 import 'package:smart_biniyog/App/data/service/network_caller.dart';
 import 'package:smart_biniyog/App/modules/utils/snackbar_message.dart';
 import 'package:smart_biniyog/App/routes/route_names.dart';
@@ -53,12 +54,20 @@ class CartController extends GetxController {
 
   placeOrder () async {
 
+    if (!AuthUtils.isLoggedIn) {
+      showSnackBarMessage(Get.context!, 'Please login to continue!');
+      Get.toNamed(RouteNames.logInScreen);
+      return;
+    }
+
     isLoading.value = true;
 
     final isUpToDate = await NetworkUtils().checkUpToDate();
 
     if (!isUpToDate) {
-      showSnackBarMessage(Get.context!, 'Please login to continue!');
+      showSnackBarMessage(Get.context!, 'Please setup your profile before you want to place an order!');
+      isLoading.value = false;
+      Get.toNamed(RouteNames.profile);
       return;
     }
 
