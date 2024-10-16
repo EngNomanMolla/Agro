@@ -23,6 +23,8 @@ import 'package:smart_biniyog/App/modules/screens/home/views/components/dashboar
 import 'package:smart_biniyog/App/modules/utils/TextStyles.dart';
 import 'package:smart_biniyog/App/routes/route_names.dart';
 
+import '../../../Screens/navigation_bar/controller/navigaion_controller.dart';
+
 class MyHomePageScreen extends StatefulWidget {
   MyHomePageScreen({Key? key}) : super(key: key);
 
@@ -34,6 +36,7 @@ class _MyHomePageScreenState extends State<MyHomePageScreen> {
   final ValueNotifier<int> _currentCarouselIndex = ValueNotifier(0);
 
   final homeController = Get.put(HomeController());
+  final nav = Get.put(NavigatinController());
 
   @override
   Widget build(BuildContext context) {
@@ -231,14 +234,17 @@ class _MyHomePageScreenState extends State<MyHomePageScreen> {
                                                 fontSize: 20,
                                                 fontWeight: FontWeight.bold,
                                                 color: Color(0xff38b579))),
-                                        Padding(
-                                          padding:
-                                              const EdgeInsets.only(right: 8.0),
-                                          child: Text('See All',
-                                              style: TextStyle(
-                                                  fontSize: 15,
-                                                  fontWeight: FontWeight.normal,
-                                                  color: Color(0xff38b579))),
+                                        InkWell(
+                                          onTap: () => nav.changeIndex(1),
+                                          child: Padding(
+                                            padding:
+                                                const EdgeInsets.only(right: 8.0),
+                                            child: Text('See All',
+                                                style: TextStyle(
+                                                    fontSize: 15,
+                                                    fontWeight: FontWeight.normal,
+                                                    color: Color(0xff38b579))),
+                                          ),
                                         ),
                                       ],
                                     ),
