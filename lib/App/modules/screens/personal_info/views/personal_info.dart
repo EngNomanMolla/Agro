@@ -17,8 +17,6 @@ class PersonalInfoScreen extends GetView<PersonalInfoGetController> {
     return Scaffold(
       body: GetBuilder<PersonalInfoGetController>(
           builder: (PersonalInfoGetController) {
-            print(api_base_url + personalInfoGetController
-                .personInfoDataModel.client!.image);
         return PersonalInfoGetController.personInfoProgress
             ? const Center(
                 child: CircularProgressIndicator(color: Color(0xff38b579)),
@@ -36,24 +34,26 @@ class PersonalInfoScreen extends GetView<PersonalInfoGetController> {
                             color: Color(0xff38b579).withOpacity(0.2),
                             borderRadius: BorderRadius.circular(100),
                             image: personalInfoGetController
-                                        .personInfoDataModel.client!.image !=
-                                    null
-                                ? DecorationImage(
-                                    image: NetworkImage(
-                                      api_base_url + personalInfoGetController
-                                          .personInfoDataModel.client!.image,
-                                    ),
-                                    fit: BoxFit.cover,
-                                  )
-                                : personalInfoGetController
-                                        .selected.value.path.isEmpty
-                                    ? null
-                                    : DecorationImage(
-                                        image: FileImage(
-                                            personalInfoGetController
-                                                .selected.value),
+                                    .selected.value.path.isEmpty
+                                ? personalInfoGetController.personInfoDataModel
+                                            .client!.image !=
+                                        null
+                                    ? DecorationImage(
+                                        image: NetworkImage(
+                                          api_base_url +
+                                              personalInfoGetController
+                                                  .personInfoDataModel
+                                                  .client!
+                                                  .image,
+                                        ),
                                         fit: BoxFit.cover,
-                                      )),
+                                      )
+                                    : null
+                                : DecorationImage(
+                                    image: FileImage(personalInfoGetController
+                                        .selected.value),
+                                    fit: BoxFit.cover,
+                                  )),
                         child: Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: Icon(Icons.camera_alt_outlined),

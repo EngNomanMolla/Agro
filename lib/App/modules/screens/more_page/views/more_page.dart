@@ -12,11 +12,15 @@ import 'package:smart_biniyog/App/modules/screens/profile/views/profile_page.dar
 import 'package:smart_biniyog/App/modules/utils/TextStyles.dart';
 import 'package:smart_biniyog/App/routes/route_names.dart';
 
+import '../../../Screens/navigation_bar/controller/navigaion_controller.dart';
+
 class MorePageScreen extends GetView<MoreController> {
   const MorePageScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+
+
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
@@ -50,7 +54,9 @@ class MorePageScreen extends GetView<MoreController> {
                 color: Color(0xff38b579),
                 //     Get.toNamed(RouteNames.profile);
                 child: InkWell(
-                  onTap: () {},
+                  onTap: () {
+
+                  },
                   child: ListTile(
                       trailing: Icon(Icons.arrow_forward_ios,
                           size: 17, color: Colors.white.withOpacity(0.7)),

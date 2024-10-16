@@ -33,6 +33,8 @@ class _MyFarmsScreenState extends State<MyFarmsScreen> {
 
   final controller = Get.put(MyFarmController());
 
+  final nav = Get.put(NavigatinController());
+
   @override
   Widget build(BuildContext context) {
     print(token);
@@ -52,7 +54,7 @@ class _MyFarmsScreenState extends State<MyFarmsScreen> {
           //     )),
         ],
       ),
-      body: token == null
+      body: !AuthUtils.isLoggedIn
           ? Center(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
@@ -90,7 +92,8 @@ class _MyFarmsScreenState extends State<MyFarmsScreen> {
                             height: 10,
                           ),
                           Text(
-                            "you need to purchase project\nview the content of this page",
+                            "You should be logged in to access your purchased projects.",
+                            textAlign: TextAlign.center,
                             style: TextStyle(
                                 fontSize: 15, fontWeight: FontWeight.bold),
                           ),
@@ -102,10 +105,10 @@ class _MyFarmsScreenState extends State<MyFarmsScreen> {
                             child: AppElevatedButton(
                               Color: Colors.green,
                               onTap: () {
-                                Get.offAllNamed(RouteNames.logInScreen);
+                                Get.toNamed(RouteNames.logInScreen);
                               },
                               child: Text(
-                                'Go to project page ',
+                                'Log In',
                                 style: TextStyle(color: Colors.white),
                               ),
                             ),
@@ -172,7 +175,7 @@ class _MyFarmsScreenState extends State<MyFarmsScreen> {
                                     child: AppElevatedButton(
                                       Color: Colors.green,
                                       onTap: () {
-                                        Get.offAllNamed(RouteNames.logInScreen);
+                                        nav.changeIndex(0);
                                       },
                                       child: Text(
                                         'Go to project page ',

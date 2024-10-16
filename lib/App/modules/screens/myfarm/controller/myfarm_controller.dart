@@ -25,6 +25,8 @@ class MyFarmController extends GetxController{
 
     myFarm.value = myFarmModelFromJson(response.body);
 
+    print(response.body);
+
     isLoading.value = false;
 
     update();
