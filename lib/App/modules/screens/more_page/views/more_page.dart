@@ -9,6 +9,7 @@ import 'package:smart_biniyog/App/modules/screens/contact/views/contact_page.dar
 import 'package:smart_biniyog/App/modules/screens/faq_question/views/faq_question.dart';
 import 'package:smart_biniyog/App/modules/screens/privacy/views/privacy_page.dart';
 import 'package:smart_biniyog/App/modules/screens/profile/views/profile_page.dart';
+import 'package:smart_biniyog/App/modules/screens/withdraw/view/withdraw.dart';
 import 'package:smart_biniyog/App/modules/utils/TextStyles.dart';
 import 'package:smart_biniyog/App/routes/route_names.dart';
 
@@ -47,6 +48,23 @@ class MorePageScreen extends GetView<MoreController> {
                               TextStyle(color: Colors.white, fontSize: 17.0)),
                       leading: Icon(Icons.perm_identity_outlined,
                           color: Colors.white)),
+                ),
+              ),
+              SizedBox(height: 5.0),
+              Card(
+                color: Color(0xff38b579),
+                //     Get.toNamed(RouteNames.profile);
+                child: InkWell(
+                  onTap: () {
+                    Get.to(() => const WithdrawView());
+                  },
+                  child: ListTile(
+                      trailing: Icon(Icons.arrow_forward_ios,
+                          size: 17, color: Colors.white.withOpacity(0.7)),
+                      title: Text('Withdraw',
+                          style:
+                          TextStyle(color: Colors.white, fontSize: 17.0)),
+                      leading: Icon(Icons.account_balance_wallet_outlined, color: Colors.white)),
                 ),
               ),
               SizedBox(height: 5.0),

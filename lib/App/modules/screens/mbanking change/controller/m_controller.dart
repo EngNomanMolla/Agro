@@ -1,25 +1,29 @@
+import 'package:get/get.dart';
 import 'package:get/get_state_manager/src/simple/get_controllers.dart';
 import 'package:smart_biniyog/App/data/service/network_caller.dart';
 import 'package:smart_biniyog/App/data/urls/urls.dart';
 
+import '../../../../routes/route_names.dart';
+
 class ChangeBankingController extends GetxController{
 
-  bool loginInProgress = false;
+  Future<bool> mfsInfoChange(String mfsName, String mfsType, String mfsNumber) async {
 
-  Future<dynamic> MbankingInfChange(String mfsName,String mfsType,String mfsNumber) async {
-    //loginInProgress = true;
     update();
-    return await NetworkUtils().PostMethod(
-        Urls.mbankingInfoChangeurl,              //final result =
-        body: {
-          "mfs_name":mfsName,
-          "mfs_type": mfsType,
-          "mfs_number": mfsNumber,
+    final data = await NetworkUtils().updateMFS(data: {
+      "mfs_name":mfsName,
+      "mfs_type": mfsType,
+      "mfs_number": mfsNumber,
+    },);
 
-        });
-
-    //loginInProgress = false;
-
+    if (data.statusCode == 200) {
+      Get.offAllNamed(RouteNames.mainNavigationScreen);
+      Get.snackbar('Success', 'MFS data successfully updated');
+      return true;
+    } else {
+      Get.snackbar('Error', 'Something is wrong');
+      return false;
+    }
   }
 
 

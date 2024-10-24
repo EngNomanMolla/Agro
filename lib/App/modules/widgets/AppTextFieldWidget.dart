@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
+import 'package:flutter/services.dart';
 
 class AppTextFieldWidget extends StatelessWidget {
   const AppTextFieldWidget({
@@ -14,6 +14,7 @@ class AppTextFieldWidget extends StatelessWidget {
     this.suffixIcon,
     this.prefixIcon,
     this.onChanged,
+    this.enabled, this.inputFormatters,
   }) : super(key: key);
   final Widget? suffixIcon;
   final Widget? prefixIcon;
@@ -23,12 +24,15 @@ class AppTextFieldWidget extends StatelessWidget {
   final int? maxLines;
   final Function(String?)? validator;
   final bool? readOnly;
-  final Function(String?)? onChanged ;
-
+  final bool? enabled;
+  final Function(String?)? onChanged;
+  final List<TextInputFormatter>? inputFormatters;
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      inputFormatters: inputFormatters,
+      enabled: enabled,
       onChanged: onChanged,
       controller: controller,
       obscureText: obscureText ?? false,
@@ -41,9 +45,10 @@ class AppTextFieldWidget extends StatelessWidget {
         return null;
       },
       decoration: InputDecoration(
-        fillColor: Colors.white,
+        fillColor:
+            enabled == false ? Colors.grey.withOpacity(.2) : Colors.white,
         hintText: hintText,
-        hintStyle:TextStyle(
+        hintStyle: TextStyle(
           color: Color(0xFF6A7189),
           fontSize: 16,
         ),
@@ -61,8 +66,8 @@ class AppTextFieldWidget extends StatelessWidget {
         //   borderSide: BorderSide(color: Colors.transparent),
         //
         // ),
-        suffixIcon:suffixIcon,
-        prefixIcon:prefixIcon,
+        suffixIcon: suffixIcon,
+        prefixIcon: prefixIcon,
       ),
     );
   }

@@ -146,6 +146,36 @@ class NetworkUtils {
     return response;
   }
 
+  Future<http.Response> updateBankDetails ({Map? data}) async {
+    Map<String, String> headers = {
+      "Content-Type": "application/json",
+      'Authorization': 'Bearer ${await AuthUtils.getAuthData()}',
+    };
+
+    http.Response response = await http.post(
+        Uri.parse(Urls.bankingInfoChangeurl),
+        headers: headers,
+        body: jsonEncode(data)
+    );
+
+    return response;
+  }
+
+  Future<http.Response> updateMFS ({Map? data}) async {
+    Map<String, String> headers = {
+      "Content-Type": "application/json",
+      'Authorization': 'Bearer ${await AuthUtils.getAuthData()}',
+    };
+
+    http.Response response = await http.post(
+        Uri.parse(Urls.mbankingInfoChangeurl),
+        headers: headers,
+        body: jsonEncode(data)
+    );
+
+    return response;
+  }
+
   Future<http.Response> order ({required Map orderData}) async {
     Map<String, String> headers = {
       "Content-Type": "application/json",

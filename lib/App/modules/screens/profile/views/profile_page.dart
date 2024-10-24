@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:smart_biniyog/App/modules/screens/Financial/views/financial_page.dart';
@@ -13,7 +12,7 @@ class ProfilePageScreen extends GetView<ProfileController> {
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
-      length: 2, // Number of tabs
+      length: 4, // Number of tabs
       child: Scaffold(
         appBar: AppBar(
           automaticallyImplyLeading: false,
@@ -28,8 +27,8 @@ class ProfilePageScreen extends GetView<ProfileController> {
               isScrollable: true,
               tabs: [
                 Tab(icon: Icon(Icons.person), text: 'Personal'),
-                // Tab(icon: Icon(Icons.balance), text: 'Bank Info'),
-                // Tab(icon: Icon(Icons.send_to_mobile), text: 'M_Banking'),
+                Tab(icon: Icon(Icons.balance), text: 'Bank Info'),
+                Tab(icon: Icon(Icons.send_to_mobile), text: 'M_Banking'),
                 Tab(icon: Icon(Icons.privacy_tip), text: 'Nominee'),
               ],
               unselectedLabelColor: Colors.white.withOpacity(0.6),
@@ -39,8 +38,8 @@ class ProfilePageScreen extends GetView<ProfileController> {
         body: TabBarView(
           children: [
             PersonalInfoScreen(),
-            // FinancialScreen(),
-            // MobileBanking(),
+            FinancialScreen(),
+            MobileBanking(),
             NomineeScreen()
           ],
         ),

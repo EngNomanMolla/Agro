@@ -23,12 +23,13 @@ class _MobileBankingChangeState extends State<MobileBankingChange> {
   final TextEditingController _RateRETController = TextEditingController();
   final TextEditingController _PhNumETController = TextEditingController();
   final TextEditingController _shortNameETController = TextEditingController();
-  // ChangeBankingController changeBankingController=Get.put(ChangeBankingController());
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   bool m = true;
   bool _isLoading = false;
   String? _selectedGateway;
-  final List<String> _gateways = ['Bkash', 'Nagad'];
+  final List<String> _gateways = ['Bkash', 'Nagad', 'Rocket'];
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -110,27 +111,26 @@ class _MobileBankingChangeState extends State<MobileBankingChange> {
                             Color: Colors.green,
                             onTap: () async {
                               if (_formKey.currentState!.validate()) {
-                               // print(_selectedGateway);
-                                // // Get.toNamed(RouteNames.phnEmailOtpScreen);
-                                //  print(_emailETController.text.trim());
-                                final result = await ChangeBankingController
-                                    .MbankingInfChange(
+
+                                setState(() {
+                                  _isLoading = true;
+                                });
+
+                                await ChangeBankingController
+                                    .mfsInfoChange(
                                   _selectedGateway!,
                                   _typeIDETController.text.trim(),
                                   _PhNumETController.text.trim(),
                                 );
-                                if (result['status'] == 'true') {
-                                  showSnackBarMessage(
-                                      context, 'OTP sent to the email address');
-                                } else {
-                                  showSnackBarMessage(context,
-                                      'OTP sent failed. Try again.', true);
-                                }
+
+                                setState(() {
+                                  _isLoading = false;
+                                });
                               }
                             },
                             child: Center(
                               child: Text(
-                                "submit",
+                               _isLoading ? 'Submitting...' : "submit",
                                 style: GoogleFonts.poppins(
                                   textStyle: const TextStyle(
                                     color: Colors.black,
