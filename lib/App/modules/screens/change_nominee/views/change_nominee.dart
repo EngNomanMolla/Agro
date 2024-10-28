@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:smart_biniyog/App/data/model/personInfo.dart';
@@ -95,6 +96,9 @@ class _ChangeNomineeScreenState extends State<ChangeNomineeScreen> {
                 AppTextFieldWidget(
                   controller: _phoneController,
                   hintText: 'phone Num',
+                  inputFormatters: [
+                    FilteringTextInputFormatter.digitsOnly
+                  ],
                   validator: (value) {
                     if (value?.isEmpty ?? true) {
                       return 'Please enter your address';
@@ -105,6 +109,9 @@ class _ChangeNomineeScreenState extends State<ChangeNomineeScreen> {
                 const SizedBox(height: 12),
                 AppTextFieldWidget(
                   controller: _NIDController,
+                  inputFormatters: [
+                    FilteringTextInputFormatter.digitsOnly
+                  ],
                   hintText: 'NID',
                   validator: (value) {
                     if (value?.isEmpty ?? true) {

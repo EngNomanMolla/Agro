@@ -179,6 +179,7 @@ class NetworkUtils {
   Future<http.Response> order ({required Map orderData}) async {
     Map<String, String> headers = {
       "Content-Type": "application/json",
+      "Accept": "application/json",
       'Authorization': 'Bearer ${await AuthUtils.getAuthData()}',
     };
 
@@ -186,6 +187,24 @@ class NetworkUtils {
         Uri.parse(Urls.orderStore),
         headers: headers,
         body: jsonEncode(orderData)
+    );
+
+    return response;
+  }
+
+  Future<http.Response> submitWithdraw ({required Map data}) async {
+    Map<String, String> headers = {
+      "Content-Type": "application/json",
+      'accept' : 'application/json',
+      'Authorization': 'Bearer ${await AuthUtils.getAuthData()}',
+    };
+
+    print(data);
+
+    http.Response response = await http.post(
+        Uri.parse(Urls.withdrawRequest),
+        headers: headers,
+        body: jsonEncode(data)
     );
 
     return response;

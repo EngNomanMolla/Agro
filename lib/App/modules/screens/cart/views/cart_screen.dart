@@ -101,7 +101,7 @@ class _CartScreenState extends State<CartScreen> {
                     Obx(() => Padding(
                         padding: const EdgeInsets.all(10.0),
                         child: InkWell(
-                          onTap: () => cartController.placeOrder(),
+                          onTap: () => cartController.goToCheckout(),
                           child: Container(
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(10.0),
@@ -125,7 +125,7 @@ class _CartScreenState extends State<CartScreen> {
                                     ),
                                   )
                                   else
-                                  Text('Order Now',
+                                  Text('Checkout',
                                       textAlign: TextAlign.center,
                                       style: TextStyle(
                                         color: Colors.white,

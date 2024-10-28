@@ -1,9 +1,13 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_state_manager/src/simple/get_state.dart';
 
 import 'package:pin_code_fields/pin_code_fields.dart';
+import 'package:smart_biniyog/App/Constant/Colors.dart';
 import 'package:smart_biniyog/App/data/service/network_caller.dart';
 import 'package:smart_biniyog/App/modules/Screens/auth/controllers/auth_controller.dart';
 import 'package:smart_biniyog/App/modules/Widgets/AppElevatedButtonWidget.dart';
@@ -23,9 +27,65 @@ class _PhnEmailOtpVerifyScreenState extends State<PhnEmailOtpVerifyScreen> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final String _code = "";
 
+  Timer? _timer;
+  int _start = 30;
+  bool _isButtonDisabled = true;
+
+  @override
+  void initState() {
+    super.initState();
+    startTimer();  // Start the timer initially
+  }
+
+  void startTimer() {
+    print('object');
+    setState(() {
+      _start = 30;
+      _isButtonDisabled = true;
+    });
+
+    _timer = Timer.periodic(Duration(seconds: 1), (timer) {
+      if (_start < 1 ) {
+        setState(() {
+          _isButtonDisabled = false;
+        });
+        timer.cancel();
+      } else {
+        setState(() {
+          _start--;
+        });
+      }
+    });
+  }
+
+  final Map<String, dynamic> arguments = Get.arguments;
+
+  final controller = Get.put(LogInScreenController());
+
+  void resendOtp() async {
+    // Your logic to resend the OTP goes here.
+    startTimer();  // Restart the timer on resend
+    // Optionally show a snackbar or toast
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(content: Text("OTP has been resent")),
+    );
+
+    await controller.verifyEmailPhn(
+      arguments['email'],
+    );
+
+  }
+
+  @override
+  void dispose() {
+    _timer?.cancel();
+    super.dispose();
+  }
+
+
+
   @override
   Widget build(BuildContext context) {
-    final Map<String, String> arguments = Get.arguments;
     print(Get.arguments);
 
     return Scaffold(
@@ -41,19 +101,27 @@ class _PhnEmailOtpVerifyScreenState extends State<PhnEmailOtpVerifyScreen> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Divider(
-                      color: Colors.grey,
-                      // height: 10,
-                      thickness: 2,
-                      // indent: 20,
-                      // endIndent: 20,                      //${arguments['email']}
-                    ),
+                    // const Divider(
+                    //   color: Colors.grey,
+                    //   // height: 10,
+                    //   thickness: 2,
+                    //   // indent: 20,
+                    //   // endIndent: 20,                      //${arguments['email']}
+                    // ),
                     Text(
-                        'please enter the verification code sent to \n  this number ${arguments['email']} '),
+                        'please enter the verification code sent to \nthis ${arguments['is_email'] == true ? 'email' : 'number'} ${arguments['email']} '),
                     SizedBox(
                       height: 6,
                     ),
-                    Text('change Number'),
+                    InkWell(
+                      onTap: () => Get.back(),
+                      child: Text('Change Number',
+                        style: TextStyle(
+                            color: greyColor,
+                            fontWeight: FontWeight.w600,
+                            fontSize: 16
+                        ),),
+                    ),
                     SizedBox(
                       height: 6,
                     ),
@@ -64,6 +132,9 @@ class _PhnEmailOtpVerifyScreenState extends State<PhnEmailOtpVerifyScreen> {
                       height: 8,
                     ),
                     PinCodeTextField(
+                      inputFormatters: [
+                        FilteringTextInputFormatter.digitsOnly
+                      ],
                       controller: _otpPinETController,
                       length: 5,
                       obscureText: false,
@@ -169,18 +240,21 @@ class _PhnEmailOtpVerifyScreenState extends State<PhnEmailOtpVerifyScreen> {
                     SizedBox(
                       height: 10,
                     ),
-                    // Row(
-                    //   children: [
-                    //     Text('Do not receive code ? Resend Code in'),
-                    //     SizedBox(
-                    //       width: 5,
-                    //     ),
-                    //     Text(
-                    //       '2.3 sec',
-                    //       style: TextStyle(color: Colors.deepOrange),
-                    //     ),
-                    //   ],
-                    // )
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text('Do not receive code?'),
+                        SizedBox(
+                          width: 5,
+                        ),
+                        InkWell(
+                          onTap: () => _isButtonDisabled ? null : resendOtp(),
+                          child: Text(_isButtonDisabled ? 'Resend in ${_start} sec' : 'Resend',
+                            style: TextStyle(color: Colors.deepOrange),
+                          ),
+                        ),
+                      ],
+                    )
                   ],
                 ),
               );

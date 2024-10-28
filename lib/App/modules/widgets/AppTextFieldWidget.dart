@@ -14,7 +14,9 @@ class AppTextFieldWidget extends StatelessWidget {
     this.suffixIcon,
     this.prefixIcon,
     this.onChanged,
-    this.enabled, this.inputFormatters,
+    this.enabled,
+    this.inputFormatters,
+    this.errorText,
   }) : super(key: key);
   final Widget? suffixIcon;
   final Widget? prefixIcon;
@@ -27,6 +29,7 @@ class AppTextFieldWidget extends StatelessWidget {
   final bool? enabled;
   final Function(String?)? onChanged;
   final List<TextInputFormatter>? inputFormatters;
+  final String? errorText;
 
   @override
   Widget build(BuildContext context) {
@@ -45,6 +48,7 @@ class AppTextFieldWidget extends StatelessWidget {
         return null;
       },
       decoration: InputDecoration(
+        errorText: errorText,
         fillColor:
             enabled == false ? Colors.grey.withOpacity(.2) : Colors.white,
         hintText: hintText,

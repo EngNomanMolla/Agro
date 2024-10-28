@@ -9,7 +9,7 @@ class ChangeFinancialController extends GetxController {
   var loginInProgress = true.obs;
 
   Future<bool> bankingInfoChange(String bankN, String acN, String branchN,
-      String acNo) async {
+      String acNo, String? swift, String? routing) async {
     loginInProgress.value = true;
 
     update();
@@ -18,6 +18,8 @@ class ChangeFinancialController extends GetxController {
       "ac_name": acN,
       "branch_name": branchN,
       "ac_no": acNo,
+      'routing_number' : routing,
+      'swift_code' : swift,
     },);
 
 

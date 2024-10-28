@@ -5,18 +5,25 @@ import 'package:hive/hive.dart';
 import 'package:smart_biniyog/App/data/model/product_model.dart';
 import 'package:smart_biniyog/App/data/service/data_saver.dart';
 import 'package:smart_biniyog/App/data/service/network_caller.dart';
+import 'package:smart_biniyog/App/modules/screens/cart/views/checkout.dart';
 import 'package:smart_biniyog/App/modules/utils/snackbar_message.dart';
 import 'package:smart_biniyog/App/routes/route_names.dart';
 
+import '../../../../data/model/personInfo.dart';
+import '../../../../data/urls/urls.dart';
+
 
 class CartController extends GetxController {
+
   List<ProductModel> productList = [];
+  List<ProductModel> tempProductList = [];
   double totalPrice=0.0;
   Box<ProductModel> productBox = Hive.box<ProductModel>('products');
 
   @override
   void onInit() {
     super.onInit();
+    getPersonInfo();
     loadProducts();
     calculateTotalPrice();
   }
@@ -51,8 +58,9 @@ class CartController extends GetxController {
   RxString tempTotalQuantity = RxString('');
 
   RxBool isLoading = RxBool(false);
+  RxBool isInsurance = RxBool(false);
 
-  placeOrder () async {
+  placeOrder (String? type) async {
 
     if (!AuthUtils.isLoggedIn) {
       showSnackBarMessage(Get.context!, 'Please login to continue!');
@@ -71,7 +79,11 @@ class CartController extends GetxController {
       return;
     }
 
-    final projects = productList.map((e) => {
+    final projects = type == 'book_now' ? tempProductList.map((e) => {
+      'id' : e.id,
+      'quantity' : e.quantity,
+      'price' : e.price,
+    }).toList() : productList.map((e) => {
       'id' : e.id,
       'quantity' : e.quantity,
       'price' : e.price,
@@ -99,6 +111,52 @@ class CartController extends GetxController {
     } else {
       print(response.body);
       showSnackBarMessage(Get.context!, 'Something is wrong, Please try again');
+    }
+  }
+
+  goToCheckout () async {
+
+    if (!AuthUtils.isLoggedIn) {
+      showSnackBarMessage(Get.context!, 'Please login to continue!');
+      Get.toNamed(RouteNames.logInScreen);
+      return;
+    }
+
+    isLoading.value = true;
+
+    final isUpToDate = await NetworkUtils().checkUpToDate();
+
+    isLoading.value = false;
+
+    if (!isUpToDate) {
+      showSnackBarMessage(Get.context!, 'Please setup your profile before you want to place an order!');
+      isLoading.value = false;
+      Get.toNamed(RouteNames.profile);
+      return;
+    }
+
+    Get.to(() => const CheckoutScreen());
+  }
+
+  bool personInfoProgress = false;
+  var personInfoDataModel = PersonInfoModel().obs;
+
+
+  Future<bool> getPersonInfo() async {
+    personInfoProgress = true;
+    update();
+    final response = await NetworkUtils().getMethod(
+      Urls.PersonInfowurl,
+    );
+    print("personInfo:$response");
+    personInfoProgress = false;
+    if (response != null) {
+      personInfoDataModel.value = PersonInfoModel.fromJson(response);
+      update();
+      return true;
+    } else {
+      update();
+      return false;
     }
   }
 

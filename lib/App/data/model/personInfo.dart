@@ -154,14 +154,18 @@ class Banking {
   String? branchName;
   String? acName;
   String? acNo;
+  String? swiftCode;
+  String? routingNumber;
 
-  Banking({this.bankName, this.branchName, this.acName, this.acNo});
+  Banking({this.bankName, this.branchName, this.acName, this.acNo, this.routingNumber, this.swiftCode});
 
   Banking.fromJson(Map<String, dynamic> json) {
     bankName = json['bank_name'];
     branchName = json['branch_name'];
     acName = json['ac_name'];
     acNo = json['ac_no'];
+    swiftCode = json['swift_code'] ?? null;
+    routingNumber = json['routing_number'] ?? null;
   }
 
   Map<String, dynamic> toJson() {

@@ -18,6 +18,7 @@ import 'package:smart_biniyog/App/modules/Screens/project_details/views/project_
 import 'package:smart_biniyog/App/modules/Widgets/RemarkBestProjectWidget.dart';
 import 'package:smart_biniyog/App/modules/Widgets/RemarkCategoryWidget.dart';
 import 'package:smart_biniyog/App/modules/screens/blog_details/views/blog_details.dart';
+import 'package:smart_biniyog/App/modules/screens/cart/controller/cart_controller.dart';
 import 'package:smart_biniyog/App/modules/screens/cart/views/cart_screen.dart';
 import 'package:smart_biniyog/App/modules/screens/home/views/components/dashboard_section.dart';
 import 'package:smart_biniyog/App/modules/utils/TextStyles.dart';
@@ -37,6 +38,7 @@ class _MyHomePageScreenState extends State<MyHomePageScreen> {
 
   final homeController = Get.put(HomeController());
   final nav = Get.put(NavigatinController());
+  final controller = Get.put(CartController());
 
   @override
   Widget build(BuildContext context) {

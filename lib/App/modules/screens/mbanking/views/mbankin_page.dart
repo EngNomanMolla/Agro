@@ -64,7 +64,7 @@ class _MobileBankingState extends State<MobileBanking> {
                                 ),
                               ),
                               title: Text(
-                                'Account Name:',
+                                'Wallet Name',
                                 style: TextStyle(
                                   color: Colors.black,
                                   fontWeight: FontWeight.w600,
@@ -83,7 +83,7 @@ class _MobileBankingState extends State<MobileBanking> {
                                 ),
                               ),
                               title: Text(
-                                'Account branch',
+                                'Wallet Type',
                                 style: TextStyle(
                                   color: Colors.black,
                                   fontWeight: FontWeight.w600,
@@ -102,7 +102,7 @@ class _MobileBankingState extends State<MobileBanking> {
                                 ),
                               ),
                               title: Text(
-                                ' Phone Num ',
+                                'Wallet Number',
                                 style: TextStyle(
                                   color: Colors.black,
                                   fontWeight: FontWeight.w600,

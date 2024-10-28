@@ -20,13 +20,15 @@ class _ChangeFinancialScreenState extends State<ChangeFinancialScreen> {
 
   static final client = Get.arguments as PersonInfoModel;
 
-  final TextEditingController _BankController = TextEditingController(text: client.client!.banking!.bankName ?? '');
+  final TextEditingController _BankController = TextEditingController(text: client.client!.banking?.bankName ?? '');
 
-  final TextEditingController _AccountNameController = TextEditingController(text: client.client!.banking!.acName ?? '');
+  final TextEditingController _AccountNameController = TextEditingController(text: client.client!.banking?.acName ?? '');
 
-  final TextEditingController _BranchController = TextEditingController(text: client.client!.banking!.branchName ?? '');
+  final TextEditingController _BranchController = TextEditingController(text: client.client!.banking?.branchName ?? '');
 
-  final TextEditingController _AccountNumlController = TextEditingController(text: client.client!.banking!.acNo ?? '');
+  final TextEditingController _AccountNumlController = TextEditingController(text: client.client!.banking?.acNo ?? '');
+  final TextEditingController _swift = TextEditingController(text: client.client!.banking?.swiftCode ?? '');
+  final TextEditingController _routing = TextEditingController(text: client.client!.banking?.routingNumber ?? '');
 
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
@@ -93,6 +95,16 @@ class _ChangeFinancialScreenState extends State<ChangeFinancialScreen> {
                   },
                 ),
                 const SizedBox(height: 12),
+                AppTextFieldWidget(
+                  controller: _swift,
+                  hintText: 'Swift Code',
+                ),
+                const SizedBox(height: 12),
+                AppTextFieldWidget(
+                  controller: _routing,
+                  hintText: 'Routing Number',
+                ),
+                const SizedBox(height: 12),
                 Container(
                   height: 48,
                   width: 358,
@@ -112,6 +124,8 @@ class _ChangeFinancialScreenState extends State<ChangeFinancialScreen> {
                               _AccountNameController.text.trim(),
                               _BranchController.text.trim(),
                               _AccountNumlController.text.trim(),
+                              _swift.text,
+                              _routing.text,
                             );
 
                             isLoading = false;

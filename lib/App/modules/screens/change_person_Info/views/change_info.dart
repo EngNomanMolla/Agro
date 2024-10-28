@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:get/get_state_manager/src/simple/get_state.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -168,6 +169,9 @@ class _ChangePerInfoState extends State<ChangePerInfo> {
                   AppTextFieldWidget(
                     controller: _PhnNumController,
                     hintText: 'Phn Num',
+                    inputFormatters: [
+                      FilteringTextInputFormatter.digitsOnly
+                    ],
                     validator: (value) {
                       if (value?.isEmpty ?? true) {
                         return 'Please enter your address';
@@ -218,6 +222,9 @@ class _ChangePerInfoState extends State<ChangePerInfo> {
                   AppTextFieldWidget(
                     controller: _nidNumController,
                     hintText: 'NID',
+                    inputFormatters: [
+                      FilteringTextInputFormatter.digitsOnly
+                    ],
                     validator: (value) {
                       if (value?.isEmpty ?? true) {
                         return 'Please enter your WhatsApp number';

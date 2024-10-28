@@ -10,10 +10,13 @@ import 'package:smart_biniyog/App/modules/Screens/summary_page.dart';
 import 'package:smart_biniyog/App/modules/Screens/profit_simulation/views/profit_simu_page.dart';
 import 'package:smart_biniyog/App/modules/Widgets/AppElevatedButtonWidget.dart';
 import 'package:smart_biniyog/App/modules/screens/cart/controller/cart_controller.dart';
+import 'package:smart_biniyog/App/modules/screens/cart/views/checkout.dart';
 import 'package:smart_biniyog/App/modules/screens/project_review/views/project_reviewlist_page.dart';
 import 'package:smart_biniyog/App/modules/screens/project_review/views/project_reviews.dart';
 import 'package:smart_biniyog/App/modules/utils/snackbar_message.dart';
 import 'package:smart_biniyog/App/routes/route_names.dart';
+
+import '../../../../data/model/product_model.dart';
 
 class ProjectDetailScreen extends StatefulWidget {
   Projects project;
@@ -64,7 +67,8 @@ class _ProjectDetailScreenState extends State<ProjectDetailScreen>
       final isUpToDate = await NetworkUtils().checkUpToDate();
 
       if (!isUpToDate) {
-        showSnackBarMessage(Get.context!, 'Please setup your profile before you want to place an order!');
+        showSnackBarMessage(Get.context!,
+            'Please setup your profile before you want to place an order!');
         Get.toNamed(RouteNames.profile);
         setState(() {
           isLoading = false;
@@ -72,31 +76,45 @@ class _ProjectDetailScreenState extends State<ProjectDetailScreen>
         return;
       }
 
-      final response = await NetworkUtils().order(orderData: {
-        "total_amount": controller.tempTotalPrice.value,
-        "projects": [
-          {
-            "id": widget.project.id.toString(),
-            "quantity": controller.tempTotalQuantity.value,
-            "price": controller.tempTotalPrice.value,
-          }
-        ],
-        "transaction_number": "TRX123456789",
-        "payment_method": "bkash",
-        "refferal_code": "",
-        "customer_note": "Thank you for your purchase"
-      });
+      controller.tempProductList.clear();
 
-      setState(() {
-        isLoading = false;
-      });
+      controller.tempProductList.add(
+        ProductModel(
+          id: widget.project.id!,
+          quantity: int.parse(controller.tempTotalQuantity.value),
+          price: double.parse(controller.tempTotalPrice.value),
+          name: widget.project.name!,
+          image: api_base_url + widget.project.image!,
+        ),
+      );
 
-      if (response.statusCode == 200) {
-        Get.offAllNamed(RouteNames.mainNavigationScreen);
-        showSnackBarMessage(context, 'Order successfully placed!');
-      } else {
-        showSnackBarMessage(context, response.body);
-      }
+      Get.to(() => CheckoutScreen(type: 'book_now',));
+
+      // final response = await NetworkUtils().order(orderData: {
+      //   "total_amount": controller.tempTotalPrice.value,
+      //   "projects": [
+      //     {
+      //       "id": widget.project.id.toString(),
+      //       "quantity": controller.tempTotalQuantity.value,
+      //       "price": controller.tempTotalPrice.value,
+      //     }
+      //   ],
+      //   "transaction_number": "TRX123456789",
+      //   "payment_method": "bkash",
+      //   "refferal_code": "",
+      //   "customer_note": "Thank you for your purchase"
+      // });
+      //
+      // setState(() {
+      //   isLoading = false;
+      // });
+      //
+      // if (response.statusCode == 200) {
+      //   Get.offAllNamed(RouteNames.mainNavigationScreen);
+      //   showSnackBarMessage(context, 'Order successfully placed!');
+      // } else {
+      //   showSnackBarMessage(context, response.body);
+      // }
     } else {
       showSnackBarMessage(context, 'Please login to place order!');
       Get.to(RouteNames.logInScreen);
@@ -195,7 +213,7 @@ class _ProjectDetailScreenState extends State<ProjectDetailScreen>
                       ),
               ),
             ),
-          )
+          ),
 
           // Padding(
           //   padding: const EdgeInsets.all(10.0),

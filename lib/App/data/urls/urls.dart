@@ -19,6 +19,7 @@ class Urls {
  static String myFarm = '$baseUrl/order/my-farm';
  static String checkUpToDate = '$baseUrl/check_up_to_date';
  static String orderStore = '$baseUrl/order/store';
+ static String withdrawRequest = '$baseUrl/transaction/withdrawal-request';
 
 
 

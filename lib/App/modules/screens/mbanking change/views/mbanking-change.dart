@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_state_manager/src/simple/get_state.dart';
@@ -90,6 +91,9 @@ class _MobileBankingChangeState extends State<MobileBankingChange> {
                 AppTextFieldWidget(
                   controller: _PhNumETController,
                   hintText: 'PhNum',
+                  inputFormatters: [
+                    FilteringTextInputFormatter.digitsOnly
+                  ],
                   validator: (value) {
                     if (value?.isEmpty ?? true) {
                       return 'Wrong Number';

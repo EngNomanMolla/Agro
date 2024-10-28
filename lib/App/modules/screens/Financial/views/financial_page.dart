@@ -24,7 +24,7 @@ class FinancialScreen extends GetView<FinancialController> {
                 child: Column(
                   children: [
                     ListTile(
-                      title: Text('Bank Informaion',
+                      title: Text('Bank Information',
                           style: TextStyle(fontWeight: FontWeight.bold)),
                       trailing: TextButton(
                         onPressed: () {
@@ -115,6 +115,44 @@ class FinancialScreen extends GetView<FinancialController> {
                               ),
                               title: Text(
                                 'A/C No ',
+                                style: TextStyle(
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.w600,
+                                  fontSize: 15,
+                                ),
+                              ),
+                            ),
+                            ListTile(
+                              iconColor: Colors.black,
+                              trailing: Text(
+                                '${FinancialController.bankingInfoDataModel.client!.banking?.swiftCode == '' ? 'null' : FinancialController.bankingInfoDataModel.client!.banking?.swiftCode}',
+                                style: TextStyle(
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.w600,
+                                  fontSize: 15,
+                                ),
+                              ),
+                              title: Text(
+                                'Swift Code',
+                                style: TextStyle(
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.w600,
+                                  fontSize: 15,
+                                ),
+                              ),
+                            ),
+                            ListTile(
+                              iconColor: Colors.black,
+                              trailing: Text(
+                                '${FinancialController.bankingInfoDataModel.client!.banking?.routingNumber == '' ? 'null' : FinancialController.bankingInfoDataModel.client!.banking?.routingNumber}',
+                                style: TextStyle(
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.w600,
+                                  fontSize: 15,
+                                ),
+                              ),
+                              title: Text(
+                                'Routing Number',
                                 style: TextStyle(
                                   color: Colors.black,
                                   fontWeight: FontWeight.w600,
