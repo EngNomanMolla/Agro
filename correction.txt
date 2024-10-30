@@ -1,0 +1,19 @@
+Agro Corrections
+—————
+1. Dashboard Title Change (Total Invest, Total Project, Etc.)
+2. Toast Test —
+3. OTP 4 ta issue —
+4. OTP Page Verify Number, Change Number ——
+5. Profile edit validation
+6. After profile edit, go to next tab
+7. Profile optional
+8. Total Value
+9. After complete order navigate to My Farm
+10. My Farm Data
+11. Withdraw history
+12. For book now or cart checkout after setup profile need to navigate back to checkout page.
+13. After setup profile in Welcome title Need to Show Hello, User Name
+14. Return Variable - Trading Category
+15. Add ROI To project list tile
+16. After end blog contact us
+17. Change summary table
