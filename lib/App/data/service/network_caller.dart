@@ -19,6 +19,7 @@ class NetworkUtils {
     };
 
     http.Response response = await http.get(Uri.parse(url), headers: headers);
+
     return response;
   }
 
@@ -252,11 +253,12 @@ class NetworkUtils {
       final http.Response response = await http.post(Uri.parse(url),
           headers: {
             "Content-Type": "application/json",
+            "Accept": "application/json",
             'Authorization': 'Bearer $token',
           },
           body: jsonEncode(body));
       // log(response.body);
-      print(response.statusCode);
+      print(response.body);
 
       if (response.statusCode == 200) {
         return jsonDecode(response.body);

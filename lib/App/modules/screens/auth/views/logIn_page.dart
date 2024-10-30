@@ -131,7 +131,7 @@ class LogInSreen extends GetView<LogInScreenController> {
                                       'is_email' : isEmail,
                                     });
                                 showSnackBarMessage(
-                                    context, 'OTP sent to the email address');
+                                    context, 'OTP sent to the ${isEmail ? 'email address' : 'phone number'}');
                               } else {
                                 // showSnackBarMessage(
                                 //     context, 'OTP sent failed. Try again.', true);

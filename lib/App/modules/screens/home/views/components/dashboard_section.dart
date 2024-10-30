@@ -32,8 +32,8 @@ class _DashboardSectionState extends State<DashboardSection> {
 
         return DashboardDataWidget(
           disbursed: formatNumber(snap.data!.data!.fundDisbursed.toString()),
-          yield: formatNumber(snap.data!.data!.totalProject.toString()),
-          engaged: formatNumber(snap.data!.data!.totalProject.toString()),
+          projects: formatNumber(snap.data!.data!.totalProject.toString()),
+          investor: formatNumber(snap.data!.data!.totalInvestor.toString()),
           returnReimbursed: formatNumber(snap.data!.data!.returnReimbursed.toString()),
         );
       },
@@ -42,13 +42,13 @@ class _DashboardSectionState extends State<DashboardSection> {
 }
 
 class DashboardDataWidget extends StatelessWidget {
-  final String? disbursed, yield, engaged, returnReimbursed;
+  final String? disbursed, projects, investor, returnReimbursed;
 
   const DashboardDataWidget({
     super.key,
     this.disbursed,
-    this.yield,
-    this.engaged,
+    this.projects,
+    this.investor,
     this.returnReimbursed,
   });
 
@@ -116,7 +116,7 @@ class DashboardDataWidget extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            '${engaged ?? '...'} +',
+                            '${projects ?? '...'} +',
                             style: TextStyle(
                               fontSize: 16,
                               fontWeight: FontWeight.bold,
@@ -124,7 +124,7 @@ class DashboardDataWidget extends StatelessWidget {
                           ),
                         ]),
                     Text(
-                      'Farmers Engaged',
+                      'Total Project',
                       style: TextStyle(
                         color: Colors.black54,
                       ),
@@ -153,7 +153,7 @@ class DashboardDataWidget extends StatelessWidget {
                           ),
                           SizedBox(width: 8.0),
                           Text(
-                            '${yield ?? '...'} +',
+                            '${returnReimbursed ?? '...'} +',
                             style: TextStyle(
                               fontSize: 16,
                               fontWeight: FontWeight.bold,
@@ -161,7 +161,7 @@ class DashboardDataWidget extends StatelessWidget {
                           ),
                         ]),
                     Text(
-                      'Agricultural Yield',
+                      'Return Reimbursed',
                       style: TextStyle(
                         color: Colors.black54,
                       ),
@@ -178,7 +178,7 @@ class DashboardDataWidget extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            '${returnReimbursed ?? '...'} +',
+                            '${investor ?? '...'} +',
                             style: TextStyle(
                               fontSize: 16,
                               fontWeight: FontWeight.bold,
@@ -186,7 +186,7 @@ class DashboardDataWidget extends StatelessWidget {
                           ),
                         ]),
                     Text(
-                      'Return Reimbursed',
+                      'Total Investor',
                       style: TextStyle(
                         color: Colors.black54,
                       ),

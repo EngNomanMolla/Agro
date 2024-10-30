@@ -428,7 +428,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                     height: 20,
                   ),
                   InkWell(
-                    onTap: () => cartController.placeOrder(widget.type!),
+                    onTap: () => cartController.placeOrder(widget.type ?? ''),
                     child: Container(
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(10.0),

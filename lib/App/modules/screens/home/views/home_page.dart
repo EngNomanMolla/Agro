@@ -239,12 +239,13 @@ class _MyHomePageScreenState extends State<MyHomePageScreen> {
                                         InkWell(
                                           onTap: () => nav.changeIndex(1),
                                           child: Padding(
-                                            padding:
-                                                const EdgeInsets.only(right: 8.0),
+                                            padding: const EdgeInsets.only(
+                                                right: 8.0),
                                             child: Text('See All',
                                                 style: TextStyle(
                                                     fontSize: 15,
-                                                    fontWeight: FontWeight.normal,
+                                                    fontWeight:
+                                                        FontWeight.normal,
                                                     color: Color(0xff38b579))),
                                           ),
                                         ),
@@ -326,6 +327,27 @@ class _MyHomePageScreenState extends State<MyHomePageScreen> {
                                                                     .black
                                                                     .withOpacity(
                                                                         0.6))),
+                                                      ]),
+                                                      Row(children: [
+                                                        Icon(Icons.percent,
+                                                            size: 13.0,
+                                                            color: Colors.black
+                                                                .withOpacity(
+                                                                    0.6)),
+                                                        SizedBox(width: 2.0),
+                                                        Text(
+                                                          '${_project.returnMin}% - ${_project.returnMax}',
+                                                          style: TextStyle(
+                                                            fontSize: 14,
+                                                            fontWeight:
+                                                                FontWeight
+                                                                    .normal,
+                                                            color: Colors.black
+                                                                .withOpacity(
+                                                              0.6,
+                                                            ),
+                                                          ),
+                                                        ),
                                                       ]),
                                                       Row(children: [
                                                         Icon(Icons.category,

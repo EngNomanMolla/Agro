@@ -90,7 +90,7 @@ class _PhnEmailOtpVerifyScreenState extends State<PhnEmailOtpVerifyScreen> {
 
     return Scaffold(
         appBar: AppBar(
-          title: Center(child: Text("Verify Number")), //${arguments['email']}
+          title: Center(child: Text("Verify ${arguments['is_email'] == true ? 'Email' : 'Number'}")), //${arguments['email']}
         ),
         body: Form(
           key: _formKey,
@@ -115,7 +115,7 @@ class _PhnEmailOtpVerifyScreenState extends State<PhnEmailOtpVerifyScreen> {
                     ),
                     InkWell(
                       onTap: () => Get.back(),
-                      child: Text('Change Number',
+                      child: Text('Change ${arguments['is_email'] == true ? 'Email' : 'Number'}',
                         style: TextStyle(
                             color: greyColor,
                             fontWeight: FontWeight.w600,
