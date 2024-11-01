@@ -13,6 +13,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:smart_biniyog/App/constant/base_url.dart';
 import 'package:smart_biniyog/App/data/model/blog_model.dart';
 import 'package:smart_biniyog/App/data/model/project_model.dart';
+import 'package:smart_biniyog/App/data/service/data_saver.dart';
 import 'package:smart_biniyog/App/modules/Screens/home/controller/home_controller.dart';
 import 'package:smart_biniyog/App/modules/Screens/project_details/views/project_details_page.dart';
 import 'package:smart_biniyog/App/modules/Widgets/RemarkBestProjectWidget.dart';
@@ -54,12 +55,23 @@ class _MyHomePageScreenState extends State<MyHomePageScreen> {
             ),
           ),
         ),
-        title: Text("Welcome to Smart Biniyog",
+        title: GetBuilder<CartController>(builder: (controller) {
+          return Text(
+            controller.personInfoProgress
+                ? 'Welcome to Smart Biniyog'
+                : AuthUtils.isLoggedIn &&
+                        controller.personInfoDataModel.value.client!.name !=
+                            null
+                    ? "Hi, ${controller.personInfoDataModel.value.client!.name}"
+                    : "Welcome to Smart Biniyog",
             style: TextStyle(
-                color: Colors.white,
-                overflow: TextOverflow.fade,
-                fontSize: 16,
-                fontWeight: FontWeight.bold)),
+              color: Colors.white,
+              overflow: TextOverflow.fade,
+              fontSize: 16,
+              fontWeight: FontWeight.bold,
+            ),
+          );
+        }),
         actions: [
           IconButton(
               onPressed: () {
@@ -199,7 +211,12 @@ class _MyHomePageScreenState extends State<MyHomePageScreen> {
                                         homeController.categories[index].name!,
                                     icon: Icons.shop_2_rounded,
                                     onTap: () {
-                                      Get.toNamed(RouteNames.projectScreen);
+                                      Get.toNamed(
+                                        RouteNames.projectScreen,
+                                        arguments: {
+                                          'index': index + 1,
+                                        },
+                                      );
                                     });
                               }),
                         ),
@@ -336,7 +353,7 @@ class _MyHomePageScreenState extends State<MyHomePageScreen> {
                                                                     0.6)),
                                                         SizedBox(width: 2.0),
                                                         Text(
-                                                          '${_project.returnMin}% - ${_project.returnMax}',
+                                                          '${_project.returnMin}% - ${_project.returnMax}%',
                                                           style: TextStyle(
                                                             fontSize: 14,
                                                             fontWeight:

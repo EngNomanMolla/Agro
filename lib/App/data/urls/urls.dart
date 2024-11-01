@@ -4,6 +4,7 @@ class Urls {
  static String otpEmailPhn = '$baseUrl/submit-login';
  static String categoryUrl = '$baseUrl/category?';
  static String allprojecturl = '$baseUrl/project';
+ static String transactions = '$baseUrl/transaction/list';
  static String businesstypeurl = '$baseUrl/business-type?';
  static String updateprofileurl = '$baseUrl/update-profile';
  static String shorttermprojecturl = '$baseUrl/project/1';

@@ -160,7 +160,7 @@ class _ChangePerInfoState extends State<ChangePerInfo> {
                     hintText: 'Name',
                     validator: (value) {
                       if (value?.isEmpty ?? true) {
-                        return 'Please enter your name';
+                        return 'This field is required.';
                       }
                       return null;
                     },
@@ -174,7 +174,7 @@ class _ChangePerInfoState extends State<ChangePerInfo> {
                     ],
                     validator: (value) {
                       if (value?.isEmpty ?? true) {
-                        return 'Please enter your address';
+                        return 'This field is required.';
                       }
                       return null;
                     },
@@ -185,7 +185,7 @@ class _ChangePerInfoState extends State<ChangePerInfo> {
                     hintText: 'Address',
                     validator: (value) {
                       if (value?.isEmpty ?? true) {
-                        return 'Please enter your address';
+                        return 'This field is required.';
                       }
                       return null;
                     },
@@ -196,7 +196,7 @@ class _ChangePerInfoState extends State<ChangePerInfo> {
                     hintText: 'Email',
                     validator: (value) {
                       if (value?.isEmpty ?? true) {
-                        return 'Please enter your WhatsApp number';
+                        return 'This field is required.';
                       }
                       return null;
                     },
@@ -227,7 +227,7 @@ class _ChangePerInfoState extends State<ChangePerInfo> {
                     ],
                     validator: (value) {
                       if (value?.isEmpty ?? true) {
-                        return 'Please enter your WhatsApp number';
+                        return 'This field is required.';
                       }
                       return null;
                     },
@@ -238,7 +238,7 @@ class _ChangePerInfoState extends State<ChangePerInfo> {
                     hintText: 'TIN',
                     validator: (value) {
                       if (value?.isEmpty ?? true) {
-                        return 'Please enter your WhatsApp number';
+                        return 'This field is required.';
                       }
                       return null;
                     },
@@ -346,7 +346,9 @@ class _ChangePerInfoState extends State<ChangePerInfo> {
                       Color: Colors.green,
                       onTap: () async {
 
-                        updateProfileData();
+                        if (_formKey.currentState!.validate()) {
+                          updateProfileData();
+                        }
 
                         // personInfoController.profileUpdate();
                         // if (_formKey.currentState!.validate()) {

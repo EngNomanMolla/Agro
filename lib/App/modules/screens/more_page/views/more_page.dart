@@ -33,41 +33,45 @@ class MorePageScreen extends GetView<MoreController> {
           padding: const EdgeInsets.all(8.0),
           child: Column(
             children: [
-              Card(
-                color: Color(0xff38b579),
-                //     Get.toNamed(RouteNames.profile);
-                child: InkWell(
-                  onTap: () {
-                    Get.toNamed(AuthUtils.isLoggedIn ? RouteNames.profile : RouteNames.logInScreen);
-                  },
-                  child: ListTile(
-                      trailing: Icon(Icons.arrow_forward_ios,
-                          size: 17, color: Colors.white.withOpacity(0.7)),
-                      title: Text('Profile',
-                          style:
-                              TextStyle(color: Colors.white, fontSize: 17.0)),
-                      leading: Icon(Icons.perm_identity_outlined,
-                          color: Colors.white)),
+
+              if (AuthUtils.isLoggedIn)...[
+                Card(
+                  color: Color(0xff38b579),
+                  //     Get.toNamed(RouteNames.profile);
+                  child: InkWell(
+                    onTap: () {
+                      Get.toNamed(AuthUtils.isLoggedIn ? RouteNames.profile : RouteNames.logInScreen);
+                    },
+                    child: ListTile(
+                        trailing: Icon(Icons.arrow_forward_ios,
+                            size: 17, color: Colors.white.withOpacity(0.7)),
+                        title: Text('Profile',
+                            style:
+                            TextStyle(color: Colors.white, fontSize: 17.0)),
+                        leading: Icon(Icons.perm_identity_outlined,
+                            color: Colors.white)),
+                  ),
                 ),
-              ),
-              SizedBox(height: 5.0),
-              Card(
-                color: Color(0xff38b579),
-                //     Get.toNamed(RouteNames.profile);
-                child: InkWell(
-                  onTap: () {
-                    Get.to(() => const WithdrawView());
-                  },
-                  child: ListTile(
-                      trailing: Icon(Icons.arrow_forward_ios,
-                          size: 17, color: Colors.white.withOpacity(0.7)),
-                      title: Text('Withdraw',
-                          style:
-                          TextStyle(color: Colors.white, fontSize: 17.0)),
-                      leading: Icon(Icons.account_balance_wallet_outlined, color: Colors.white)),
+                SizedBox(height: 5.0),
+                Card(
+                  color: Color(0xff38b579),
+                  //     Get.toNamed(RouteNames.profile);
+                  child: InkWell(
+                    onTap: () {
+                      Get.to(() => const WithdrawView());
+                    },
+                    child: ListTile(
+                        trailing: Icon(Icons.arrow_forward_ios,
+                            size: 17, color: Colors.white.withOpacity(0.7)),
+                        title: Text('Withdraw',
+                            style:
+                            TextStyle(color: Colors.white, fontSize: 17.0)),
+                        leading: Icon(Icons.account_balance_wallet_outlined, color: Colors.white)),
+                  ),
                 ),
-              ),
-              SizedBox(height: 5.0),
+                SizedBox(height: 5.0),
+              ],
+
               Card(
                 color: Color(0xff38b579),
                 //     Get.toNamed(RouteNames.profile);

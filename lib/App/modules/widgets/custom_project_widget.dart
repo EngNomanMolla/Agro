@@ -14,7 +14,8 @@ class CustomProjectWidget extends StatelessWidget {
       children: [
         Container(
           decoration: BoxDecoration(
-            color: farm.projectStatus == 'Active' ? Colors.green : Colors.red,
+            color: farm.orderStatus == 'Active' || farm.orderStatus == 'active' ? Colors.green :
+            farm.orderStatus == 'Pending' || farm.orderStatus == 'pending' ? Colors.amber : Colors.red,
             borderRadius: BorderRadius.only(
               topRight: Radius.circular(20),
               topLeft: Radius.circular(20),
@@ -26,7 +27,7 @@ class CustomProjectWidget extends StatelessWidget {
           ),
           child: Center(
             child: Text(
-              farm.projectStatus ?? '',
+              farm.orderStatus ?? '',
               style: TextStyle(
                 color: Colors.white,
                 fontWeight: FontWeight.bold,

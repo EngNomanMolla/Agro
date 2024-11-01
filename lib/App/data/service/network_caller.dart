@@ -77,6 +77,21 @@ class NetworkUtils {
     return response;
   }
 
+  Future<http.Response> getTransactions() async {
+    Map<String, String> headers = {
+      "Content-Type": "application/json",
+      "Accept": "application/json",
+      'Authorization': 'Bearer ${await AuthUtils.getAuthData()}',
+    };
+
+    http.Response response = await http.get(
+      Uri.parse(Urls.transactions),
+      headers: headers,
+    );
+
+    return response;
+  }
+
   Future<http.Response> getMyFarm() async {
     Map<String, String> headers = {
       "Content-Type": "application/json",
@@ -96,7 +111,7 @@ class NetworkUtils {
     };
 
     http.Response response =
-    await http.get(Uri.parse(Urls.checkUpToDate), headers: headers);
+        await http.get(Uri.parse(Urls.checkUpToDate), headers: headers);
 
     final data = jsonDecode(response.body);
 
@@ -109,21 +124,19 @@ class NetworkUtils {
       'Authorization': 'Bearer ${await AuthUtils.getAuthData()}',
     };
 
-    http.Response response = await http.post(
-      Uri.parse(Urls.updateprofileurl),
-      headers: headers,
-      body: jsonEncode(personalInfo)
-    );
+    http.Response response = await http.post(Uri.parse(Urls.updateprofileurl),
+        headers: headers, body: jsonEncode(personalInfo));
 
     return response;
   }
 
-  Future<http.StreamedResponse> updateProfilePicture (String image) async {
+  Future<http.StreamedResponse> updateProfilePicture(String image) async {
     var headers = {
       "Content-Type": "application/json",
       'Authorization': 'Bearer ${await AuthUtils.getAuthData()}',
     };
-    var request = http.MultipartRequest('POST', Uri.parse(Urls.updateprofileurl));
+    var request =
+        http.MultipartRequest('POST', Uri.parse(Urls.updateprofileurl));
     request.files.add(await http.MultipartFile.fromPath('image', image));
     request.headers.addAll(headers);
 
@@ -132,7 +145,7 @@ class NetworkUtils {
     return response;
   }
 
-  Future<http.Response> updateNominee ({Map? info}) async {
+  Future<http.Response> updateNominee({Map? info}) async {
     Map<String, String> headers = {
       "Content-Type": "application/json",
       'Authorization': 'Bearer ${await AuthUtils.getAuthData()}',
@@ -141,13 +154,12 @@ class NetworkUtils {
     http.Response response = await http.post(
         Uri.parse(Urls.nomineeInfoChangeurl),
         headers: headers,
-        body: jsonEncode(info)
-    );
+        body: jsonEncode(info));
 
     return response;
   }
 
-  Future<http.Response> updateBankDetails ({Map? data}) async {
+  Future<http.Response> updateBankDetails({Map? data}) async {
     Map<String, String> headers = {
       "Content-Type": "application/json",
       'Authorization': 'Bearer ${await AuthUtils.getAuthData()}',
@@ -156,13 +168,12 @@ class NetworkUtils {
     http.Response response = await http.post(
         Uri.parse(Urls.bankingInfoChangeurl),
         headers: headers,
-        body: jsonEncode(data)
-    );
+        body: jsonEncode(data));
 
     return response;
   }
 
-  Future<http.Response> updateMFS ({Map? data}) async {
+  Future<http.Response> updateMFS({Map? data}) async {
     Map<String, String> headers = {
       "Content-Type": "application/json",
       'Authorization': 'Bearer ${await AuthUtils.getAuthData()}',
@@ -171,42 +182,35 @@ class NetworkUtils {
     http.Response response = await http.post(
         Uri.parse(Urls.mbankingInfoChangeurl),
         headers: headers,
-        body: jsonEncode(data)
-    );
+        body: jsonEncode(data));
 
     return response;
   }
 
-  Future<http.Response> order ({required Map orderData}) async {
+  Future<http.Response> order({required Map orderData}) async {
     Map<String, String> headers = {
       "Content-Type": "application/json",
       "Accept": "application/json",
       'Authorization': 'Bearer ${await AuthUtils.getAuthData()}',
     };
 
-    http.Response response = await http.post(
-        Uri.parse(Urls.orderStore),
-        headers: headers,
-        body: jsonEncode(orderData)
-    );
+    http.Response response = await http.post(Uri.parse(Urls.orderStore),
+        headers: headers, body: jsonEncode(orderData));
 
     return response;
   }
 
-  Future<http.Response> submitWithdraw ({required Map data}) async {
+  Future<http.Response> submitWithdraw({required Map data}) async {
     Map<String, String> headers = {
       "Content-Type": "application/json",
-      'accept' : 'application/json',
+      'accept': 'application/json',
       'Authorization': 'Bearer ${await AuthUtils.getAuthData()}',
     };
 
     print(data);
 
-    http.Response response = await http.post(
-        Uri.parse(Urls.withdrawRequest),
-        headers: headers,
-        body: jsonEncode(data)
-    );
+    http.Response response = await http.post(Uri.parse(Urls.withdrawRequest),
+        headers: headers, body: jsonEncode(data));
 
     return response;
   }

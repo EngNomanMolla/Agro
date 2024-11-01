@@ -87,7 +87,7 @@ class _ChangeNomineeScreenState extends State<ChangeNomineeScreen> {
                   hintText: 'Name',
                   validator: (value) {
                     if (value?.isEmpty ?? true) {
-                      return 'Please enter your name';
+                      return 'This field is required.';
                     }
                     return null;
                   },
@@ -101,7 +101,7 @@ class _ChangeNomineeScreenState extends State<ChangeNomineeScreen> {
                   ],
                   validator: (value) {
                     if (value?.isEmpty ?? true) {
-                      return 'Please enter your address';
+                      return 'This field is required.';
                     }
                     return null;
                   },
@@ -115,7 +115,7 @@ class _ChangeNomineeScreenState extends State<ChangeNomineeScreen> {
                   hintText: 'NID',
                   validator: (value) {
                     if (value?.isEmpty ?? true) {
-                      return 'Please enter your WhatsApp number';
+                      return 'This field is required.';
                     }
                     return null;
                   },
@@ -127,7 +127,7 @@ class _ChangeNomineeScreenState extends State<ChangeNomineeScreen> {
                   //suffixIcon: IconButton(onPressed: (){ }, icon: const Icon(Icons.calendar_month_sharp),),
                   validator: (value) {
                     if (value?.isEmpty ?? true) {
-                      return 'Please enter your WhatsApp number';
+                      return 'This field is required.';
                     }
                     return null;
                   },

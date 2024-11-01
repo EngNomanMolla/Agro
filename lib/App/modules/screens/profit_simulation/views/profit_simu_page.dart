@@ -41,19 +41,28 @@ class _ProfitSimuScreenState extends State<ProfitSimuScreen> {
             child: Table(
               border: TableBorder.all(color: Colors.grey),
               children: [
-                _buildTableRow(
-                    'Project Duration', widget.project.duration.toString()),
-                _buildTableRow(
-                    'ROI',
-                    widget.project.returnMin.toString() +
-                        '%' +
-                        ' - ' +
-                        widget.project.returnMax.toString() +
-                        '%'),
+                // _buildTableRow(
+                //     'Project Duration', widget.project.duration.toString()),
+                // _buildTableRow(
+                //     'ROI',
+                //     widget.project.returnMin.toString() +
+                //         '%' +
+                //         ' - ' +
+                //         widget.project.returnMax.toString() +
+                //         '%'),
+                // _buildTableRow('Net Profit',
+                //     '৳ ${calculateROI(widget.project.returnMin, widget.project.projectPrice)} - ৳ ${calculateROI(widget.project.returnMax, widget.project.projectPrice)}'),
+                // _buildTableRow('Total Investment',
+                //     '৳ ${(totalPrice * totalNumberOfProjects).toString()}')
+                
+                
+                _buildTableRow('Invest Amount/Unit', widget.project.projectPrice ?? ''),
+                _buildTableRow('Project Duration', widget.project.duration ?? ''),
+                _buildTableRow('ROI',widget.project.returnMin.toString() + '%' +' - '+ widget.project.returnMax.toString() + '%'),
                 _buildTableRow('Net Profit',
-                    '৳ ${calculateROI(widget.project.returnMin, widget.project.projectPrice)} - ৳ ${calculateROI(widget.project.returnMax, widget.project.projectPrice)}'),
-                _buildTableRow('Total Investment',
-                    '৳ ${(totalPrice * totalNumberOfProjects).toString()}')
+                    '${calculateROI(widget.project.returnMin, widget.project.projectPrice)} - ${calculateROI(widget.project.returnMax, widget.project.projectPrice)}'),
+                _buildTableRow('Total Amount with Profit',
+                    '${double.parse(widget.project.projectPrice ?? '0') + double.parse(calculateROI(widget.project.returnMin, widget.project.projectPrice))} - ${double.parse(widget.project.projectPrice ?? '0') + double.parse(calculateROI(widget.project.returnMax, widget.project.projectPrice))}'),
               ],
             ),
           ),

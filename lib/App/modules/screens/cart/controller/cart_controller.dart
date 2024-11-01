@@ -104,7 +104,9 @@ class CartController extends GetxController {
 
     if (response.statusCode == 200) {
       showSnackBarMessage(Get.context!, 'Order successfully placed!');
-      Get.offAllNamed(RouteNames.mainNavigationScreen);
+      Get.offAllNamed(RouteNames.mainNavigationScreen, arguments: {
+        'index' : 2,
+      });
       await productBox.clear();
       productList.clear();
       return;

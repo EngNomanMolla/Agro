@@ -141,7 +141,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                                       ),
                                     ),
                                     Text(
-                                      '৳ ${cartController.tempTotalPrice}',
+                                      '৳ ${widget.type == 'book_now' ? cartController.tempTotalPrice : cartController.totalPrice}',
                                       textAlign: TextAlign.center,
                                       style: TextStyle(
                                         color: Colors.black.withOpacity(.8),

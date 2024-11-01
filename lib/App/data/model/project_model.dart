@@ -32,6 +32,7 @@ class Projects {
   String? projectPrice;
   String? returnMax;
   String? returnMin;
+  String? profitType;
   String? place;
   String? investmentTime;
   String? investmentGoal;
@@ -68,6 +69,7 @@ class Projects {
         this.minInvestment,
         this.projected,
         this.about,
+        this.profitType,
         this.createdAt,
         this.updatedAt,
         this.statusName,
@@ -94,6 +96,7 @@ class Projects {
     minInvestment = json['min_investment'];
     projected = json['projected'];
     about = json['about'];
+    profitType = json['profit_type'] ?? 'No Data';
     createdAt = json['created_at'];
     updatedAt = json['updated_at'];
     statusName = json['status_name'];

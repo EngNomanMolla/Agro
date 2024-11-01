@@ -41,6 +41,7 @@ class _MyFarmsScreenState extends State<MyFarmsScreen> {
 
     return Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         scrolledUnderElevation: 0,
         title: Center(child: const Text('My Farms')),
         actions: [

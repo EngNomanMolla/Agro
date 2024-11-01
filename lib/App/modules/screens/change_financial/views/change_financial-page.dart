@@ -55,7 +55,7 @@ class _ChangeFinancialScreenState extends State<ChangeFinancialScreen> {
                   hintText: 'Bank Name',
                   validator: (value) {
                     if (value?.isEmpty ?? true) {
-                      return 'Please enter your name';
+                      return 'This field is required';
                     }
                     return null;
                   },
@@ -66,7 +66,7 @@ class _ChangeFinancialScreenState extends State<ChangeFinancialScreen> {
                   hintText: 'Account Name',
                   validator: (value) {
                     if (value?.isEmpty ?? true) {
-                      return 'Please enter your WhatsApp number';
+                      return 'This field is required';
                     }
                     return null;
                   },
@@ -77,7 +77,7 @@ class _ChangeFinancialScreenState extends State<ChangeFinancialScreen> {
                   hintText: 'Branch Name',
                   validator: (value) {
                     if (value?.isEmpty ?? true) {
-                      return 'Please enter your address';
+                      return 'This field is required';
                     }
                     return null;
                   },
@@ -89,7 +89,7 @@ class _ChangeFinancialScreenState extends State<ChangeFinancialScreen> {
                   //suffixIcon: IconButton(onPressed: (){ }, icon: const Icon(Icons.calendar_month_sharp),),
                   validator: (value) {
                     if (value?.isEmpty ?? true) {
-                      return 'Please enter your WhatsApp number';
+                      return 'This field is required';
                     }
                     return null;
                   },
@@ -98,11 +98,23 @@ class _ChangeFinancialScreenState extends State<ChangeFinancialScreen> {
                 AppTextFieldWidget(
                   controller: _swift,
                   hintText: 'Swift Code',
+                  validator: (value) {
+                    if (value?.isEmpty ?? true) {
+                      return 'This field is required';
+                    }
+                    return null;
+                  },
                 ),
                 const SizedBox(height: 12),
                 AppTextFieldWidget(
                   controller: _routing,
                   hintText: 'Routing Number',
+                  validator: (value) {
+                    if (value?.isEmpty ?? true) {
+                      return 'This field is required';
+                    }
+                    return null;
+                  },
                 ),
                 const SizedBox(height: 12),
                 Container(
@@ -113,25 +125,27 @@ class _ChangeFinancialScreenState extends State<ChangeFinancialScreen> {
                         return AppElevatedButton(
                           Color: Colors.green,
                           onTap: () async {
+                            if (_formKey.currentState!.validate()) {
 
-                            isLoading = true;
-                            setState(() {
+                              isLoading = true;
+                              setState(() {
 
-                            });
+                              });
 
-                            await changeFinancialController.bankingInfoChange(
-                              _BankController.text.trim(),
-                              _AccountNameController.text.trim(),
-                              _BranchController.text.trim(),
-                              _AccountNumlController.text.trim(),
-                              _swift.text,
-                              _routing.text,
-                            );
+                              await changeFinancialController.bankingInfoChange(
+                                _BankController.text.trim(),
+                                _AccountNameController.text.trim(),
+                                _BranchController.text.trim(),
+                                _AccountNumlController.text.trim(),
+                                _swift.text,
+                                _routing.text,
+                              );
 
-                            isLoading = false;
-                            setState(() {
+                              isLoading = false;
+                              setState(() {
 
-                            });
+                              });
+                            }
                           },
                           child: Center(
                             child: Text(

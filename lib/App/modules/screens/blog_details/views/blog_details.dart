@@ -6,14 +6,14 @@ import 'package:smart_biniyog/App/constant/base_url.dart';
 import '../../../../data/model/blog_model.dart'; // Import intl package
 
 class BlogDetailsScreen extends StatelessWidget {
-
   Data blog;
 
-  BlogDetailsScreen(this.blog) ;
+  BlogDetailsScreen(this.blog);
 
   String formatDate(String date) {
     final DateTime parsedDate = DateTime.parse(date);
-    return DateFormat('dd MMM yyyy').format(parsedDate); // Formatting to 01 Jun 2024
+    return DateFormat('dd MMM yyyy')
+        .format(parsedDate); // Formatting to 01 Jun 2024
   }
 
   @override
@@ -21,10 +21,11 @@ class BlogDetailsScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         leading: InkWell(
-          onTap: ()=>Get.back(),
-          child: Icon(Icons.arrow_back_ios,color: Colors.white),
+          onTap: () => Get.back(),
+          child: Icon(Icons.arrow_back_ios, color: Colors.white),
         ),
-        title: Text(blog.title!, style: TextStyle(fontSize: 18,color: Colors.white)),
+        title: Text(blog.title!,
+            style: TextStyle(fontSize: 18, color: Colors.white)),
         backgroundColor: Color(0xff38b579),
       ),
       body: SingleChildScrollView(
@@ -36,7 +37,7 @@ class BlogDetailsScreen extends StatelessWidget {
             ClipRRect(
               borderRadius: BorderRadius.circular(10),
               child: Image.network(
-                api_base_url+blog.image!, // Replace with your image path
+                api_base_url + blog.image!, // Replace with your image path
                 height: 200,
                 width: double.infinity,
                 fit: BoxFit.cover,
@@ -66,8 +67,46 @@ class BlogDetailsScreen extends StatelessWidget {
             SizedBox(height: 20),
             Text(
               blog.description!,
-              style: TextStyle(fontSize: 15, height: 1.5,color: Colors.black.withOpacity(0.5) ),
+              style: TextStyle(
+                  fontSize: 15,
+                  height: 1.5,
+                  color: Colors.black.withOpacity(0.5)),
             ),
+            SizedBox(height: 20),
+            Container(
+              padding: EdgeInsets.symmetric(
+                horizontal: 15,
+                vertical: 10,
+              ),
+              decoration: BoxDecoration(
+                color: Colors.green,
+                borderRadius: BorderRadius.circular(6),
+              ),
+              child: Center(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      'Have more queries?',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 25,
+                      ),
+                    ),
+                    ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(5)
+                        )
+                      ),
+                      onPressed: () {},
+                      child: Text('Contact Us'),
+                    )
+                  ],
+                ),
+              ),
+            )
           ],
         ),
       ),

@@ -35,6 +35,7 @@ class Datum {
   DateTime? projectStartDate;
   DateTime? projectExpirationDate;
   String? projectStatus;
+  String? orderStatus;
   String? projectCategory;
   String? totalDeposit;
   String? totalProfit;
@@ -57,6 +58,7 @@ class Datum {
     this.projectImage,
     this.returnMax,
     this.returnMin,
+    this.orderStatus,
   });
 
   factory Datum.fromJson(Map<String, dynamic> json) => Datum(
@@ -73,6 +75,7 @@ class Datum {
     totalDeposit: json["total_deposit"],
     totalProfit: json["total_profit"],
     projectDuration: json["project_duration"],
+    orderStatus: json['order_status']
   );
 
   Map<String, dynamic> toJson() => {

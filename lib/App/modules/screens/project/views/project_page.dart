@@ -19,6 +19,17 @@ class _ProjectPageScreenState extends State<ProjectPageScreen> {
   HomeController homeController = Get.put(HomeController());
   ProjectController projectController = Get.put(ProjectController());
 
+  final arg = Get.arguments ?? {};
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    if (arg['index'] != null) {
+      projectController.tabController.index = arg['index'];
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     List<CategoryModel> categories = [

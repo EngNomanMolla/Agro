@@ -82,7 +82,7 @@ class _MobileBankingChangeState extends State<MobileBankingChange> {
                   hintText: 'Account type',
                   validator: (value) {
                     if (value?.isEmpty ?? true) {
-                      return 'Wrong Number';
+                      return 'Please fill the details.';
                     }
                     return null;
                   },
@@ -96,7 +96,7 @@ class _MobileBankingChangeState extends State<MobileBankingChange> {
                   ],
                   validator: (value) {
                     if (value?.isEmpty ?? true) {
-                      return 'Wrong Number';
+                      return 'Please fill the details.';
                     }
                     return null;
                   },

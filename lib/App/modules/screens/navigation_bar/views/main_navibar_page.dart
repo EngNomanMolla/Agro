@@ -27,6 +27,20 @@ class _MainBottomNavBarState extends State<MainBottomNavBar> {
     MorePageScreen(),
   ];
 
+  final arg = Get.arguments ?? {};
+
+  checkChangeIndex () {
+    if (arg['index'] != null) {
+      _navigatinController.changeIndex(arg['index']);
+    }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    checkChangeIndex();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

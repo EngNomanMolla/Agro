@@ -7,17 +7,22 @@ import 'package:smart_biniyog/App/data/model/project_model.dart';
 import 'package:smart_biniyog/App/data/model/new_project_model.dart';
 import 'package:smart_biniyog/App/data/service/network_caller.dart';
 
+import '../../../Screens/home/controller/home_controller.dart';
+
 class ProjectController extends GetxController
     with GetSingleTickerProviderStateMixin {
+
   late TabController tabController;
 
   RxInt currentIndex = 0.obs;
+
+  HomeController homeController = Get.put(HomeController());
 
 
   @override
   void onInit() {
     super.onInit();
-    tabController = TabController(length: 5, vsync: this);
+    tabController = TabController(length: homeController.categories.length + 1, vsync: this);
     tabController.addListener(() {
       if (!tabController.indexIsChanging &&
           currentIndex.value != tabController.index) {
