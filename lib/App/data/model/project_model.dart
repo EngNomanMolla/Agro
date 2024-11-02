@@ -179,8 +179,8 @@ class Reviews {
     status = json['status'];
     createdAt = json['created_at'];
     updatedAt = json['updated_at'];
-    clientName = json['client_name'];
-    clientImage = json['client_image'];
+    clientName = json['client_name'] ?? json['client']['name'];
+    clientImage = json['client_image'] ?? json['client']['image'];
   }
 
   Map<String, dynamic> toJson() {

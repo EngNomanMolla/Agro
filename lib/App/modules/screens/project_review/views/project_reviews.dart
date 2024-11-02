@@ -62,8 +62,8 @@ class _ProjectReviewsState extends State<ProjectReviews> {
                       children: [
                         ClipRRect(
                           borderRadius: BorderRadius.circular(50),
-                          child: widget.reviews[index].clientImage==" " || widget.reviews[index].clientName == null ? Icon(Icons.person,size: 30.0,color:Colors.black.withOpacity(0.7)): Image.network(
-                            api_base_url+widget.reviews[index].clientImage!,
+                          child: widget.reviews[index].clientImage == null || widget.reviews[index].clientImage==" " || widget.reviews[index].clientName == null ? Icon(Icons.person,size: 30.0,color:Colors.black.withOpacity(0.7)): Image.network(
+                            '${api_base_url}${widget.reviews[index].clientImage ?? ''}',
                             height: 60,
                             width: 60,
                             fit: BoxFit.cover,
