@@ -11,6 +11,8 @@ import 'package:smart_biniyog/App/modules/screens/change_nominee/controller/Chan
 import 'package:smart_biniyog/App/modules/utils/snackbar_message.dart';
 import 'package:smart_biniyog/App/routes/route_names.dart';
 
+import '../../nominee/controller/nominee_controller.dart';
+
 class ChangeNomineeScreen extends StatefulWidget {
   ChangeNomineeScreen({Key? key}) : super(key: key);
 
@@ -21,6 +23,10 @@ class ChangeNomineeScreen extends StatefulWidget {
 }
 
 class _ChangeNomineeScreenState extends State<ChangeNomineeScreen> {
+
+
+  final nomineeController = Get.put(NomineeController());
+
   final TextEditingController _NameController = TextEditingController(
       text: ChangeNomineeScreen.info.client!.nominee == null
           ? ''
@@ -61,6 +67,13 @@ class _ChangeNomineeScreenState extends State<ChangeNomineeScreen> {
 
     isLoading = false;
     setState(() {});
+
+    nomineeController.personInfoDataModel.client!.nominee = Nominee(
+      name: _NameController.text,
+      phone: _phoneController.text,
+      nid: _NIDController.text,
+      relationship: _RelationlController.text,
+    );
 
     if (response.statusCode == 200) {
       Get.back(

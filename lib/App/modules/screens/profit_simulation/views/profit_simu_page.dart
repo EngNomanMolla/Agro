@@ -54,11 +54,18 @@ class _ProfitSimuScreenState extends State<ProfitSimuScreen> {
                 //     '৳ ${calculateROI(widget.project.returnMin, widget.project.projectPrice)} - ৳ ${calculateROI(widget.project.returnMax, widget.project.projectPrice)}'),
                 // _buildTableRow('Total Investment',
                 //     '৳ ${(totalPrice * totalNumberOfProjects).toString()}')
-                
-                
-                _buildTableRow('Invest Amount/Unit', widget.project.projectPrice ?? ''),
-                _buildTableRow('Project Duration', widget.project.duration ?? ''),
-                _buildTableRow('ROI',widget.project.returnMin.toString() + '%' +' - '+ widget.project.returnMax.toString() + '%'),
+
+                _buildTableRow(
+                    'Invest Amount/Unit', widget.project.projectPrice ?? ''),
+                _buildTableRow(
+                    'Project Duration', widget.project.duration ?? ''),
+                _buildTableRow(
+                    'ROI',
+                    widget.project.returnMin.toString() +
+                        '%' +
+                        ' - ' +
+                        widget.project.returnMax.toString() +
+                        '%'),
                 _buildTableRow('Net Profit',
                     '${calculateROI(widget.project.returnMin, widget.project.projectPrice)} - ${calculateROI(widget.project.returnMax, widget.project.projectPrice)}'),
                 _buildTableRow('Total Amount with Profit',
@@ -79,10 +86,11 @@ class _ProfitSimuScreenState extends State<ProfitSimuScreen> {
                             totalNumberOfProjects--;
                           });
 
-
                           final price = totalPrice * totalNumberOfProjects;
-                          cartController.tempTotalPrice.value = price.toString();
-                          cartController.tempTotalQuantity.value = totalNumberOfProjects.toString();
+                          cartController.tempTotalPrice.value =
+                              price.toString();
+                          cartController.tempTotalQuantity.value =
+                              totalNumberOfProjects.toString();
                         }
                       },
                       child: Container(
@@ -111,8 +119,8 @@ class _ProfitSimuScreenState extends State<ProfitSimuScreen> {
 
                         final price = totalPrice * totalNumberOfProjects;
                         cartController.tempTotalPrice.value = price.toString();
-                        cartController.tempTotalQuantity.value = totalNumberOfProjects.toString();
-
+                        cartController.tempTotalQuantity.value =
+                            totalNumberOfProjects.toString();
                       },
                       child: Container(
                         decoration: BoxDecoration(
@@ -206,3 +214,6 @@ class _ProfitSimuScreenState extends State<ProfitSimuScreen> {
     );
   }
 }
+
+
+// profit_type

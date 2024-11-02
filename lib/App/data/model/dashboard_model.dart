@@ -25,10 +25,10 @@ class DashboardModel {
 }
 
 class Data {
-  int? totalInvestor;
-  int? totalProject;
-  String? fundDisbursed;
-  String? returnReimbursed;
+  dynamic totalInvestor;
+  dynamic totalProject;
+  dynamic fundDisbursed;
+  dynamic returnReimbursed;
 
   Data({
     this.totalInvestor,

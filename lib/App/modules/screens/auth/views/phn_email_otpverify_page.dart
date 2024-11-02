@@ -132,8 +132,9 @@ class _PhnEmailOtpVerifyScreenState extends State<PhnEmailOtpVerifyScreen> {
                       height: 8,
                     ),
                     PinCodeTextField(
+                      keyboardType: TextInputType.phone,
                       inputFormatters: [
-                        FilteringTextInputFormatter.digitsOnly
+                        FilteringTextInputFormatter.digitsOnly,
                       ],
                       controller: _otpPinETController,
                       length: 5,

@@ -25,23 +25,24 @@ class LogInSreen extends GetView<LogInScreenController> {
       resizeToAvoidBottomInset: false,
       body: Form(
         key: _formKey,
-        child: Column(
-          children: [
-            GetBuilder<LogInScreenController>(builder: (loginScreenController) {
-              return Container(
-                width: double.infinity,
-                child: Center(
-                  child: Image.asset(
-                    'assets/images/demo_pic.jpg',
-                    width: double.infinity,
-                    fit: BoxFit.fill,
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              GetBuilder<LogInScreenController>(
+                  builder: (loginScreenController) {
+                return Container(
+                  width: double.infinity,
+                  child: Center(
+                    child: Image.asset(
+                      'assets/images/demo_pic.jpg',
+                      width: double.infinity,
+                      height: MediaQuery.sizeOf(context).height * .35,
+                      fit: BoxFit.cover,
+                    ),
                   ),
-                ),
-              );
-            }),
-
-            Expanded(
-              child: Padding(
+                );
+              }),
+              Padding(
                 padding: const EdgeInsets.all(10.0),
                 child: Column(
                   children: [
@@ -62,9 +63,9 @@ class LogInSreen extends GetView<LogInScreenController> {
                         ),
                       ],
                     )),
-              
+
                     SizedBox(height: 20.0),
-              
+
                     Container(
                       height: 50.0,
                       child: TextField(
@@ -88,7 +89,7 @@ class LogInSreen extends GetView<LogInScreenController> {
                         ),
                       ),
                     ),
-              
+
                     // AppTextFieldWidget(
                     //   controller: _emailETController,
                     //   hintText: 'Enter Phone Num or Email',
@@ -99,7 +100,7 @@ class LogInSreen extends GetView<LogInScreenController> {
                     //     return null;
                     //   },
                     // ),
-              
+
                     SizedBox(
                       height: 20,
                     ),
@@ -121,21 +122,24 @@ class LogInSreen extends GetView<LogInScreenController> {
                               );
                               print(result);
 
-                              final emailRegex = RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$');
-                              final bool isEmail = emailRegex.hasMatch(_emailETController.text);
+                              final emailRegex =
+                                  RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$');
+                              final bool isEmail =
+                                  emailRegex.hasMatch(_emailETController.text);
 
-                              if (result != null && result['status'] == 'true') {
+                              if (result != null &&
+                                  result['status'] == 'true') {
                                 Get.toNamed(RouteNames.phnEmailOtpScreen,
                                     arguments: {
                                       'email': _emailETController.text.trim(),
-                                      'is_email' : isEmail,
+                                      'is_email': isEmail,
                                     });
-                                showSnackBarMessage(
-                                    context, 'OTP sent to the ${isEmail ? 'email address' : 'phone number'}');
+                                showSnackBarMessage(context,
+                                    'OTP sent to the ${isEmail ? 'email address' : 'phone number'}');
                               } else {
                                 // showSnackBarMessage(
                                 //     context, 'OTP sent failed. Try again.', true);
-              
+
                                 //  //   //String text = _emailETController.text;
                                 //  //
                                 //  //   // final result = await NetworkUtils().postMethod(
@@ -178,7 +182,7 @@ class LogInSreen extends GetView<LogInScreenController> {
                           //         'Registration Failed! Try again', true);
                           //  }
                           //  }
-              
+
                           child: Center(
                             child: Text(
                               "Continue",
@@ -192,7 +196,7 @@ class LogInSreen extends GetView<LogInScreenController> {
                         ),
                       );
                     }),
-              
+
                     SizedBox(
                       height: 10,
                     ),
@@ -200,7 +204,7 @@ class LogInSreen extends GetView<LogInScreenController> {
                         child: TextButton(
                             onPressed: () {
                               Get.toNamed(RouteNames.mainNavigationScreen);
-              
+
                               // Navigator.push(
                               //     context,
                               //     MaterialPageRoute(builder: (context) => MainBottomNavBar()));
@@ -209,12 +213,12 @@ class LogInSreen extends GetView<LogInScreenController> {
                               "Skip for now",
                               style: TextStyle(color: Color(0xff38b579)),
                             ))),
-              //
+                    //
                   ],
                 ),
-              ),
-            )
-          ],
+              )
+            ],
+          ),
         ),
       ),
     );

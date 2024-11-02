@@ -48,7 +48,7 @@ class PersonalInfoGetController extends GetxController{
 
   updateProfilePicture () async {
     final response = await NetworkUtils().updateProfilePicture(selected.value.path);
-
+    print(response.reasonPhrase);
     if (response.statusCode == 200) {
       showSnackBarMessage(Get.context!, 'Profile picture updated');
     } else {

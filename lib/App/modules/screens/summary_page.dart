@@ -68,7 +68,7 @@ class _SummaryScreenState extends State<SummaryScreen> {
                       _buildTableRow('Investment Time', '${widget.project.investmentTime} Days Left'),
                       _buildTableRow('Minimum Invest', '${widget.project.minInvestment} Tk'),
                       _buildTableRow('Profit ROI',widget.project.returnMin.toString() + '%' +' - '+ widget.project.returnMax.toString() + '%'),
-                      _buildTableRow('Profit Type', widget.project.profitType ?? 'No Data'),
+                      _buildTableRow('Profit Return Type', widget.project.profitType ?? 'No Data'),
                       _buildTableRow('Project Location', widget.project.place ?? 'No Data'),
                       _buildTableRow('Project Status', widget.project.statusName ?? 'No Data'),
                     ],

@@ -9,8 +9,7 @@ import 'package:smart_biniyog/App/routes/route_names.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
 //comment
-void main()async {
-
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Hive.initFlutter();
   Hive.registerAdapter(ProductModelAdapter()); // Register adapter
@@ -19,12 +18,12 @@ void main()async {
   await AuthUtils.checkLoginState();
 
   runApp(
-
     DevicePreview(
-      enabled: !kReleaseMode,
+      // enabled: !kReleaseMode,
+      enabled: false,
       builder: (context) => MyApp(), // Wrap your app
-    ),);
-
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -37,16 +36,13 @@ class MyApp extends StatelessWidget {
       title: 'Smart_biniyog',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-     getPages: RouteDestinations.pages,
+      getPages: RouteDestinations.pages,
       initialRoute: RouteNames.dashBoard,
 
-
-
-    // home: DateDifferenceScreen(),       //
+      // home: DateDifferenceScreen(),       //
       //        DashBoardScreen(),
     );
   }

@@ -133,6 +133,7 @@ class NetworkUtils {
   Future<http.StreamedResponse> updateProfilePicture(String image) async {
     var headers = {
       "Content-Type": "application/json",
+      'Accept' : 'application/json',
       'Authorization': 'Bearer ${await AuthUtils.getAuthData()}',
     };
     var request =
@@ -141,6 +142,10 @@ class NetworkUtils {
     request.headers.addAll(headers);
 
     http.StreamedResponse response = await request.send();
+
+    final status = await http.Response.fromStream(response);
+
+    print(status.body);
 
     return response;
   }
