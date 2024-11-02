@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:smart_biniyog/App/constant/base_url.dart';
@@ -28,7 +30,9 @@ class _ProjectReviewsState extends State<ProjectReviews> {
   @override
   Widget build(BuildContext context) {
 
-    print(widget.reviews.first.reviewText);
+    final productJson = jsonEncode(widget.reviews);
+
+    print(productJson);
 
     return Scaffold(
       backgroundColor: Colors.white,
@@ -56,15 +60,15 @@ class _ProjectReviewsState extends State<ProjectReviews> {
                     Row(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        // ClipRRect(
-                        //   borderRadius: BorderRadius.circular(50),
-                        //   child: reviews[index].clientImage==" "? Icon(Icons.person,size: 30.0,color:Colors.black.withOpacity(0.7)): Image.network(
-                        //     api_base_url+reviews[index].clientImage!,
-                        //     height: 60,
-                        //     width: 60,
-                        //     fit: BoxFit.cover,
-                        //   ),
-                        // ),
+                        ClipRRect(
+                          borderRadius: BorderRadius.circular(50),
+                          child: widget.reviews[index].clientImage==" " || widget.reviews[index].clientName == null ? Icon(Icons.person,size: 30.0,color:Colors.black.withOpacity(0.7)): Image.network(
+                            api_base_url+widget.reviews[index].clientImage!,
+                            height: 60,
+                            width: 60,
+                            fit: BoxFit.cover,
+                          ),
+                        ),
                         SizedBox(width: 10),
                         Expanded(
                           child: Column(
@@ -73,7 +77,7 @@ class _ProjectReviewsState extends State<ProjectReviews> {
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                 children: [
-                                  Text(widget.reviews[index].clientName!,style: TextStyle(
+                                  Text(widget.reviews[index].clientName ?? 'Anonymous',style: TextStyle(
                                     fontSize: 18,
                                     overflow: TextOverflow.ellipsis,
                                     color: Colors.black.withOpacity(0.7),
