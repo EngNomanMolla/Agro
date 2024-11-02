@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+import 'package:smart_biniyog/App/Constant/Colors.dart';
 import 'package:smart_biniyog/App/constant/base_url.dart';
 
 import '../../../../data/model/blog_model.dart'; // Import intl package
@@ -79,7 +80,7 @@ class BlogDetailsScreen extends StatelessWidget {
                 vertical: 10,
               ),
               decoration: BoxDecoration(
-                color: Colors.green,
+                color: greyColor,
                 borderRadius: BorderRadius.circular(6),
               ),
               child: Center(

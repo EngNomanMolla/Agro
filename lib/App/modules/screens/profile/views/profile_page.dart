@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:smart_biniyog/App/modules/screens/Financial/views/financial_page.dart';
+import 'package:smart_biniyog/App/modules/screens/cart/controller/cart_controller.dart';
 import 'package:smart_biniyog/App/modules/screens/mbanking/views/mbankin_page.dart';
 import 'package:smart_biniyog/App/modules/screens/nominee/views/nominee_page.dart';
 import 'package:smart_biniyog/App/modules/screens/personal_info/views/personal_info.dart';
@@ -11,38 +12,43 @@ class ProfilePageScreen extends GetView<ProfileController> {
 
   @override
   Widget build(BuildContext context) {
-    return DefaultTabController(
-      length: 4, // Number of tabs
-      child: Scaffold(
-        appBar: AppBar(
-          automaticallyImplyLeading: false,
-          backgroundColor: Color(0xff38b579),
-          leading: InkWell(
-            onTap: () => Get.back(),
-            child: Icon(Icons.arrow_back, color: Colors.white, size: 20.0),
-          ),
-          title: Text('Profile',
-              style: TextStyle(color: Colors.white, fontSize: 20.0)),
-          bottom: TabBar(
-              isScrollable: true,
-              tabs: [
-                Tab(icon: Icon(Icons.person), text: 'Personal'),
-                Tab(icon: Icon(Icons.balance), text: 'Bank Info'),
-                Tab(icon: Icon(Icons.send_to_mobile), text: 'M_Banking'),
-                Tab(icon: Icon(Icons.privacy_tip), text: 'Nominee'),
-              ],
-              unselectedLabelColor: Colors.white.withOpacity(0.6),
-              labelColor: Colors.white,
-              indicatorColor: Colors.white),
+
+    final controller = Get.put(ProfileController());
+    Get.put(CartController());
+
+    print(controller.type.value);
+
+    return Scaffold(
+      appBar: AppBar(
+        automaticallyImplyLeading: false,
+        backgroundColor: Color(0xff38b579),
+        leading: InkWell(
+          onTap: () => Get.back(),
+          child: Icon(Icons.arrow_back, color: Colors.white, size: 20.0),
         ),
-        body: TabBarView(
-          children: [
-            PersonalInfoScreen(),
-            FinancialScreen(),
-            MobileBanking(),
-            NomineeScreen()
-          ],
-        ),
+        title: Text('Profile',
+            style: TextStyle(color: Colors.white, fontSize: 20.0)),
+        bottom: TabBar(
+          controller: controller.tabController,
+            isScrollable: true,
+            tabs: [
+              Tab(icon: Icon(Icons.person), text: 'Personal'),
+              Tab(icon: Icon(Icons.privacy_tip), text: 'Nominee'),
+              Tab(icon: Icon(Icons.balance), text: 'Bank Info'),
+              Tab(icon: Icon(Icons.send_to_mobile), text: 'M_Banking'),
+            ],
+            unselectedLabelColor: Colors.white.withOpacity(0.6),
+            labelColor: Colors.white,
+            indicatorColor: Colors.white),
+      ),
+      body: TabBarView(
+        controller: controller.tabController,
+        children: [
+          PersonalInfoScreen(),
+          NomineeScreen(),
+          FinancialScreen(),
+          MobileBanking(),
+        ],
       ),
     );
 

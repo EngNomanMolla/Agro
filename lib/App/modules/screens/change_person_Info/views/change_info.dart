@@ -9,7 +9,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:smart_biniyog/App/data/service/network_caller.dart';
 import 'package:smart_biniyog/App/modules/Widgets/AppElevatedButtonWidget.dart';
 import 'package:smart_biniyog/App/modules/Widgets/AppTextFieldWidget.dart';
-import 'package:smart_biniyog/App/modules/screens/change_person_Info/controller/changeper-controller.dart';
+import 'package:smart_biniyog/App/modules/screens/change_person_Info/controller/changeper_controller.dart';
 import 'package:smart_biniyog/App/modules/utils/snackbar_message.dart';
 import 'package:smart_biniyog/App/routes/route_names.dart';
 
@@ -25,10 +25,8 @@ class ChangePerInfo extends StatefulWidget {
 class _ChangePerInfoState extends State<ChangePerInfo> {
   static final info = Get.arguments as PersonInfoModel;
 
-
-
   int _val = 1;
-  String? _val1 = info.client!.gender;
+  String? _val1 = info.client!.gender ?? '1';
   final TextEditingController _nameController =
       TextEditingController(text: info.client!.name);
   final TextEditingController _EmailController =
@@ -37,7 +35,7 @@ class _ChangePerInfoState extends State<ChangePerInfo> {
       TextEditingController(text: info.client!.phone);
 
   final TextEditingController _address =
-  TextEditingController(text: info.client!.address);
+      TextEditingController(text: info.client!.address);
 
   final TextEditingController _DateBirthlController = TextEditingController();
   final TextEditingController _nid_backlController = TextEditingController();
@@ -68,21 +66,20 @@ class _ChangePerInfoState extends State<ChangePerInfo> {
   bool isLoading = false;
 
   updateProfileData() async {
-
     setState(() {
       isLoading = true;
     });
 
     final response = await NetworkUtils().updatePersonalInfo(
       personalInfo: {
-        'name' : _nameController.text,
-        'phone' : _PhnNumController.text,
-        'address' : _address.text,
-        'email' : _EmailController.text,
-        'date_of_birth' : _DateBirthlController.text,
-        'nid' : _nidNumController.text,
-        'tin' : _TINController.text,
-        'gender' : _val1,
+        'name': _nameController.text,
+        'phone': _PhnNumController.text,
+        'address': _address.text,
+        'email': _EmailController.text,
+        'date_of_birth': _DateBirthlController.text,
+        'nid': _nidNumController.text,
+        'tin': _TINController.text,
+        'gender': _val1,
       },
     );
 
@@ -91,8 +88,13 @@ class _ChangePerInfoState extends State<ChangePerInfo> {
     });
 
     if (response.statusCode == 200) {
-      Get.offAllNamed(RouteNames.mainNavigationScreen);
-      showSnackBarMessage(context, 'Profile updated success');
+      // Get.offAllNamed(RouteNames.mainNavigationScreen);
+      Get.back(
+        result: {
+          'index': 1,
+        },
+      );
+      showSnackBarMessage(context, 'Personal Info Updated.');
     } else {
       showSnackBarMessage(context, 'Something is wrong');
     }
@@ -100,7 +102,6 @@ class _ChangePerInfoState extends State<ChangePerInfo> {
 
   @override
   Widget build(BuildContext context) {
-
     print(info.client!.name);
 
     return Scaffold(
@@ -169,9 +170,7 @@ class _ChangePerInfoState extends State<ChangePerInfo> {
                   AppTextFieldWidget(
                     controller: _PhnNumController,
                     hintText: 'Phn Num',
-                    inputFormatters: [
-                      FilteringTextInputFormatter.digitsOnly
-                    ],
+                    inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                     validator: (value) {
                       if (value?.isEmpty ?? true) {
                         return 'This field is required.';
@@ -222,9 +221,7 @@ class _ChangePerInfoState extends State<ChangePerInfo> {
                   AppTextFieldWidget(
                     controller: _nidNumController,
                     hintText: 'NID',
-                    inputFormatters: [
-                      FilteringTextInputFormatter.digitsOnly
-                    ],
+                    inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                     validator: (value) {
                       if (value?.isEmpty ?? true) {
                         return 'This field is required.';
@@ -345,7 +342,6 @@ class _ChangePerInfoState extends State<ChangePerInfo> {
                     child: AppElevatedButton(
                       Color: Colors.green,
                       onTap: () async {
-
                         if (_formKey.currentState!.validate()) {
                           updateProfileData();
                         }
@@ -424,7 +420,7 @@ class _ChangePerInfoState extends State<ChangePerInfo> {
                       },
                       child: Center(
                         child: Text(
-                          "Update",
+                          isLoading ? 'Updating...' : "Update",
                           style: GoogleFonts.poppins(
                             textStyle: const TextStyle(
                               color: Colors.white,

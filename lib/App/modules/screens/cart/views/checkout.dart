@@ -7,6 +7,7 @@ import '../controller/cart_controller.dart';
 
 class CheckoutScreen extends StatefulWidget {
   final String? type;
+
   const CheckoutScreen({super.key, this.type});
 
   @override
@@ -14,28 +15,27 @@ class CheckoutScreen extends StatefulWidget {
 }
 
 class _CheckoutScreenState extends State<CheckoutScreen> {
-
   final CartController cartController = Get.put(CartController());
 
-  @override
-  void initState() {
-    super.initState();
-  }
+  final arg = Get.arguments ?? false;
 
   @override
   Widget build(BuildContext context) {
-
-
     return Scaffold(
       appBar: AppBar(
         scrolledUnderElevation: 0,
         leading: IconButton(
-            onPressed: () => Get.back(), icon: Icon(Icons.arrow_back)),
+          onPressed: () => arg
+              ? Get.offAllNamed(RouteNames.mainNavigationScreen)
+              : Get.back(),
+          icon: Icon(
+            arg ? Icons.home : Icons.arrow_back,
+          ),
+        ),
         title: Text('Checkout'),
       ),
       body: GetBuilder<CartController>(builder: (cartController) {
-        return Obx(() =>
-            Padding(
+        return Obx(() => Padding(
               padding: const EdgeInsets.fromLTRB(15, 0, 15, 15),
               child: Column(
                 children: [
@@ -65,59 +65,69 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Column(
-                                  children: widget.type == 'book_now' ? cartController.tempProductList
-                                      .map((product) =>
-                                      Row(
-                                        crossAxisAlignment:
-                                        CrossAxisAlignment.center,
-                                        mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          Text(
-                                            '${product.name} x ${product.quantity}',
-                                            textAlign: TextAlign.center,
-                                            style: TextStyle(
-                                              color: Colors.black.withOpacity(.8),
-                                              fontWeight: FontWeight.w500,
-                                            ),
-                                          ),
-                                          Text(
-                                            '৳ ${product.price}',
-                                            textAlign: TextAlign.center,
-                                            style: TextStyle(
-                                              color: Colors.black.withOpacity(.8),
-                                              fontWeight: FontWeight.w500,
-                                            ),
-                                          ),
-                                        ],
-                                      ))
-                                      .toList() : cartController.productList
-                                      .map((product) =>
-                                      Row(
-                                        crossAxisAlignment:
-                                        CrossAxisAlignment.center,
-                                        mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          Text(
-                                            '${product.name} x ${product.quantity}',
-                                            textAlign: TextAlign.center,
-                                            style: TextStyle(
-                                              color: Colors.black.withOpacity(.8),
-                                              fontWeight: FontWeight.w500,
-                                            ),
-                                          ),
-                                          Text(
-                                            '৳ ${product.price}',
-                                            textAlign: TextAlign.center,
-                                            style: TextStyle(
-                                              color: Colors.black.withOpacity(.8),
-                                              fontWeight: FontWeight.w500,
-                                            ),
-                                          ),
-                                        ],
-                                      ))
-                                      .toList(),
+                                  children: widget.type == 'book_now'
+                                      ? cartController.tempProductList
+                                          .map((product) => Row(
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.center,
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment
+                                                        .spaceBetween,
+                                                children: [
+                                                  Text(
+                                                    '${product.name} x ${product.quantity}',
+                                                    textAlign: TextAlign.center,
+                                                    style: TextStyle(
+                                                      color: Colors.black
+                                                          .withOpacity(.8),
+                                                      fontWeight:
+                                                          FontWeight.w500,
+                                                    ),
+                                                  ),
+                                                  Text(
+                                                    '৳ ${product.price}',
+                                                    textAlign: TextAlign.center,
+                                                    style: TextStyle(
+                                                      color: Colors.black
+                                                          .withOpacity(.8),
+                                                      fontWeight:
+                                                          FontWeight.w500,
+                                                    ),
+                                                  ),
+                                                ],
+                                              ))
+                                          .toList()
+                                      : cartController.productList
+                                          .map((product) => Row(
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.center,
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment
+                                                        .spaceBetween,
+                                                children: [
+                                                  Text(
+                                                    '${product.name} x ${product.quantity}',
+                                                    textAlign: TextAlign.center,
+                                                    style: TextStyle(
+                                                      color: Colors.black
+                                                          .withOpacity(.8),
+                                                      fontWeight:
+                                                          FontWeight.w500,
+                                                    ),
+                                                  ),
+                                                  Text(
+                                                    '৳ ${product.price}',
+                                                    textAlign: TextAlign.center,
+                                                    style: TextStyle(
+                                                      color: Colors.black
+                                                          .withOpacity(.8),
+                                                      fontWeight:
+                                                          FontWeight.w500,
+                                                    ),
+                                                  ),
+                                                ],
+                                              ))
+                                          .toList(),
                                 ),
                                 const SizedBox(
                                   height: 10,
@@ -130,7 +140,8 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                                 ),
                                 Row(
                                   crossAxisAlignment: CrossAxisAlignment.center,
-                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
                                   children: [
                                     Text(
                                       'Total',
@@ -162,7 +173,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                                 value: cartController.isInsurance.value,
                                 onChanged: (value) {
                                   cartController.isInsurance.value =
-                                  !cartController.isInsurance.value;
+                                      !cartController.isInsurance.value;
                                 },
                               ),
                               Text(
@@ -183,7 +194,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                           const SizedBox(
                             height: 15,
                           ),
-                      
+
                           // Payment
                           Text(
                             'Payment',
@@ -227,20 +238,22 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                                 overflow: TextOverflow.ellipsis,
                                 style: TextStyle(
                                   fontSize: 12,
-                                ),),
+                                ),
+                              ),
                             ),
                           ),
                           const SizedBox(
                             height: 20,
                           ),
-                      
+
                           // Bank Info
                           GetBuilder<CartController>(builder: (cartController) {
                             if (!cartController.personInfoProgress) {
                               return Column(
                                 children: [
                                   Row(
-                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
                                     children: [
                                       Text(
                                         'Bank Info',
@@ -250,7 +263,8 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                                         ),
                                       ),
                                       InkWell(
-                                        onTap: () => Get.toNamed(RouteNames.profile),
+                                        onTap: () =>
+                                            Get.toNamed(RouteNames.profile),
                                         child: Text(
                                           'Change',
                                           style: TextStyle(
@@ -280,17 +294,21 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                                       borderRadius: BorderRadius.circular(10),
                                     ),
                                     child: Column(
-                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
                                       children: [
                                         Row(
-                                          crossAxisAlignment: CrossAxisAlignment.center,
-                                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.center,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
                                           children: [
                                             Text(
                                               'Bank Name',
                                               textAlign: TextAlign.center,
                                               style: TextStyle(
-                                                color: Colors.black.withOpacity(.8),
+                                                color: Colors.black
+                                                    .withOpacity(.8),
                                                 fontWeight: FontWeight.w500,
                                               ),
                                             ),
@@ -298,7 +316,8 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                                               '${cartController.personInfoDataModel.value.client!.banking?.bankName}',
                                               textAlign: TextAlign.center,
                                               style: TextStyle(
-                                                color: Colors.black.withOpacity(.8),
+                                                color: Colors.black
+                                                    .withOpacity(.8),
                                                 fontWeight: FontWeight.w500,
                                               ),
                                             ),
@@ -314,14 +333,17 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                                           height: 2,
                                         ),
                                         Row(
-                                          crossAxisAlignment: CrossAxisAlignment.center,
-                                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.center,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
                                           children: [
                                             Text(
                                               'Branch Name',
                                               textAlign: TextAlign.center,
                                               style: TextStyle(
-                                                color: Colors.black.withOpacity(.8),
+                                                color: Colors.black
+                                                    .withOpacity(.8),
                                                 fontWeight: FontWeight.w500,
                                               ),
                                             ),
@@ -329,7 +351,8 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                                               '${cartController.personInfoDataModel.value.client!.banking?.branchName}',
                                               textAlign: TextAlign.center,
                                               style: TextStyle(
-                                                color: Colors.black.withOpacity(.8),
+                                                color: Colors.black
+                                                    .withOpacity(.8),
                                                 fontWeight: FontWeight.w500,
                                               ),
                                             ),
@@ -345,14 +368,17 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                                           height: 2,
                                         ),
                                         Row(
-                                          crossAxisAlignment: CrossAxisAlignment.center,
-                                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.center,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
                                           children: [
                                             Text(
                                               'A/C Name',
                                               textAlign: TextAlign.center,
                                               style: TextStyle(
-                                                color: Colors.black.withOpacity(.8),
+                                                color: Colors.black
+                                                    .withOpacity(.8),
                                                 fontWeight: FontWeight.w500,
                                               ),
                                             ),
@@ -360,7 +386,8 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                                               '${cartController.personInfoDataModel.value.client!.banking?.acName}',
                                               textAlign: TextAlign.center,
                                               style: TextStyle(
-                                                color: Colors.black.withOpacity(.8),
+                                                color: Colors.black
+                                                    .withOpacity(.8),
                                                 fontWeight: FontWeight.w500,
                                               ),
                                             ),
@@ -376,14 +403,17 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                                           height: 2,
                                         ),
                                         Row(
-                                          crossAxisAlignment: CrossAxisAlignment.center,
-                                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.center,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
                                           children: [
                                             Text(
                                               'A/C No',
                                               textAlign: TextAlign.center,
                                               style: TextStyle(
-                                                color: Colors.black.withOpacity(.8),
+                                                color: Colors.black
+                                                    .withOpacity(.8),
                                                 fontWeight: FontWeight.w500,
                                               ),
                                             ),
@@ -391,7 +421,8 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                                               '${cartController.personInfoDataModel.value.client!.banking?.acNo}',
                                               textAlign: TextAlign.center,
                                               style: TextStyle(
-                                                color: Colors.black.withOpacity(.8),
+                                                color: Colors.black
+                                                    .withOpacity(.8),
                                                 fontWeight: FontWeight.w500,
                                               ),
                                             ),
@@ -411,15 +442,12 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                                   ),
                                 ],
                               );
-                      
                             } else {
                               return Center(
                                 child: CircularProgressIndicator(),
                               );
                             }
                           }),
-                      
-                          
                         ],
                       ),
                     ),

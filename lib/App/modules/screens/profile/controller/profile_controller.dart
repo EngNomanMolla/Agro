@@ -1,13 +1,16 @@
-import 'package:get/get_state_manager/src/simple/get_controllers.dart';
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
-class ProfileController extends GetxController{
+class ProfileController extends GetxController with GetSingleTickerProviderStateMixin {
 
+  late TabController tabController;
 
+  RxInt type = RxInt(0); // 0 = normal, 1 = cart, 2 = checkout
 
   @override
   void onInit() {
-    // TODO: implement onInit
     super.onInit();
+    tabController = TabController(length: 4, vsync: this);
   }
 
 

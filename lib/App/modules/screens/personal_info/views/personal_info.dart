@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:smart_biniyog/App/constant/base_url.dart';
 import 'package:smart_biniyog/App/modules/screens/change_person_Info/views/change_info.dart';
 import 'package:smart_biniyog/App/modules/screens/personal_info/controlar/personal_controller.dart';
+import 'package:smart_biniyog/App/modules/screens/profile/controller/profile_controller.dart';
 import 'package:smart_biniyog/App/routes/route_names.dart';
 
 class PersonalInfoScreen extends GetView<PersonalInfoGetController> {
@@ -11,6 +12,8 @@ class PersonalInfoScreen extends GetView<PersonalInfoGetController> {
 
   PersonalInfoGetController personalInfoGetController =
       Get.put(PersonalInfoGetController());
+
+  final profileController = Get.put(ProfileController());
 
   @override
   Widget build(BuildContext context) {
@@ -73,10 +76,14 @@ class PersonalInfoScreen extends GetView<PersonalInfoGetController> {
                           ),
                         ),
                         trailing: TextButton(
-                          onPressed: () {
-                            Get.toNamed(RouteNames.changePersonalInfo,
+                          onPressed: () async {
+                            final result = await Get.toNamed(RouteNames.changePersonalInfo,
                                 arguments: PersonalInfoGetController
-                                    .personInfoDataModel);
+                                    .personInfoDataModel) ?? {};
+
+                            if (result['index'] != null) {
+                              profileController.tabController.index = result['index'];
+                            }
                           },
                           child: Container(
                               decoration: BoxDecoration(

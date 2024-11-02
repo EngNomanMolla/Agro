@@ -22,13 +22,19 @@ class ChangeNomineeScreen extends StatefulWidget {
 
 class _ChangeNomineeScreenState extends State<ChangeNomineeScreen> {
   final TextEditingController _NameController = TextEditingController(
-      text: ChangeNomineeScreen.info.client!.nominee == null ? '' : ChangeNomineeScreen.info.client!.nominee!.name);
+      text: ChangeNomineeScreen.info.client!.nominee == null
+          ? ''
+          : ChangeNomineeScreen.info.client!.nominee!.name);
 
   final TextEditingController _phoneController = TextEditingController(
-      text: ChangeNomineeScreen.info.client!.nominee == null ? '' : ChangeNomineeScreen.info.client!.nominee!.phone);
+      text: ChangeNomineeScreen.info.client!.nominee == null
+          ? ''
+          : ChangeNomineeScreen.info.client!.nominee!.phone);
 
   final TextEditingController _NIDController = TextEditingController(
-      text: ChangeNomineeScreen.info.client!.nominee == null ? '' : ChangeNomineeScreen.info.client!.nominee!.nid);
+      text: ChangeNomineeScreen.info.client!.nominee == null
+          ? ''
+          : ChangeNomineeScreen.info.client!.nominee!.nid);
 
   final TextEditingController _RelationlController = TextEditingController(
       text: ChangeNomineeScreen.info.client!.nominee == null
@@ -43,11 +49,8 @@ class _ChangeNomineeScreenState extends State<ChangeNomineeScreen> {
   bool isLoading = false;
 
   void updateNomineeInfo() async {
-
     isLoading = true;
-    setState(() {
-
-    });
+    setState(() {});
 
     final response = await NetworkUtils().updateNominee(info: {
       "name": _NameController.text,
@@ -57,12 +60,14 @@ class _ChangeNomineeScreenState extends State<ChangeNomineeScreen> {
     });
 
     isLoading = false;
-    setState(() {
-
-    });
+    setState(() {});
 
     if (response.statusCode == 200) {
-      Get.offAllNamed(RouteNames.mainNavigationScreen);
+      Get.back(
+        result: {
+          'index': 2,
+        },
+      );
       showSnackBarMessage(Get.context!, 'Nominee successfully updated');
     } else {
       showSnackBarMessage(Get.context!, 'Something is wrong, Please try again');
@@ -96,9 +101,7 @@ class _ChangeNomineeScreenState extends State<ChangeNomineeScreen> {
                 AppTextFieldWidget(
                   controller: _phoneController,
                   hintText: 'phone Num',
-                  inputFormatters: [
-                    FilteringTextInputFormatter.digitsOnly
-                  ],
+                  inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                   validator: (value) {
                     if (value?.isEmpty ?? true) {
                       return 'This field is required.';
@@ -109,9 +112,7 @@ class _ChangeNomineeScreenState extends State<ChangeNomineeScreen> {
                 const SizedBox(height: 12),
                 AppTextFieldWidget(
                   controller: _NIDController,
-                  inputFormatters: [
-                    FilteringTextInputFormatter.digitsOnly
-                  ],
+                  inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                   hintText: 'NID',
                   validator: (value) {
                     if (value?.isEmpty ?? true) {
@@ -148,7 +149,7 @@ class _ChangeNomineeScreenState extends State<ChangeNomineeScreen> {
                       },
                       child: Center(
                         child: Text(
-                          isLoading ? 'Loading...' : "Update",
+                          isLoading ? 'Updating...' : "Update",
                           style: GoogleFonts.poppins(
                             textStyle: const TextStyle(
                               color: Colors.white,

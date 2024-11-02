@@ -235,7 +235,7 @@ class _WithdrawViewState extends State<WithdrawView> {
                                       enabled: false,
                                       controller: TextEditingController(),
                                       hintText:
-                                          '${controller.personInfoDataModel.client!.banking!.bankName}',
+                                          '${controller.personInfoDataModel.client!.banking == null ? 'No Data' : controller.personInfoDataModel.client!.banking!.bankName}',
                                     ),
                                     const SizedBox(
                                       height: 10,
@@ -254,7 +254,7 @@ class _WithdrawViewState extends State<WithdrawView> {
                                       enabled: false,
                                       controller: TextEditingController(),
                                       hintText:
-                                          '${controller.personInfoDataModel.client!.banking!.branchName}',
+                                          '${controller.personInfoDataModel.client!.banking == null ? 'No Data' : controller.personInfoDataModel.client!.banking!.branchName}',
                                     ),
                                     const SizedBox(
                                       height: 10,
@@ -273,7 +273,7 @@ class _WithdrawViewState extends State<WithdrawView> {
                                       enabled: false,
                                       controller: TextEditingController(),
                                       hintText:
-                                          '${controller.personInfoDataModel.client!.banking!.acName}',
+                                          '${controller.personInfoDataModel.client!.banking == null ? 'No Data' : controller.personInfoDataModel.client!.banking!.acName}',
                                     ),
                                     const SizedBox(
                                       height: 10,
@@ -292,7 +292,7 @@ class _WithdrawViewState extends State<WithdrawView> {
                                       enabled: false,
                                       controller: TextEditingController(),
                                       hintText:
-                                          '${controller.personInfoDataModel.client!.banking!.acNo}',
+                                          '${controller.personInfoDataModel.client!.banking == null ? 'No Data' : controller.personInfoDataModel.client!.banking!.acNo}',
                                     ),
                                     const SizedBox(
                                       height: 10,
@@ -311,7 +311,7 @@ class _WithdrawViewState extends State<WithdrawView> {
                                       enabled: false,
                                       controller: TextEditingController(),
                                       hintText:
-                                          '${controller.personInfoDataModel.client!.banking!.routingNumber}',
+                                          '${controller.personInfoDataModel.client!.banking == null ? 'No Data' : controller.personInfoDataModel.client!.banking!.routingNumber}',
                                     ),
                                     const SizedBox(
                                       height: 10,
@@ -330,7 +330,7 @@ class _WithdrawViewState extends State<WithdrawView> {
                                       enabled: false,
                                       controller: TextEditingController(),
                                       hintText:
-                                          '${controller.personInfoDataModel.client!.banking!.swiftCode}',
+                                          '${controller.personInfoDataModel.client!.banking == null ? 'No Data' : controller.personInfoDataModel.client!.banking!.swiftCode}',
                                     ),
                                     const SizedBox(
                                       height: 10,
@@ -362,7 +362,7 @@ class _WithdrawViewState extends State<WithdrawView> {
                                       enabled: false,
                                       controller: TextEditingController(),
                                       hintText:
-                                          '${controller.personInfoDataModel.client!.mfs!.mfsName}',
+                                          '${controller.personInfoDataModel.client!.banking == null ? 'No Data' : controller.personInfoDataModel.client!.mfs!.mfsName}',
                                     ),
                                     const SizedBox(
                                       height: 10,
@@ -381,7 +381,7 @@ class _WithdrawViewState extends State<WithdrawView> {
                                       enabled: false,
                                       controller: TextEditingController(),
                                       hintText:
-                                          '${controller.personInfoDataModel.client!.mfs!.mfsType}',
+                                          '${controller.personInfoDataModel.client!.banking == null ? 'No Data' : controller.personInfoDataModel.client!.mfs!.mfsType}',
                                     ),
                                     const SizedBox(
                                       height: 10,
@@ -400,7 +400,7 @@ class _WithdrawViewState extends State<WithdrawView> {
                                       enabled: false,
                                       controller: TextEditingController(),
                                       hintText:
-                                          '${controller.personInfoDataModel.client!.mfs!.mfsNumber}',
+                                          '${controller.personInfoDataModel.client!.banking == null ? 'No Data' : controller.personInfoDataModel.client!.mfs!.mfsNumber}',
                                     ),
                                     const SizedBox(
                                       height: 10,

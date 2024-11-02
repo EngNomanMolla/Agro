@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -11,6 +13,7 @@ import 'package:smart_biniyog/App/modules/Screens/profit_simulation/views/profit
 import 'package:smart_biniyog/App/modules/Widgets/AppElevatedButtonWidget.dart';
 import 'package:smart_biniyog/App/modules/screens/cart/controller/cart_controller.dart';
 import 'package:smart_biniyog/App/modules/screens/cart/views/checkout.dart';
+import 'package:smart_biniyog/App/modules/screens/profile/controller/profile_controller.dart';
 import 'package:smart_biniyog/App/modules/screens/project_review/views/project_reviewlist_page.dart';
 import 'package:smart_biniyog/App/modules/screens/project_review/views/project_reviews.dart';
 import 'package:smart_biniyog/App/modules/utils/snackbar_message.dart';
@@ -33,6 +36,7 @@ class _ProjectDetailScreenState extends State<ProjectDetailScreen>
   int _selectedIndex = 0;
 
   final controller = Get.put(CartController());
+  final profileController = Get.put(ProfileController());
 
   @override
   void initState() {
@@ -64,17 +68,8 @@ class _ProjectDetailScreenState extends State<ProjectDetailScreen>
         isLoading = true;
       });
 
-      final isUpToDate = await NetworkUtils().checkUpToDate();
 
-      if (!isUpToDate) {
-        showSnackBarMessage(Get.context!,
-            'Please setup your profile before you want to place an order!');
-        Get.toNamed(RouteNames.profile);
-        setState(() {
-          isLoading = false;
-        });
-        return;
-      }
+      final isUpToDate = await NetworkUtils().checkUpToDate();
 
       controller.tempProductList.clear();
 
@@ -88,7 +83,31 @@ class _ProjectDetailScreenState extends State<ProjectDetailScreen>
         ),
       );
 
-      Get.to(() => CheckoutScreen(type: 'book_now',));
+      if (!isUpToDate) {
+        showSnackBarMessage(
+          Get.context!,
+          'Please setup your profile before you want to place an order!',
+        );
+
+        profileController.type.value = 2;
+
+        Get.toNamed(
+          RouteNames.profile,
+          arguments: {
+            'from_checkout': true,
+          },
+        );
+        setState(() {
+          isLoading = false;
+        });
+        return;
+      }
+
+      Get.to(
+        () => CheckoutScreen(
+          type: 'book_now',
+        ),
+      );
 
       // final response = await NetworkUtils().order(orderData: {
       //   "total_amount": controller.tempTotalPrice.value,
@@ -126,8 +145,12 @@ class _ProjectDetailScreenState extends State<ProjectDetailScreen>
     return Scaffold(
       appBar: AppBar(
         leading: InkWell(
-            onTap: () => Get.back(),
-            child: Icon(Icons.arrow_back_ios, color: Colors.white)),
+          onTap: () => Get.back(),
+          child: Icon(
+            Icons.arrow_back_ios,
+            color: Colors.white,
+          ),
+        ),
         backgroundColor: Color(0xff38b579),
         title: Text(
           'Project Details',
@@ -180,7 +203,10 @@ class _ProjectDetailScreenState extends State<ProjectDetailScreen>
                       Center(child: SummaryScreen(widget.project)),
                       Center(child: ProfitSimuScreen(widget.project)),
                       Center(child: AboutSreen(widget.project.about!)),
-                      Center(child: ProjectReviews(widget.project.reviews!)),
+                      Center(
+                          child: ProjectReviews(
+                        reviews: widget.project.reviews ?? [],
+                      )),
                     ],
                   ),
                 ),

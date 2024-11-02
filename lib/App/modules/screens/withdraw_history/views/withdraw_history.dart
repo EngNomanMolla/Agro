@@ -9,8 +9,6 @@ class WithdrawHistoryView extends StatelessWidget {
   Widget build(BuildContext context) {
     final controller = Get.put(TransactionHistoryController());
 
-    final trx = controller.transactions.where((trx) => trx.paymentType == '3').toList();
-
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
@@ -29,7 +27,12 @@ class WithdrawHistoryView extends StatelessWidget {
             child: CircularProgressIndicator(),
           );
         } else {
-          return ListView.separated(
+
+          final trx = controller.transactions.where((trx) => trx.paymentType == '3').toList();
+
+          return trx.length < 1 ? Center(
+            child: Text('No Data'),
+          ) :  ListView.separated(
             itemCount: trx.length,
             padding: EdgeInsets.all(15),
             itemBuilder: (_, index) {

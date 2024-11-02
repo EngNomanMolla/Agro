@@ -3,12 +3,15 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:smart_biniyog/App/modules/screens/change_nominee/views/change_nominee.dart';
 import 'package:smart_biniyog/App/modules/screens/nominee/controller/nominee_controller.dart';
+import 'package:smart_biniyog/App/modules/screens/profile/controller/profile_controller.dart';
 import 'package:smart_biniyog/App/routes/route_names.dart';
 
 class NomineeScreen extends GetView<NomineeController> {
   NomineeScreen({Key? key}) : super(key: key);
 
   NomineeController nomineeController = Get.put(NomineeController());
+
+  final profileController = Get.put(ProfileController());
 
   @override
   Widget build(BuildContext context) {
@@ -25,11 +28,15 @@ class NomineeScreen extends GetView<NomineeController> {
                 child: Column(
                   children: [
                     ListTile(
-                      title: Text('Nominee Informaion',
+                      title: Text('Nominee Information',
                           style: TextStyle(fontWeight: FontWeight.bold)),
                       trailing: TextButton(
-                        onPressed: () {
-                          Get.toNamed(RouteNames.changeNomineeInfo, arguments: NomineeController.personInfoDataModel);
+                        onPressed: () async {
+                          final result = await Get.toNamed(RouteNames.changeNomineeInfo, arguments: NomineeController.personInfoDataModel) ?? {};
+
+                          if (result['index'] != null) {
+                            profileController.tabController.index = result['index'];
+                          }
                         },
                         child: Text('Change'),
                       ),

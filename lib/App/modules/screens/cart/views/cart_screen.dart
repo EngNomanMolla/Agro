@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:smart_biniyog/App/data/model/product_model.dart';
 import 'package:smart_biniyog/App/modules/screens/cart/controller/cart_controller.dart';
+import 'package:smart_biniyog/App/routes/route_names.dart';
 
 class CartScreen extends StatefulWidget {
   @override
@@ -10,6 +11,8 @@ class CartScreen extends StatefulWidget {
 
 class _CartScreenState extends State<CartScreen> {
   final CartController cartController = Get.put(CartController());
+
+  final arg = Get.arguments ?? false;
 
   @override
   void initState() {
@@ -22,10 +25,14 @@ class _CartScreenState extends State<CartScreen> {
       appBar: AppBar(
         backgroundColor: Color(0xff38b579),
         leading: InkWell(
-            onTap: () {
-              Get.back();
-            },
-            child: Icon(Icons.arrow_back_ios, color: Colors.white)),
+          onTap: () {
+            arg ? Get.offAllNamed(RouteNames.mainNavigationScreen) : Get.back();
+          },
+          child: Icon(
+            arg ? Icons.home : Icons.arrow_back_ios,
+            color: Colors.white,
+          ),
+        ),
         title: Text('Cart List', style: TextStyle(color: Colors.white)),
       ),
       body: GetBuilder<CartController>(
@@ -110,28 +117,26 @@ class _CartScreenState extends State<CartScreen> {
                             child: Padding(
                               padding: const EdgeInsets.all(10.0),
                               child: Row(
-                                mainAxisAlignment:
-                                MainAxisAlignment.center,
+                                mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
-
-                                  if(cartController.isLoading.value)
-                                  Center(
-                                    child: SizedBox(
-                                      height: 25,
-                                      width: 25,
-                                      child: CircularProgressIndicator(
-                                        color: Colors.white,
+                                  if (cartController.isLoading.value)
+                                    Center(
+                                      child: SizedBox(
+                                        height: 25,
+                                        width: 25,
+                                        child: CircularProgressIndicator(
+                                          color: Colors.white,
+                                        ),
                                       ),
-                                    ),
-                                  )
+                                    )
                                   else
-                                  Text('Checkout',
-                                      textAlign: TextAlign.center,
-                                      style: TextStyle(
-                                        color: Colors.white,
-                                        fontWeight: FontWeight.normal,
-                                        fontSize: 17.0,
-                                      )),
+                                    Text('Checkout',
+                                        textAlign: TextAlign.center,
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                          fontWeight: FontWeight.normal,
+                                          fontSize: 17.0,
+                                        )),
                                 ],
                               ),
                             ),

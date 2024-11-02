@@ -7,11 +7,17 @@ import '../../../../data/model/project_model.dart';
 
 
 
-class ProjectReviews extends StatelessWidget {
+class ProjectReviews extends StatefulWidget {
 
-  List<Reviews> reviews=[];
+  final List<Reviews> reviews;
 
-  ProjectReviews(this.reviews);
+  ProjectReviews({required this.reviews});
+
+  @override
+  State<ProjectReviews> createState() => _ProjectReviewsState();
+}
+
+class _ProjectReviewsState extends State<ProjectReviews> {
   HomeController homeController = Get.put(HomeController());
 
   String formatDate(String date) {
@@ -21,14 +27,22 @@ class ProjectReviews extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+    print(widget.reviews.first.reviewText);
+
     return Scaffold(
       backgroundColor: Colors.white,
       body: Padding(
         padding: const EdgeInsets.all(10.0),
         child: GetBuilder<HomeController>(builder: (_) {
           return ListView.builder(
-            itemCount: reviews.length,
+            itemCount: widget.reviews.length,
             itemBuilder: (context, index) {
+
+              // final data = widget.reviews[index];
+              //
+              // return Text(data.clientImage ?? '');
+
               return Container(
                 margin: EdgeInsets.only(bottom: 15.0),
                 padding: EdgeInsets.all(10.0),
@@ -42,15 +56,15 @@ class ProjectReviews extends StatelessWidget {
                     Row(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        ClipRRect(
-                          borderRadius: BorderRadius.circular(50),
-                          child: reviews[index].clientImage==" "? Icon(Icons.person,size: 30.0,color:Colors.black.withOpacity(0.7)): Image.network(
-                            api_base_url+reviews[index].clientImage!,
-                            height: 60,
-                            width: 60,
-                            fit: BoxFit.cover,
-                          ),
-                        ),
+                        // ClipRRect(
+                        //   borderRadius: BorderRadius.circular(50),
+                        //   child: reviews[index].clientImage==" "? Icon(Icons.person,size: 30.0,color:Colors.black.withOpacity(0.7)): Image.network(
+                        //     api_base_url+reviews[index].clientImage!,
+                        //     height: 60,
+                        //     width: 60,
+                        //     fit: BoxFit.cover,
+                        //   ),
+                        // ),
                         SizedBox(width: 10),
                         Expanded(
                           child: Column(
@@ -59,18 +73,18 @@ class ProjectReviews extends StatelessWidget {
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                 children: [
-                                  Text(reviews[index].clientName!,style: TextStyle(
+                                  Text(widget.reviews[index].clientName!,style: TextStyle(
                                     fontSize: 18,
                                     overflow: TextOverflow.ellipsis,
                                     color: Colors.black.withOpacity(0.7),
                                     fontWeight: FontWeight.normal,
                                   )),
-                                  buildStarRating(int.parse(reviews[index].rating!)),
+                                  buildStarRating(int.parse(widget.reviews[index].rating!)),
                                 ],
                               ),
                               SizedBox(height: 5),
                               Text(
-                                reviews[index].reviewText!,
+                                widget.reviews[index].reviewText!,
                                 style: TextStyle(
                                   fontSize: 14,
                                   color: Colors.black.withOpacity(0.7),
@@ -87,7 +101,7 @@ class ProjectReviews extends StatelessWidget {
                     Align(
                       alignment: Alignment.bottomRight,
                       child: Text(
-                        'Commented on: ${formatDate(reviews[index].createdAt!)}',
+                        'Commented on: ${formatDate(widget.reviews[index].createdAt!)}',
                         style: TextStyle(
                           fontSize: 12,
                           color: Colors.grey,

@@ -6,18 +6,17 @@ import 'package:smart_biniyog/App/data/model/product_model.dart';
 import 'package:smart_biniyog/App/data/service/data_saver.dart';
 import 'package:smart_biniyog/App/data/service/network_caller.dart';
 import 'package:smart_biniyog/App/modules/screens/cart/views/checkout.dart';
+import 'package:smart_biniyog/App/modules/screens/profile/controller/profile_controller.dart';
 import 'package:smart_biniyog/App/modules/utils/snackbar_message.dart';
 import 'package:smart_biniyog/App/routes/route_names.dart';
 
 import '../../../../data/model/personInfo.dart';
 import '../../../../data/urls/urls.dart';
 
-
 class CartController extends GetxController {
-
   List<ProductModel> productList = [];
   List<ProductModel> tempProductList = [];
-  double totalPrice=0.0;
+  double totalPrice = 0.0;
   Box<ProductModel> productBox = Hive.box<ProductModel>('products');
 
   @override
@@ -48,8 +47,8 @@ class CartController extends GetxController {
     calculateTotalPrice();
   }
 
-  calculateTotalPrice(){
-    totalPrice=0.0;
+  calculateTotalPrice() {
+    totalPrice = 0.0;
     productList.forEach((product) => totalPrice += product.price);
     update(); // Update UI
   }
@@ -60,8 +59,7 @@ class CartController extends GetxController {
   RxBool isLoading = RxBool(false);
   RxBool isInsurance = RxBool(false);
 
-  placeOrder (String? type) async {
-
+  placeOrder(String? type) async {
     if (!AuthUtils.isLoggedIn) {
       showSnackBarMessage(Get.context!, 'Please login to continue!');
       Get.toNamed(RouteNames.logInScreen);
@@ -73,21 +71,28 @@ class CartController extends GetxController {
     final isUpToDate = await NetworkUtils().checkUpToDate();
 
     if (!isUpToDate) {
-      showSnackBarMessage(Get.context!, 'Please setup your profile before you want to place an order!');
+      showSnackBarMessage(Get.context!,
+          'Please setup your profile before you want to place an order!');
       isLoading.value = false;
       Get.toNamed(RouteNames.profile);
       return;
     }
 
-    final projects = type == 'book_now' ? tempProductList.map((e) => {
-      'id' : e.id,
-      'quantity' : e.quantity,
-      'price' : e.price,
-    }).toList() : productList.map((e) => {
-      'id' : e.id,
-      'quantity' : e.quantity,
-      'price' : e.price,
-    }).toList();
+    final projects = type == 'book_now'
+        ? tempProductList
+            .map((e) => {
+                  'id': e.id,
+                  'quantity': e.quantity,
+                  'price': e.price,
+                })
+            .toList()
+        : productList
+            .map((e) => {
+                  'id': e.id,
+                  'quantity': e.quantity,
+                  'price': e.price,
+                })
+            .toList();
 
     print(projects);
 
@@ -96,7 +101,7 @@ class CartController extends GetxController {
       "projects": projects,
       "transaction_number": "TRX123456789",
       "payment_method": "bkash",
-      "refferal_code":"",
+      "refferal_code": "",
       "customer_note": "Thank you for your purchase"
     });
 
@@ -105,7 +110,7 @@ class CartController extends GetxController {
     if (response.statusCode == 200) {
       showSnackBarMessage(Get.context!, 'Order successfully placed!');
       Get.offAllNamed(RouteNames.mainNavigationScreen, arguments: {
-        'index' : 2,
+        'index': 2,
       });
       await productBox.clear();
       productList.clear();
@@ -116,8 +121,9 @@ class CartController extends GetxController {
     }
   }
 
-  goToCheckout () async {
+  final profileController = Get.put(ProfileController());
 
+  goToCheckout() async {
     if (!AuthUtils.isLoggedIn) {
       showSnackBarMessage(Get.context!, 'Please login to continue!');
       Get.toNamed(RouteNames.logInScreen);
@@ -131,9 +137,20 @@ class CartController extends GetxController {
     isLoading.value = false;
 
     if (!isUpToDate) {
-      showSnackBarMessage(Get.context!, 'Please setup your profile before you want to place an order!');
+      showSnackBarMessage(
+        Get.context!,
+        'Please setup your profile before you want to place an order!',
+      );
       isLoading.value = false;
-      Get.toNamed(RouteNames.profile);
+
+      profileController.type.value = 1;
+
+      Get.toNamed(
+        RouteNames.profile,
+        arguments: {
+          'from_cart': true,
+        },
+      );
       return;
     }
 
@@ -142,7 +159,6 @@ class CartController extends GetxController {
 
   bool personInfoProgress = false;
   var personInfoDataModel = PersonInfoModel().obs;
-
 
   Future<bool> getPersonInfo() async {
     personInfoProgress = true;
@@ -161,5 +177,4 @@ class CartController extends GetxController {
       return false;
     }
   }
-
 }

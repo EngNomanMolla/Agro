@@ -176,7 +176,7 @@ class _MyFarmsScreenState extends State<MyFarmsScreen> {
                                     child: AppElevatedButton(
                                       Color: Colors.green,
                                       onTap: () {
-                                        nav.changeIndex(0);
+                                        nav.changeIndex(1);
                                       },
                                       child: Text(
                                         'Go to project page ',
