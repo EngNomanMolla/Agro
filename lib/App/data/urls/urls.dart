@@ -7,6 +7,7 @@ class Urls {
  static String transactions = '$baseUrl/transaction/list';
  static String businesstypeurl = '$baseUrl/business-type?';
  static String updateprofileurl = '$baseUrl/update-profile';
+ static String updateprofilePictureurl = '$baseUrl/update-image';
  static String shorttermprojecturl = '$baseUrl/project/1';
  static String longtermprojecturl = '$baseUrl/project/2';
  static String  returntermprojecturl = '$baseUrl/project/3';

@@ -47,22 +47,27 @@ class LogInSreen extends GetView<LogInScreenController> {
                 child: Column(
                   children: [
                     Center(
-                        child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          'SMART ',
-                          style: TitleTextStyle.copyWith(
-                              color: greyColor, fontWeight: FontWeight.bold),
-                        ),
-                        Text(
-                          'BINIYOG ',
-                          style: TitleTextStyle.copyWith(
-                              color: primaryColor, fontWeight: FontWeight.bold),
-                        ),
-                      ],
-                    )),
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            'SMART ',
+                            style: TitleTextStyle.copyWith(
+                              color: greyColor,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          Text(
+                            'BINIYOG ',
+                            style: TitleTextStyle.copyWith(
+                              color: primaryColor,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
 
                     SizedBox(height: 20.0),
 

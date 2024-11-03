@@ -71,22 +71,22 @@ class TransactionsModel {
 
 class Client {
   int? id;
-  Name? name;
-  Email? email;
+  dynamic name;
+  dynamic email;
   DateTime? verifiedAt;
   String? phone;
-  Address? address;
+  dynamic address;
   String? nid;
   dynamic nidF;
   dynamic nidB;
   String? tin;
   String? balance;
-  Image? image;
+  dynamic image;
   dynamic otp;
-  Gender? gender;
+  dynamic gender;
   String? status;
   String? clientType;
-  ReferralCode? referralCode;
+  dynamic referralCode;
   dynamic referralId;
   String? referralStatus;
   DateTime? createdAt;
@@ -118,22 +118,22 @@ class Client {
 
   factory Client.fromJson(Map<String, dynamic> json) => Client(
     id: json["id"],
-    name: nameValues.map[json["name"]]!,
-    email: emailValues.map[json["email"]]!,
+    name: json["name"] ?? 'NULL',
+    email: json["email"] ?? 'NULL',
     verifiedAt: json["verified_at"] == null ? null : DateTime.parse(json["verified_at"]),
     phone: json["phone"],
-    address: addressValues.map[json["address"]]!,
+    address: json["address"] ?? 'NULL',
     nid: json["nid"],
     nidF: json["nid_f"],
     nidB: json["nid_b"],
     tin: json["tin"],
     balance: json["balance"],
-    image: imageValues.map[json["image"]]!,
+    image: json["image"] ?? 'NULL',
     otp: json["otp"],
-    gender: genderValues.map[json["gender"]]!,
+    gender: json["gender"] ?? 'NULL',
     status: json["status"],
     clientType: json["client_type"],
-    referralCode: referralCodeValues.map[json["referral_code"]]!,
+    referralCode: json["referral_code"] ?? 'NULL',
     referralId: json["referral_id"],
     referralStatus: json["referral_status"],
     createdAt: json["created_at"] == null ? null : DateTime.parse(json["created_at"]),

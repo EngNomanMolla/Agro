@@ -203,7 +203,7 @@ class _ProjectDetailScreenState extends State<ProjectDetailScreen>
                     children: [
                       Center(child: SummaryScreen(widget.project)),
                       Center(child: ProfitSimuScreen(widget.project)),
-                      Center(child: AboutSreen(widget.project.about!)),
+                      Center(child: AboutSreen(widget.project.about ?? 'No Data')),
                       Center(
                           child: ProjectReviews(
                         reviews: widget.project.reviews ?? [],

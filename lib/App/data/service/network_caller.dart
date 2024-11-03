@@ -137,7 +137,7 @@ class NetworkUtils {
       'Authorization': 'Bearer ${await AuthUtils.getAuthData()}',
     };
     var request =
-        http.MultipartRequest('POST', Uri.parse(Urls.updateprofileurl));
+        http.MultipartRequest('POST', Uri.parse(Urls.updateprofilePictureurl));
     request.files.add(await http.MultipartFile.fromPath('image', image));
     request.headers.addAll(headers);
 

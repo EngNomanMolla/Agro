@@ -159,6 +159,27 @@ class PersonalInfoScreen extends GetView<PersonalInfoGetController> {
                         ),
                       ),
                     ),
+
+                    ListTile(
+                      iconColor: Colors.black,
+                      trailing: Text(
+                        ' ${PersonalInfoGetController.personInfoDataModel.client!.phone}',
+                        style: TextStyle(
+                          color: Colors.black,
+                          fontWeight: FontWeight.w600,
+                          fontSize: 15,
+                        ),
+                      ),
+                      title: Text(
+                        'Phone: ',
+                        style: TextStyle(
+                          color: Colors.black,
+                          fontWeight: FontWeight.w600,
+                          fontSize: 15,
+                        ),
+                      ),
+                    ),
+
                     ListTile(
                       iconColor: Colors.black,
                       trailing: Text(

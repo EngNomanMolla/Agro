@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:get/get.dart';
 import 'package:get/get_rx/get_rx.dart';
 import 'package:get/get_rx/src/rx_types/rx_types.dart';
@@ -117,7 +119,22 @@ class CartController extends GetxController {
       return;
     } else {
       print(response.body);
-      showSnackBarMessage(Get.context!, 'Something is wrong, Please try again');
+
+      final status = jsonDecode(response.body);
+
+      if (status.containsKey('errors')) {
+        status['errors'].forEach((key, value) {
+          if (value is List) {
+            for (var message in value) {
+              showSnackBarMessage(Get.context!, message);
+            }
+          }
+        });
+      } else {
+        showSnackBarMessage(Get.context!, 'Something is wrong');
+      }
+
+
     }
   }
 

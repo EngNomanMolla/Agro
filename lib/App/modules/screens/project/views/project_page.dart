@@ -40,11 +40,13 @@ class _ProjectPageScreenState extends State<ProjectPageScreen> {
 
     return Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         leading: widget.leading
             ? InkWell(
-                onTap: () => Get.back(),
-                child: Icon(Icons.arrow_back_ios, color: Colors.white))
-            : SizedBox(),
+            onTap: () => Get.back(),
+            child: Icon(Icons.arrow_back_ios, color: Colors.white))
+            : null,
+        centerTitle: true,
         title: Text('Projects', style: TextStyle(color: Colors.white)),
         backgroundColor: Color(0xff38b579), // Base color
         bottom: TabBar(
@@ -55,9 +57,10 @@ class _ProjectPageScreenState extends State<ProjectPageScreen> {
           isScrollable: true,
           labelStyle: TextStyle(fontSize: 16.0),
           tabs: categories
-              .map((category) => Tab(
-                    text: category.name!,
-                  ))
+              .map((category) =>
+              Tab(
+                text: category.name!,
+              ))
               .toList(),
         ),
       ),
