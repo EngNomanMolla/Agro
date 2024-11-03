@@ -21,6 +21,10 @@ class LogInSreen extends GetView<LogInScreenController> {
 
   @override
   Widget build(BuildContext context) {
+
+    bool isKeyboardVisible = MediaQuery.of(context).viewInsets.bottom > 0;
+
+
     return Scaffold(
       resizeToAvoidBottomInset: false,
       body: Form(
@@ -36,7 +40,7 @@ class LogInSreen extends GetView<LogInScreenController> {
                     child: Image.asset(
                       'assets/images/demo_pic.jpg',
                       width: double.infinity,
-                      height: MediaQuery.sizeOf(context).height * .35,
+                      height: MediaQuery.sizeOf(context).height * (isKeyboardVisible ? .15 : .35),
                       fit: BoxFit.cover,
                     ),
                   ),
